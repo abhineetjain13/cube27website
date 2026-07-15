@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Contact } from "@/components/sections/contact";
+import { Navbar } from "@/components/sections/navbar";
+import { Footer } from "@/components/sections/footer";
+
+export const prerender = true;
+---
+
+<Layout
+  title="Contact cube27 — Start a Conversation"
+  description="Tell cube27 about your idea, process, or technology challenge and our experts will get in touch."
+>
+  <div
+    class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
+  >
+    <Navbar client:load />
+    <Contact client:load />
+    <Footer />
+  </div>
+</Layout>

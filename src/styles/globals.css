@@ -1,0 +1,643 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Color bindings (theme tokens — cube27- prefix is standard) */
+  --color-cube27-neutral-primary: var(--cube27-neutral-primary);
+  --color-cube27-neutral-secondary: var(--cube27-neutral-secondary);
+  --color-cube27-neutral-inverse: var(--cube27-neutral-inverse);
+  --color-cube27-neutral-light: var(--cube27-neutral-light);
+  --color-cube27-neutral-dark: var(--cube27-neutral-dark);
+  --color-cube27-accent-primary: var(--cube27-accent-primary);
+  --color-cube27-accent-secondary: var(--cube27-accent-secondary);
+  --color-cube27-accent-tertiary: var(--cube27-accent-tertiary);
+  --color-cube27-text-primary: var(--cube27-text-primary);
+  --color-cube27-text-secondary: var(--cube27-text-secondary);
+  --color-cube27-text-inverse: var(--cube27-text-inverse);
+  --color-cube27-text-inverse-secondary: var(--cube27-text-inverse-secondary);
+  --color-cube27-text-on-accent-primary: var(--cube27-text-on-accent-primary);
+  --color-cube27-text-on-accent-secondary: var(
+    --cube27-text-on-accent-secondary
+  );
+  --color-cube27-text-on-accent-tertiary: var(--cube27-text-on-accent-tertiary);
+  --color-cube27-button-primary-background: var(
+    --cube27-button-primary-background
+  );
+  --color-cube27-button-primary-text: var(--cube27-button-primary-text);
+  --color-cube27-button-primary-border: var(--cube27-button-primary-border);
+  --color-cube27-button-secondary-background: var(
+    --cube27-button-secondary-background
+  );
+  --color-cube27-button-secondary-text: var(--cube27-button-secondary-text);
+  --color-cube27-button-secondary-border: var(--cube27-button-secondary-border);
+  --color-cube27-background-primary: var(--cube27-background-primary);
+  --color-cube27-background-secondary: var(--cube27-background-secondary);
+  --color-cube27-background-accent-primary: var(
+    --cube27-background-accent-primary
+  );
+  --color-cube27-background-accent-secondary: var(
+    --cube27-background-accent-secondary
+  );
+  --color-cube27-background-accent-tertiary: var(
+    --cube27-background-accent-tertiary
+  );
+  --color-cube27-background-inverse: var(--cube27-background-inverse);
+  --color-cube27-border-primary: var(--cube27-border-primary);
+  --color-cube27-border-inverse: var(--cube27-border-inverse);
+  --color-cube27-input-background: var(--cube27-input-background);
+  --color-cube27-input-border: var(--cube27-input-border);
+
+  /* shadcn standard color bindings */
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* shadcn sidebar color bindings */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Color scale bindings (50-950 for neutrals and accents) */
+  --color-cube27-neutral-primary-50: var(--cube27-neutral-primary-50);
+  --color-cube27-neutral-primary-100: var(--cube27-neutral-primary-100);
+  --color-cube27-neutral-primary-200: var(--cube27-neutral-primary-200);
+  --color-cube27-neutral-primary-300: var(--cube27-neutral-primary-300);
+  --color-cube27-neutral-primary-400: var(--cube27-neutral-primary-400);
+  --color-cube27-neutral-primary-500: var(--cube27-neutral-primary-500);
+  --color-cube27-neutral-primary-600: var(--cube27-neutral-primary-600);
+  --color-cube27-neutral-primary-700: var(--cube27-neutral-primary-700);
+  --color-cube27-neutral-primary-800: var(--cube27-neutral-primary-800);
+  --color-cube27-neutral-primary-900: var(--cube27-neutral-primary-900);
+  --color-cube27-neutral-primary-950: var(--cube27-neutral-primary-950);
+  --color-cube27-accent-primary-50: var(--cube27-accent-primary-50);
+  --color-cube27-accent-primary-100: var(--cube27-accent-primary-100);
+  --color-cube27-accent-primary-200: var(--cube27-accent-primary-200);
+  --color-cube27-accent-primary-300: var(--cube27-accent-primary-300);
+  --color-cube27-accent-primary-400: var(--cube27-accent-primary-400);
+  --color-cube27-accent-primary-500: var(--cube27-accent-primary-500);
+  --color-cube27-accent-primary-600: var(--cube27-accent-primary-600);
+  --color-cube27-accent-primary-700: var(--cube27-accent-primary-700);
+  --color-cube27-accent-primary-800: var(--cube27-accent-primary-800);
+  --color-cube27-accent-primary-900: var(--cube27-accent-primary-900);
+  --color-cube27-accent-primary-950: var(--cube27-accent-primary-950);
+  --color-cube27-accent-secondary-50: var(--cube27-accent-secondary-50);
+  --color-cube27-accent-secondary-100: var(--cube27-accent-secondary-100);
+  --color-cube27-accent-secondary-200: var(--cube27-accent-secondary-200);
+  --color-cube27-accent-secondary-300: var(--cube27-accent-secondary-300);
+  --color-cube27-accent-secondary-400: var(--cube27-accent-secondary-400);
+  --color-cube27-accent-secondary-500: var(--cube27-accent-secondary-500);
+  --color-cube27-accent-secondary-600: var(--cube27-accent-secondary-600);
+  --color-cube27-accent-secondary-700: var(--cube27-accent-secondary-700);
+  --color-cube27-accent-secondary-800: var(--cube27-accent-secondary-800);
+  --color-cube27-accent-secondary-900: var(--cube27-accent-secondary-900);
+  --color-cube27-accent-secondary-950: var(--cube27-accent-secondary-950);
+
+  /* Radius bindings (semantic — fallback to base --radius) */
+  --radius-button: var(--radius-button, var(--radius));
+  --radius-card: var(--radius-card, var(--radius));
+  --radius-input: var(--radius-input, var(--radius));
+
+  /* Font size scale (maps standard Tailwind text-* to brand type scale) */
+  --text-9xl: var(--font-size-9xl, 8rem);
+  --text-8xl: var(--font-size-8xl, 6rem);
+  --text-7xl: var(--font-size-7xl, 4.5rem);
+  --text-6xl: var(--font-size-6xl, 3.75rem);
+  --text-5xl: var(--font-size-5xl, 3rem);
+  --text-4xl: var(--font-size-4xl, 2.25rem);
+  --text-3xl: var(--font-size-3xl, 1.875rem);
+  --text-2xl: var(--font-size-2xl, 1.5rem);
+  --text-xl: var(--font-size-xl, 1.25rem);
+  --text-lg: var(--font-size-lg, 1.125rem);
+  --text-base: var(--font-size-base, 1rem);
+  --text-sm: var(--font-size-sm, 0.875rem);
+  --text-xs: var(--font-size-xs, 0.75rem);
+
+  /* Font bindings */
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-eyebrow: var(--font-eyebrow, var(--font-body));
+  --font-button: var(--font-button, var(--font-body));
+}
+
+/* ============================================
+   shadcn → cube27- token aliases
+   Maps shadcn's standard variable names to the cube27- design system.
+   Lives outside cube27-theme-start/end so it survives shared theme tokens.
+   ============================================ */
+:root {
+  /* Core */
+  --background: var(--cube27-background-primary);
+  --foreground: var(--cube27-text-primary);
+
+  /* Card */
+  --card: var(--cube27-background-secondary);
+  --card-foreground: var(--cube27-text-primary);
+
+  /* Popover */
+  --popover: var(--cube27-background-primary);
+  --popover-foreground: var(--cube27-text-primary);
+
+  /* Primary (accent/brand — buttons, checkboxes, active states) */
+  --primary: var(--cube27-accent-primary);
+  --primary-foreground: var(--cube27-text-on-accent-primary);
+
+  /* Secondary (subtle backgrounds) */
+  --secondary: var(--cube27-background-secondary);
+  --secondary-foreground: var(--cube27-text-primary);
+
+  /* Muted (de-emphasized content) */
+  --muted: var(--cube27-background-secondary);
+  --muted-foreground: var(--cube27-text-secondary);
+
+  /* Accent (hover states, highlighted items — maps to accent-secondary brand color) */
+  --accent: var(--cube27-accent-secondary);
+  --accent-foreground: var(--cube27-text-on-accent-secondary);
+
+  /* Form inputs */
+  --input: var(--cube27-input-border);
+  --border: var(--cube27-border-primary);
+  --ring: var(--cube27-accent-primary);
+
+  /* Sidebar */
+  --sidebar: var(--cube27-background-secondary);
+  --sidebar-foreground: var(--cube27-text-primary);
+  --sidebar-primary: var(--cube27-accent-primary);
+  --sidebar-primary-foreground: var(--cube27-text-on-accent-primary);
+  --sidebar-accent: var(--cube27-background-secondary);
+  --sidebar-accent-foreground: var(--cube27-text-primary);
+  --sidebar-border: var(--cube27-border-primary);
+  --sidebar-ring: var(--cube27-accent-primary);
+}
+
+/* cube27-theme-start */
+:root {
+  /* ============================================
+     cube27 design tokens
+     ============================================ */
+  /* Border radius */
+  --radius: 0.625rem;
+  --radius-button: 0.375rem;
+  --radius-card: 0.75rem;
+  --radius-input: 0.375rem;
+
+  /* Font families */
+  --font-heading: "Inter Variable", Inter, system-ui, sans-serif;
+  --font-body: "Inter Variable", Inter, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-eyebrow: "Inter Variable", Inter, system-ui, sans-serif;
+  --font-button: "Inter Variable", Inter, system-ui, sans-serif;
+
+  /* Font sizes (type scale) */
+  --font-size-9xl: 8rem;
+  --font-size-8xl: 6rem;
+  --font-size-7xl: 4.5rem;
+  --font-size-6xl: 3.75rem;
+  --font-size-5xl: 3rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-xl: 1.25rem;
+  --font-size-lg: 1.125rem;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-xs: 0.75rem;
+
+  /* Typography role weights, letter-spacing, line-height */
+  --font-heading-weight: 500;
+  --font-heading-bold-weight: 600;
+  --font-heading-letter-spacing: -0.02em;
+  --font-heading-line-height: 1.05;
+  --font-body-weight: 400;
+  --font-body-bold-weight: 500;
+  --font-body-letter-spacing: 0em;
+  --font-body-line-height: 1.6;
+  --font-eyebrow-weight: 600;
+  --font-eyebrow-letter-spacing: 0.22em;
+  --font-eyebrow-line-height: 1.2;
+  --font-button-weight: 500;
+  --font-button-letter-spacing: 0em;
+  --font-button-line-height: 1;
+
+  /* Shadows */
+  --cube27-shadow-color: var(--cube27-border-primary);
+
+  /* Borders */
+  --border-width: 1px;
+  --border-style: solid;
+
+  /* cube27 theme colors (light mode) — cube27 / Cinematic Enterprise */
+  --cube27-neutral-primary: #fafaf7;
+  --cube27-neutral-secondary: #efefea;
+  --cube27-neutral-inverse: #0f1117;
+  --cube27-neutral-light: #ffffff;
+  --cube27-neutral-dark: #0f1117;
+  --cube27-neutral-primary-s0: white;
+  --cube27-neutral-primary-s1: var(--cube27-neutral-primary);
+  --cube27-neutral-primary-s2: var(--cube27-neutral-secondary);
+  --cube27-neutral-primary-s3: color-mix(
+    in oklch,
+    var(--cube27-neutral-primary) 95%,
+    var(--cube27-neutral-inverse)
+  );
+  --cube27-neutral-primary-s4: color-mix(
+    in oklch,
+    var(--cube27-neutral-primary) 88%,
+    var(--cube27-neutral-inverse)
+  );
+  --cube27-neutral-primary-s5: color-mix(
+    in oklch,
+    var(--cube27-neutral-primary) 76%,
+    var(--cube27-neutral-inverse)
+  );
+  --cube27-neutral-inverse-s0: black;
+  --cube27-neutral-inverse-s1: var(--cube27-neutral-inverse);
+  --cube27-neutral-inverse-s2: color-mix(
+    in oklch,
+    var(--cube27-neutral-inverse) 84%,
+    var(--cube27-neutral-primary)
+  );
+  --cube27-neutral-inverse-s3: color-mix(
+    in oklch,
+    var(--cube27-neutral-inverse) 66%,
+    var(--cube27-neutral-primary)
+  );
+  --cube27-neutral-inverse-s4: color-mix(
+    in oklch,
+    var(--cube27-neutral-inverse) 48%,
+    var(--cube27-neutral-primary)
+  );
+  --cube27-neutral-inverse-s5: color-mix(
+    in oklch,
+    var(--cube27-neutral-inverse) 30%,
+    var(--cube27-neutral-primary)
+  );
+  --cube27-accent-primary: #2f58ff;
+  --cube27-accent-secondary: #1e3fd0;
+  --cube27-accent-tertiary: #2f58ff;
+  --cube27-text-primary: #0f1117;
+  --cube27-text-secondary: #6b7180;
+  --cube27-text-inverse: oklch(1 0 0);
+  --cube27-text-inverse-secondary: oklch(1 0 0 / 60%);
+  --cube27-text-on-accent-primary: oklch(1 0 0);
+  --cube27-text-on-accent-secondary: oklch(1 0 0);
+  --cube27-text-on-accent-tertiary: oklch(0 0 0);
+  --cube27-button-primary-background: #2f58ff;
+  --cube27-button-primary-text: #ffffff;
+  --cube27-button-primary-border: #2f58ff;
+  --cube27-button-secondary-background: #0f1117;
+  --cube27-button-secondary-text: #ffffff;
+  --cube27-button-secondary-border: #0f1117;
+  --cube27-background-primary: var(--cube27-neutral-primary-s1);
+  --cube27-background-secondary: var(--cube27-neutral-secondary);
+  --cube27-background-accent-primary: var(--cube27-accent-primary);
+  --cube27-background-accent-secondary: var(--cube27-accent-secondary);
+  --cube27-background-accent-tertiary: var(--cube27-accent-tertiary);
+  --cube27-background-inverse: var(--cube27-neutral-inverse-s1);
+  --cube27-border-primary: #e2e0d8;
+  --cube27-border-inverse: color-mix(
+    in srgb,
+    var(--cube27-neutral-inverse-s0) 20%,
+    transparent
+  );
+  --cube27-input-background: #ffffff;
+  --cube27-input-border: #e2e0d8;
+  --destructive: oklch(0.55 0.22 27);
+  --border: var(--cube27-border-primary);
+  --background: var(--cube27-background-primary);
+  --foreground: var(--cube27-text-primary);
+  --card: var(--cube27-background-secondary);
+  --card-foreground: var(--cube27-text-primary);
+  --popover: var(--cube27-background-secondary);
+  --popover-foreground: var(--cube27-text-primary);
+  --primary: var(--cube27-background-inverse);
+  --primary-foreground: var(--cube27-text-inverse);
+  --secondary: var(--cube27-background-secondary);
+  --secondary-foreground: var(--cube27-text-primary);
+  --muted: var(--cube27-background-secondary);
+  --muted-foreground: var(--cube27-text-secondary);
+  --accent: var(--cube27-background-primary);
+  --accent-foreground: var(--cube27-text-inverse);
+  --input: var(--cube27-input-border);
+  --ring: var(--cube27-border-inverse);
+
+  /* Color scales (50-950) */
+  --cube27-neutral-primary-50: oklch(1 0 0);
+  --cube27-neutral-primary-100: oklch(0.964 0 0.2);
+  --cube27-neutral-primary-200: oklch(0.911 0 0.4);
+  --cube27-neutral-primary-300: oklch(0.849 0 0.6);
+  --cube27-neutral-primary-400: oklch(0.781 0 0.8);
+  --cube27-neutral-primary-500: oklch(0.708 0 1);
+  --cube27-neutral-primary-600: oklch(0.629 0 1.2);
+  --cube27-neutral-primary-700: oklch(0.547 0 1.4);
+  --cube27-neutral-primary-800: oklch(0.461 0 1.6);
+  --cube27-neutral-primary-900: oklch(0.372 0 1.8);
+  --cube27-neutral-primary-950: oklch(0.28 0 2);
+  --cube27-neutral-inverse-50: oklch(0.98 0 352);
+  --cube27-neutral-inverse-100: oklch(0.941 0 352.8);
+  --cube27-neutral-inverse-200: oklch(0.877 0 353.6);
+  --cube27-neutral-inverse-300: oklch(0.798 0 354.4);
+  --cube27-neutral-inverse-400: oklch(0.708 0 355.2);
+  --cube27-neutral-inverse-500: oklch(0.609 0 356);
+  --cube27-neutral-inverse-600: oklch(0.501 0 356.8);
+  --cube27-neutral-inverse-700: oklch(0.385 0 357.6);
+  --cube27-neutral-inverse-800: oklch(0.263 0 358.4);
+  --cube27-neutral-inverse-900: oklch(0.134 0 359.2);
+  --cube27-neutral-inverse-950: oklch(0 0 0);
+  --cube27-accent-primary-50: oklch(0.98 0 352);
+  --cube27-accent-primary-100: oklch(0.941 0 352.8);
+  --cube27-accent-primary-200: oklch(0.877 0 353.6);
+  --cube27-accent-primary-300: oklch(0.798 0 354.4);
+  --cube27-accent-primary-400: oklch(0.708 0 355.2);
+  --cube27-accent-primary-500: oklch(0.609 0 356);
+  --cube27-accent-primary-600: oklch(0.501 0 356.8);
+  --cube27-accent-primary-700: oklch(0.385 0 357.6);
+  --cube27-accent-primary-800: oklch(0.263 0 358.4);
+  --cube27-accent-primary-900: oklch(0.134 0 359.2);
+  --cube27-accent-primary-950: oklch(0 0 0);
+  --cube27-accent-secondary-50: oklch(1 0 0);
+  --cube27-accent-secondary-100: oklch(0.964 0 0.2);
+  --cube27-accent-secondary-200: oklch(0.911 0 0.4);
+  --cube27-accent-secondary-300: oklch(0.849 0 0.6);
+  --cube27-accent-secondary-400: oklch(0.781 0 0.8);
+  --cube27-accent-secondary-500: oklch(0.708 0 1);
+  --cube27-accent-secondary-600: oklch(0.629 0 1.2);
+  --cube27-accent-secondary-700: oklch(0.547 0 1.4);
+  --cube27-accent-secondary-800: oklch(0.461 0 1.6);
+  --cube27-accent-secondary-900: oklch(0.372 0 1.8);
+  --cube27-accent-secondary-950: oklch(0.28 0 2);
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* cube27 theme colors (dark mode - inverted lightness) */
+  --cube27-neutral-primary: oklch(0 0 0);
+  --cube27-neutral-secondary: oklch(0.03 0 0);
+  --cube27-neutral-inverse: oklch(1 0 0);
+  --cube27-neutral-light: oklch(0.941 0 352.8);
+  --cube27-neutral-dark: oklch(0 0 0);
+  --cube27-neutral-primary-s0: color-mix(
+    in oklch,
+    var(--cube27-neutral-primary) 88%,
+    black
+  );
+  --cube27-neutral-primary-s1: var(--cube27-neutral-primary);
+  --cube27-neutral-primary-s2: var(--cube27-neutral-secondary);
+  --cube27-neutral-primary-s3: color-mix(
+    in oklch,
+    var(--cube27-neutral-primary) 95%,
+    var(--cube27-neutral-inverse)
+  );
+  --cube27-neutral-primary-s4: color-mix(
+    in oklch,
+    var(--cube27-neutral-primary) 88%,
+    var(--cube27-neutral-inverse)
+  );
+  --cube27-neutral-primary-s5: color-mix(
+    in oklch,
+    var(--cube27-neutral-primary) 76%,
+    var(--cube27-neutral-inverse)
+  );
+  --cube27-neutral-inverse-s0: color-mix(
+    in oklch,
+    var(--cube27-neutral-inverse) 88%,
+    white
+  );
+  --cube27-neutral-inverse-s1: var(--cube27-neutral-inverse);
+  --cube27-neutral-inverse-s2: color-mix(
+    in oklch,
+    var(--cube27-neutral-inverse) 84%,
+    var(--cube27-neutral-primary)
+  );
+  --cube27-neutral-inverse-s3: color-mix(
+    in oklch,
+    var(--cube27-neutral-inverse) 66%,
+    var(--cube27-neutral-primary)
+  );
+  --cube27-neutral-inverse-s4: color-mix(
+    in oklch,
+    var(--cube27-neutral-inverse) 48%,
+    var(--cube27-neutral-primary)
+  );
+  --cube27-neutral-inverse-s5: color-mix(
+    in oklch,
+    var(--cube27-neutral-inverse) 30%,
+    var(--cube27-neutral-primary)
+  );
+  --cube27-accent-primary: oklch(1 0 0);
+  --cube27-accent-secondary: oklch(0 0 0);
+  --cube27-accent-tertiary: oklch(1 0 0);
+  --cube27-text-primary: var(--cube27-neutral-primary-100);
+  --cube27-text-secondary: var(--cube27-neutral-primary-500);
+  --cube27-text-inverse: oklch(0 0 0);
+  --cube27-text-inverse-secondary: oklch(0 0 0 / 60%);
+  --cube27-text-on-accent-primary: oklch(0 0 0);
+  --cube27-text-on-accent-secondary: oklch(0 0 0);
+  --cube27-text-on-accent-tertiary: oklch(0.941 0 352.8);
+  --cube27-button-primary-background: var(--cube27-background-inverse);
+  --cube27-button-primary-text: var(--cube27-background-primary);
+  --cube27-button-primary-border: var(--cube27-background-inverse);
+  --cube27-button-secondary-background: var(--cube27-background-primary);
+  --cube27-button-secondary-text: var(--cube27-background-inverse);
+  --cube27-button-secondary-border: oklch(0.2 0 0);
+  --cube27-background-primary: var(--cube27-neutral-primary-s1);
+  --cube27-background-secondary: var(--cube27-neutral-secondary);
+  --cube27-background-accent-primary: var(--cube27-accent-primary);
+  --cube27-background-accent-secondary: var(--cube27-accent-secondary);
+  --cube27-background-accent-tertiary: var(--cube27-accent-tertiary);
+  --cube27-background-inverse: var(--cube27-neutral-inverse-s1);
+  --cube27-border-primary: var(--cube27-neutral-primary-s5);
+  --cube27-border-inverse: color-mix(
+    in srgb,
+    var(--cube27-neutral-inverse-s0) 20%,
+    transparent
+  );
+  --cube27-input-background: var(--cube27-neutral-primary);
+  --cube27-input-border: var(--cube27-neutral-primary-s5);
+  --destructive: oklch(0.45 0.22 27);
+  --border: var(--cube27-border-primary);
+  --background: var(--cube27-background-primary);
+  --foreground: var(--cube27-text-primary);
+  --card: var(--cube27-background-secondary);
+  --card-foreground: var(--cube27-text-primary);
+  --popover: var(--cube27-background-secondary);
+  --popover-foreground: var(--cube27-text-primary);
+  --primary: var(--cube27-background-inverse);
+  --primary-foreground: var(--cube27-text-inverse);
+  --secondary: var(--cube27-background-secondary);
+  --secondary-foreground: var(--cube27-text-primary);
+  --muted: var(--cube27-background-secondary);
+  --muted-foreground: var(--cube27-text-secondary);
+  --accent: var(--cube27-background-primary);
+  --accent-foreground: var(--cube27-text-inverse);
+  --input: var(--cube27-input-border);
+  --ring: var(--cube27-border-inverse);
+
+  /* Color scales (static - same as light mode) */
+  --cube27-neutral-primary-50: oklch(0.98 0 352);
+  --cube27-neutral-primary-100: oklch(0.941 0 352.8);
+  --cube27-neutral-primary-200: oklch(0.877 0 353.6);
+  --cube27-neutral-primary-300: oklch(0.798 0 354.4);
+  --cube27-neutral-primary-400: oklch(0.708 0 355.2);
+  --cube27-neutral-primary-500: oklch(0.609 0 356);
+  --cube27-neutral-primary-600: oklch(0.501 0 356.8);
+  --cube27-neutral-primary-700: oklch(0.385 0 357.6);
+  --cube27-neutral-primary-800: oklch(0.263 0 358.4);
+  --cube27-neutral-primary-900: oklch(0.134 0 359.2);
+  --cube27-neutral-primary-950: oklch(0 0 0);
+  --cube27-neutral-inverse-50: oklch(1 0 0);
+  --cube27-neutral-inverse-100: oklch(0.964 0 0.2);
+  --cube27-neutral-inverse-200: oklch(0.911 0 0.4);
+  --cube27-neutral-inverse-300: oklch(0.849 0 0.6);
+  --cube27-neutral-inverse-400: oklch(0.781 0 0.8);
+  --cube27-neutral-inverse-500: oklch(0.708 0 1);
+  --cube27-neutral-inverse-600: oklch(0.629 0 1.2);
+  --cube27-neutral-inverse-700: oklch(0.547 0 1.4);
+  --cube27-neutral-inverse-800: oklch(0.461 0 1.6);
+  --cube27-neutral-inverse-900: oklch(0.372 0 1.8);
+  --cube27-neutral-inverse-950: oklch(0.28 0 2);
+  --cube27-accent-primary-50: #eef2ff;
+  --cube27-accent-primary-100: #e0e7ff;
+  --cube27-accent-primary-200: #c3d0ff;
+  --cube27-accent-primary-300: #9db2ff;
+  --cube27-accent-primary-400: #6b8aff;
+  --cube27-accent-primary-500: #2f58ff;
+  --cube27-accent-primary-600: #1e3fd0;
+  --cube27-accent-primary-700: #1a35b0;
+  --cube27-accent-primary-800: #182c8c;
+  --cube27-accent-primary-900: #17276f;
+  --cube27-accent-primary-950: #0f1740;
+  --cube27-accent-secondary-50: oklch(0.98 0 352);
+  --cube27-accent-secondary-100: oklch(0.941 0 352.8);
+  --cube27-accent-secondary-200: oklch(0.877 0 353.6);
+  --cube27-accent-secondary-300: oklch(0.798 0 354.4);
+  --cube27-accent-secondary-400: oklch(0.708 0 355.2);
+  --cube27-accent-secondary-500: oklch(0.609 0 356);
+  --cube27-accent-secondary-600: oklch(0.501 0 356.8);
+  --cube27-accent-secondary-700: oklch(0.385 0 357.6);
+  --cube27-accent-secondary-800: oklch(0.263 0 358.4);
+  --cube27-accent-secondary-900: oklch(0.134 0 359.2);
+  --cube27-accent-secondary-950: oklch(0 0 0);
+}
+/* cube27-theme-end */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cube27-background-primary text-cube27-text-primary;
+    font-weight: var(--font-body-weight);
+    letter-spacing: var(--font-body-letter-spacing);
+    line-height: var(--font-body-line-height);
+  }
+
+  .typography-heading {
+    font-weight: var(--font-heading-weight);
+    letter-spacing: var(--font-heading-letter-spacing);
+    line-height: var(--font-heading-line-height);
+  }
+
+  .typography-body {
+    font-weight: var(--font-body-weight);
+    letter-spacing: var(--font-body-letter-spacing);
+    line-height: var(--font-body-line-height);
+  }
+
+  .typography-eyebrow {
+    font-weight: var(--font-eyebrow-weight);
+    letter-spacing: var(--font-eyebrow-letter-spacing);
+    line-height: var(--font-eyebrow-line-height);
+  }
+
+  .typography-button {
+    font-weight: var(--font-button-weight);
+    letter-spacing: var(--font-button-letter-spacing);
+    line-height: var(--font-button-line-height);
+  }
+}
+
+/* Reduced motion: disable animations and transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   CSS View Transitions (MPA)
+   ============================================ */
+@view-transition {
+  navigation: auto;
+}
+
+/* Crossfade animation for page transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.2s;
+  animation-timing-function: ease-out;
+}
+
+/* Disable view transitions for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
+/* ============================================
+   Prose. Tailwind Typography
+   ============================================ */
+.prose {
+  --tw-prose-body: var(--cube27-text-primary);
+  --tw-prose-headings: var(--cube27-text-primary);
+  --tw-prose-lead: var(--cube27-text-secondary);
+  --tw-prose-links: var(--cube27-accent-primary);
+  --tw-prose-bold: var(--cube27-text-primary);
+  --tw-prose-counters: var(--cube27-text-secondary);
+  --tw-prose-bullets: var(--cube27-text-primary);
+  --tw-prose-hr: var(--cube27-border-primary);
+  --tw-prose-quotes: var(--cube27-text-primary);
+  --tw-prose-quote-borders: var(--cube27-border-primary);
+  --tw-prose-captions: var(--cube27-text-secondary);
+  --tw-prose-code: var(--cube27-text-primary);
+  --tw-prose-pre-code: var(--cube27-text-primary);
+  --tw-prose-pre-bg: var(--cube27-background-secondary);
+  --tw-prose-th-borders: var(--cube27-border-primary);
+  --tw-prose-td-borders: var(--cube27-border-primary);
+}

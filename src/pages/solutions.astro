@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { SolutionsPage } from "@/components/pages/solutions/page";
+
+export const prerender = true;
+---
+
+<Layout
+  title="Solutions — cube27"
+  description="cube27's solutions across digital marketing & MarTech, BI & analytics, ecommerce, machine learning, GCC-as-a-Service, and engineering — proven across 100+ brands and $1B+ in optimized ad spend."
+>
+  <SolutionsPage client:load />
+</Layout>

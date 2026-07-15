@@ -1,0 +1,276 @@
+import { Check } from "lucide-react";
+import { Navbar } from "@/components/sections/navbar";
+import { Footer } from "@/components/sections/footer";
+import { HomeHero } from "@/components/pages/home/sections/hero";
+import { Contact } from "@/components/sections/contact";
+import { Reveal } from "@/components/ui/reveal";
+
+/**
+ * @cube27Component
+ * @cube27ComponentId CaseStudiesPage
+ * @cube27ComponentType page
+ * @cube27ComponentPattern landing
+ * @cube27ComponentStatus stable
+ * @cube27ComponentDescription cube27 Case Studies page shell (Cinematic Enterprise direction). Reuses the shared Navbar + Footer, the home HomeHero, and the shared Contact section as the closing band. Body is a stack of page-local case-study blocks rendered from the CASE_STUDIES data array — each block has a tracked category eyebrow, grotesk title, intro, Challenge/Solution narrative, a hairline-ruled results stat grid (proof-tile anatomy), key-outcome checklist with same-color accent checks, and a quiet tag row. Blocks alternate warm-white and neutral-secondary backgrounds for separation. Content is verbatim from client-provided case studies — keep facts and figures exact. Warm-white canvas, single electric-blue accent reserved for eyebrows/checks.
+ */
+interface CaseStudy {
+  category: string;
+  title: string;
+  intro?: string;
+  challenge: string;
+  solutionIntro?: string;
+  solution: string[];
+  impact?: string;
+  impactList?: string[];
+  results: { value: string; label: string }[];
+  keyOutcomesTitle?: string;
+  keyOutcomes: string[];
+  tags: string[];
+}
+
+const CASE_STUDIES: CaseStudy[] = [
+  {
+    category: "GCC & Operations",
+    title:
+      "Establishing an Excellence & Operations Center for a growing commerce & technology partner",
+    intro:
+      "A leading commerce and technology partner sought to scale rapidly while maintaining seamless alignment with its headquarters. The goal was to create a high-performance center that integrated technical capability, process rigor, and organizational culture.",
+    challenge:
+      "The partner wanted to focus on rapid growth while ensuring operational, technical, and process excellence across commerce, digital marketing, and technology initiatives.",
+    solution: [
+      "Excellence & Operations Center setup: implemented a “Build-Operate” model, managing entity setup, infrastructure, and compliance to accelerate operational readiness.",
+      "Targeted talent deployment (Product Engineering): recruited teams with deep expertise in technology, commerce platforms, and operational processes to support growth initiatives.",
+      "Commerce & tech enablement (Enterprise Commerce): optimized tech and operational process and platform integrations to scale commerce operations seamlessly.",
+      "AI-accelerated operations (Agentic AI & Process Automation): embedded intelligent automation for operational workflows, enabling faster execution and actionable insights across business functions.",
+    ],
+    impact:
+      "The partner was able to scale rapidly, focusing internal efforts on technology and product innovation, while leveraging CUBE27’s full suite of capabilities — GCC, enterprise commerce, product engineering, and AI-driven process automation — to enable operational excellence. This model is repeatable for other growth-stage partners seeking to establish knowledge, technology, or process centers while concentrating on scaling their core business.",
+    results: [
+      { value: "100%", label: "Seamless integration" },
+      { value: "<10%", label: "Attrition rate" },
+      { value: "24/7", label: "Global coverage" },
+      { value: "6 weeks", label: "Onboarding time" },
+    ],
+    keyOutcomes: [
+      "Fully operational team functioning as dedicated contractors",
+      "High retention rates ensured knowledge continuity",
+      "Successfully scaled to support global operations 24/7",
+    ],
+    tags: ["GCC Setup", "Culture Mirroring", "Build-Operate Model"],
+  },
+  {
+    category: "Digital Transformation",
+    title: "Building a scalable supplier ERP system",
+    challenge:
+      "A leading manufacturing supplier managed its Purchase Order, Challan, and Invoice processes through disconnected Excel files. With no centralized database, the company faced frequent data errors, duplicate entries, poor traceability, and zero visibility into historical pricing and volume trends. As transaction volumes grew, manual handling became unsustainable.",
+    solutionIntro:
+      "A customized, web-based ERP system was developed to streamline and digitize the entire procurement and billing lifecycle.",
+    solution: [
+      "Designed a structured 4-step reconciliation workflow with automatic document conversion.",
+      "Built on Python and Next.js with a centralized, secure database.",
+      "Integrated Material Code mapping aligned with industry standards.",
+      "Implemented validation rules and approval controls.",
+      "Added built-in analytics for historical trend analysis and reporting.",
+    ],
+    results: [
+      { value: "100%", label: "Digitization" },
+      { value: "0", label: "Manual errors" },
+      { value: "Real-time", label: "Analytics" },
+      { value: "Full", label: "Audit trail" },
+    ],
+    impactList: [
+      "Significant reduction in manual data entry and processing time",
+      "Elimination of most billing and documentation errors",
+      "Faster invoicing cycles and improved cash flow",
+      "Complete audit trail across all transactions",
+      "Improved management visibility through real-time reporting",
+    ],
+    keyOutcomesTitle: "Impact",
+    keyOutcomes: [],
+    tags: ["Angular", "Node.js", "ERP", "Workflow Automation"],
+  },
+];
+
+export function CaseStudiesPage() {
+  return (
+    <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
+      <Navbar />
+      <main>
+        <HomeHero
+          headlineLines={["Outcomes we've", "engineered for", "our partners."]}
+          body="From standing up global capability centers to digitizing core operations, here's how CUBE27 turns strategy into measurable, repeatable results."
+          ctaLabel="Discuss your project"
+          ctaHref="#contact"
+          overlayEyebrow="OUTCOMES DELIVERED"
+          overlayTitle="Impact. Value. Trust."
+          overlayDescription="Rigorous delivery for over 100+ global brands."
+          overlayBadge="10x"
+        />
+        {CASE_STUDIES.map((cs, i) => (
+          <CaseStudyBlock key={cs.title} study={cs} index={i} />
+        ))}
+        <Contact
+          eyebrow="Start your project"
+          headlineLines={["Let's engineer your", "next outcome."]}
+          body="Tell us about the capability, platform, or process you want to scale. Our experts will map the right approach and get back to you quickly."
+        />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+function CaseStudyBlock({ study, index }: { study: CaseStudy; index: number }) {
+  const alt = index % 2 === 1;
+  return (
+    <section
+      className={`border-t border-cube27-border-primary py-20 lg:py-28 ${
+        alt ? "bg-cube27-neutral-secondary/40" : "bg-cube27-background-primary"
+      }`}
+    >
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <Reveal>
+          <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
+            {study.category}
+          </p>
+          <h2 className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.4rem,2.6vw,1.95rem)] font-medium leading-[1.15] tracking-[-0.02em] text-cube27-text-primary">
+            {study.title}
+          </h2>
+          {study.intro && (
+            <p className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
+              {study.intro}
+            </p>
+          )}
+        </Reveal>
+
+        {/* Results grid */}
+        <Reveal delay={0.08}>
+          <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary lg:grid-cols-4">
+            {study.results.map((r) => (
+              <div key={r.label} className="bg-cube27-background-primary p-6">
+                <dt className="typography-heading text-[clamp(1.6rem,3vw,2.25rem)] font-medium tracking-[-0.02em] text-cube27-text-primary">
+                  {r.value}
+                </dt>
+                <dd className="mt-1 text-[0.85rem] text-cube27-text-secondary">
+                  {r.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
+
+        {/* Narrative columns */}
+        <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2">
+          <Reveal delay={0.05}>
+            <NarrativeGroup title="The challenge">
+              <p className="text-[0.98rem] leading-relaxed text-cube27-text-secondary">
+                {study.challenge}
+              </p>
+            </NarrativeGroup>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <NarrativeGroup title="The solution">
+              {study.solutionIntro && (
+                <p className="mb-4 text-[0.98rem] leading-relaxed text-cube27-text-secondary">
+                  {study.solutionIntro}
+                </p>
+              )}
+              <ul className="space-y-3">
+                {study.solution.map((s) => (
+                  <li
+                    key={s}
+                    className="flex gap-3 text-[0.95rem] leading-relaxed text-cube27-text-secondary"
+                  >
+                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-cube27-accent-primary" />
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </NarrativeGroup>
+          </Reveal>
+        </div>
+
+        {/* Impact / key outcomes */}
+        {(study.impact || study.impactList || study.keyOutcomes.length > 0) && (
+          <Reveal delay={0.12}>
+            <div className="mt-10 border-t border-cube27-border-primary pt-8">
+              <NarrativeGroup title={study.keyOutcomesTitle ?? "Impact"}>
+                {study.impact && (
+                  <p className="max-w-3xl text-[0.98rem] leading-relaxed text-cube27-text-secondary">
+                    {study.impact}
+                  </p>
+                )}
+                {!study.impact &&
+                  study.impactList &&
+                  study.impactList.length > 0 && (
+                    <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      {study.impactList.map((o) => (
+                        <li
+                          key={o}
+                          className="flex gap-2.5 text-[0.95rem] leading-relaxed text-cube27-text-primary"
+                        >
+                          <Check
+                            className="mt-0.5 size-4 shrink-0 text-cube27-accent-primary"
+                            strokeWidth={2}
+                          />
+                          <span>{o}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                {study.impact && study.keyOutcomes.length > 0 && (
+                  <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    {study.keyOutcomes.map((o) => (
+                      <li
+                        key={o}
+                        className="flex gap-2.5 text-[0.95rem] leading-relaxed text-cube27-text-primary"
+                      >
+                        <Check
+                          className="mt-0.5 size-4 shrink-0 text-cube27-accent-primary"
+                          strokeWidth={2}
+                        />
+                        <span>{o}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </NarrativeGroup>
+            </div>
+          </Reveal>
+        )}
+
+        {/* Tags */}
+        <Reveal delay={0.14}>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {study.tags.map((t) => (
+              <span
+                key={t}
+                className="rounded-full border border-cube27-border-primary px-3 py-1 text-[0.78rem] text-cube27-text-secondary"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function NarrativeGroup({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <h3 className="typography-eyebrow text-[0.7rem] uppercase tracking-wide text-cube27-text-primary">
+        {title}
+      </h3>
+      <div className="mt-3">{children}</div>
+    </div>
+  );
+}
