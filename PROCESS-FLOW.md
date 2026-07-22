@@ -51,7 +51,7 @@ code repository (GitHub) and automatically published by Cloudflare.
           Live at www.cube27.com
 ```
 
-There is no separate "publish" button and no login dashboard — **the code *is* the
+There is no separate "publish" button and no login dashboard — **the code _is_ the
 content**, and pushing to GitHub is what publishes it.
 
 ---
@@ -97,7 +97,7 @@ right files, makes the edits, checks them, and publishes.
 **How to describe a change well (so the AI gets it right the first time):**
 
 - Name the page or area exactly.
-- Paste the *current* text if you can, and the *new* text you want.
+- Paste the _current_ text if you can, and the _new_ text you want.
 - Ask for one change at a time when possible.
 - Ask the AI to **show you the change and run `pnpm run verify` before pushing**.
 
@@ -148,18 +148,18 @@ right files, makes the edits, checks them, and publishes.
 └── 📄 README / AGENTS / MAINTENANCE / PROCESS-FLOW  docs
 ```
 
-| Folder / file | What it holds | Who usually touches it |
-| :------------ | :------------ | :--------------------- |
-| `src/pages/` | One file per URL (e.g. `about.astro` → `/about`) | AI / developer |
-| `src/components/pages/` | The text & layout of each page | AI / developer |
-| `src/components/sections/` | Shared **navbar, footer, contact** | AI / developer |
-| `src/site-config.ts` | Company name, email, address, social links | AI / developer |
-| `src/styles/globals.css` | Brand colors and fonts | Developer |
-| `public/` | Images, favicon, `llms.txt` | Anyone (drop-in files) |
-| `files/*.md` | Text mirror of page copy | Non-tech can read/draft here |
+| Folder / file              | What it holds                                    | Who usually touches it       |
+| :------------------------- | :----------------------------------------------- | :--------------------------- |
+| `src/pages/`               | One file per URL (e.g. `about.astro` → `/about`) | AI / developer               |
+| `src/components/pages/`    | The text & layout of each page                   | AI / developer               |
+| `src/components/sections/` | Shared **navbar, footer, contact**               | AI / developer               |
+| `src/site-config.ts`       | Company name, email, address, social links       | AI / developer               |
+| `src/styles/globals.css`   | Brand colors and fonts                           | Developer                    |
+| `public/`                  | Images, favicon, `llms.txt`                      | Anyone (drop-in files)       |
+| `files/*.md`               | Text mirror of page copy                         | Non-tech can read/draft here |
 
 > 💡 The `files/` folder holds readable Markdown copies of each page's text — a safe
-> place to *read* current copy or *draft* new wording before asking the AI to apply it.
+> place to _read_ current copy or _draft_ new wording before asking the AI to apply it.
 
 ---
 
@@ -220,14 +220,14 @@ The form needs three secret values in Cloudflare (`RESEND_API_KEY`,
 
 ## 6. "Where do I edit this?" quick guide
 
-| What you want to change | File / place | How to ask the AI |
-| :---------------------- | :----------- | :---------------- |
-| Text on a page | `src/components/pages/<page>/` | "Change the text on the … page to …" |
+| What you want to change     | File / place                                    | How to ask the AI                         |
+| :-------------------------- | :---------------------------------------------- | :---------------------------------------- |
+| Text on a page              | `src/components/pages/<page>/`                  | "Change the text on the … page to …"      |
 | Contact info / social links | `site-config.ts` + `contact.tsx` + `footer.tsx` | "Update our contact info everywhere to …" |
-| An image | `public/` folder | "Replace the image on … with this file" |
-| Brand colors / fonts | `src/styles/globals.css` | "Change the accent color to …" |
-| Navbar / footer links | `sections/navbar.tsx` / `footer.tsx` | "Add a link to … in the navbar" |
-| Contact-form behavior | `functions/api/contact.ts` | "Add a field to the contact form for …" |
+| An image                    | `public/` folder                                | "Replace the image on … with this file"   |
+| Brand colors / fonts        | `src/styles/globals.css`                        | "Change the accent color to …"            |
+| Navbar / footer links       | `sections/navbar.tsx` / `footer.tsx`            | "Add a link to … in the navbar"           |
+| Contact-form behavior       | `functions/api/contact.ts`                      | "Add a field to the contact form for …"   |
 
 ---
 
@@ -263,18 +263,18 @@ publishes automatically. There is no manual deploy step.
 
 ## 9. Mini-glossary
 
-| Term | What it means |
-| :--- | :------------ |
-| **AI assistant** | The chat helper inside VS Code that edits the code when you describe a change. |
-| **Repository / repo** | The folder of files that make up the website, tracked by GitHub. |
-| **GitHub** | The online home where the code is stored and versioned. |
-| **Commit / push** | Saving a change and sending it up to GitHub. |
-| **Build** | Turning the code into the finished web pages. |
-| **Deploy** | Publishing the finished pages to the live internet. |
-| **Cloudflare Pages** | The service that builds and hosts the live site. |
-| **Component** | A reusable building block of a page (e.g. the footer). |
-| **Astro / React** | The tools the site is built with. |
-| **Secret / environment variable** | A private key stored safely outside the code (e.g. the email key). |
+| Term                              | What it means                                                                  |
+| :-------------------------------- | :----------------------------------------------------------------------------- |
+| **AI assistant**                  | The chat helper inside VS Code that edits the code when you describe a change. |
+| **Repository / repo**             | The folder of files that make up the website, tracked by GitHub.               |
+| **GitHub**                        | The online home where the code is stored and versioned.                        |
+| **Commit / push**                 | Saving a change and sending it up to GitHub.                                   |
+| **Build**                         | Turning the code into the finished web pages.                                  |
+| **Deploy**                        | Publishing the finished pages to the live internet.                            |
+| **Cloudflare Pages**              | The service that builds and hosts the live site.                               |
+| **Component**                     | A reusable building block of a page (e.g. the footer).                         |
+| **Astro / React**                 | The tools the site is built with.                                              |
+| **Secret / environment variable** | A private key stored safely outside the code (e.g. the email key).             |
 
 ---
 

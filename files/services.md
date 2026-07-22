@@ -166,9 +166,9 @@ Centers of Excellence designed to drive continuous improvement — not just deli
 | Metric              | Value    |
 | ------------------- | -------- |
 | Startup Time        | 90+ days |
-| Team Size           | 150+  |
-| Attrition Rate      | <10%  |
-| YoY Efficiency Gain | 10%   |
+| Team Size           | 150+     |
+| Attrition Rate      | <10%     |
+| YoY Efficiency Gain | 10%      |
 
 Best for CTOs / CIOs scaling multi-continent teams with full IP & data protection.
 

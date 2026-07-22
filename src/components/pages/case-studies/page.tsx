@@ -4,8 +4,10 @@ import { Footer } from "@/components/sections/footer";
 import { HomeHero } from "@/components/pages/home/sections/hero";
 import { Contact } from "@/components/sections/contact";
 import { Reveal } from "@/components/ui/reveal";
+import { SplitExplorer, type SplitItem } from "@/components/ui/split-explorer";
 
 interface CaseStudy {
+  id: string;
   category: string;
   title: string;
   intro?: string;
@@ -22,6 +24,7 @@ interface CaseStudy {
 
 const CASE_STUDIES: CaseStudy[] = [
   {
+    id: "gcc-operations",
     category: "GCC & Operations",
     title:
       "Establishing an Excellence & Operations Center for a growing commerce & technology partner",
@@ -51,6 +54,7 @@ const CASE_STUDIES: CaseStudy[] = [
     tags: ["GCC Setup", "Culture Mirroring", "Build-Operate Model"],
   },
   {
+    id: "digital-transformation",
     category: "Digital Transformation",
     title: "Building a scalable supplier ERP system",
     challenge:
@@ -79,16 +83,18 @@ const CASE_STUDIES: CaseStudy[] = [
     ],
     keyOutcomesTitle: "Impact",
     keyOutcomes: [],
-    tags: [
-      "Python",
-      "Next.js",
-      "ERP",
-      "Workflow Automation",
-    ],
+    tags: ["Python", "Next.js", "ERP", "Workflow Automation"],
   },
 ];
 
 export function CaseStudiesPage() {
+  const items: SplitItem[] = CASE_STUDIES.map((cs) => ({
+    id: cs.id,
+    eyebrow: cs.category,
+    title: cs.title,
+    render: () => <CaseStudyDetail study={cs} />,
+  }));
+
   return (
     <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
       <Navbar />
@@ -107,9 +113,20 @@ export function CaseStudiesPage() {
           overlayDescription="Rigorous delivery for over 100+ global brands."
           overlayBadge="10x"
         />
-        {CASE_STUDIES.map((cs, i) => (
-          <CaseStudyBlock key={cs.title} study={cs} index={i} />
-        ))}
+
+        <section className="border-t border-cube27-border-primary py-20 lg:py-28">
+          <div className="mx-auto mb-12 max-w-7xl px-5 sm:px-8">
+            <Reveal>
+              <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
+                Case Studies
+              </p>
+              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+                Select an engagement to explore the outcome.
+              </h2>
+            </Reveal>
+          </div>
+          <SplitExplorer items={items} ariaLabel="Case studies" />
+        </section>
 
         <ClientsAndBrandsSection />
 
@@ -188,141 +205,127 @@ function ClientsAndBrandsSection() {
   );
 }
 
-function CaseStudyBlock({ study, index }: { study: CaseStudy; index: number }) {
-  const alt = index % 2 === 1;
+function CaseStudyDetail({ study }: { study: CaseStudy }) {
   return (
-    <section
-      className={`border-t border-cube27-border-primary py-20 lg:py-28 ${
-        alt ? "bg-cube27-neutral-secondary/40" : "bg-cube27-background-primary"
-      }`}
-    >
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <Reveal>
-          <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
-            {study.category}
+    <div>
+      <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
+        {study.category}
+      </p>
+      <h3 className="typography-heading mt-4 text-balance text-[clamp(1.4rem,2.6vw,1.95rem)] font-medium leading-[1.15] tracking-[-0.02em] text-cube27-text-primary">
+        {study.title}
+      </h3>
+      {study.intro && (
+        <p className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
+          {study.intro}
+        </p>
+      )}
+
+      {/* Results grid */}
+      <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-4">
+        {study.results.map((r) => (
+          <div
+            key={r.label}
+            className="bg-cube27-background-primary p-5 sm:p-6"
+          >
+            <dt className="typography-heading text-[clamp(1.5rem,3vw,2rem)] font-medium tracking-[-0.02em] text-cube27-text-primary">
+              {r.value}
+            </dt>
+            <dd className="mt-1 text-[0.82rem] text-cube27-text-secondary">
+              {r.label}
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      {/* Narrative columns */}
+      <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2">
+        <NarrativeGroup title="The challenge">
+          <p className="text-[0.98rem] leading-relaxed text-cube27-text-secondary">
+            {study.challenge}
           </p>
-          <h2 className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.4rem,2.6vw,1.95rem)] font-medium leading-[1.15] tracking-[-0.02em] text-cube27-text-primary">
-            {study.title}
-          </h2>
-          {study.intro && (
-            <p className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
-              {study.intro}
+        </NarrativeGroup>
+
+        <NarrativeGroup title="The solution">
+          {study.solutionIntro && (
+            <p className="mb-4 text-[0.98rem] leading-relaxed text-cube27-text-secondary">
+              {study.solutionIntro}
             </p>
           )}
-        </Reveal>
-
-        {/* Results grid */}
-        <Reveal delay={0.08}>
-          <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary lg:grid-cols-4">
-            {study.results.map((r) => (
-              <div key={r.label} className="bg-cube27-background-primary p-6">
-                <dt className="typography-heading text-[clamp(1.6rem,3vw,2.25rem)] font-medium tracking-[-0.02em] text-cube27-text-primary">
-                  {r.value}
-                </dt>
-                <dd className="mt-1 text-[0.85rem] text-cube27-text-secondary">
-                  {r.label}
-                </dd>
-              </div>
+          <ul className="space-y-3">
+            {study.solution.map((s) => (
+              <li
+                key={s}
+                className="flex gap-3 text-[0.95rem] leading-relaxed text-cube27-text-secondary"
+              >
+                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-cube27-accent-primary" />
+                <span>{s}</span>
+              </li>
             ))}
-          </dl>
-        </Reveal>
+          </ul>
+        </NarrativeGroup>
+      </div>
 
-        {/* Narrative columns */}
-        <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2">
-          <Reveal delay={0.05}>
-            <NarrativeGroup title="The challenge">
-              <p className="text-[0.98rem] leading-relaxed text-cube27-text-secondary">
-                {study.challenge}
+      {/* Impact / key outcomes */}
+      {(study.impact ||
+        (study.impactList && study.impactList.length > 0) ||
+        study.keyOutcomes.length > 0) && (
+        <div className="mt-10 border-t border-cube27-border-primary pt-8">
+          <NarrativeGroup title={study.keyOutcomesTitle ?? "Impact"}>
+            {study.impact && (
+              <p className="max-w-3xl text-[0.98rem] leading-relaxed text-cube27-text-secondary">
+                {study.impact}
               </p>
-            </NarrativeGroup>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <NarrativeGroup title="The solution">
-              {study.solutionIntro && (
-                <p className="mb-4 text-[0.98rem] leading-relaxed text-cube27-text-secondary">
-                  {study.solutionIntro}
-                </p>
+            )}
+            {!study.impact &&
+              study.impactList &&
+              study.impactList.length > 0 && (
+                <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {study.impactList.map((o) => (
+                    <li
+                      key={o}
+                      className="flex gap-2.5 text-[0.95rem] leading-relaxed text-cube27-text-primary"
+                    >
+                      <Check
+                        className="mt-0.5 size-4 shrink-0 text-cube27-accent-primary"
+                        strokeWidth={2}
+                      />
+                      <span>{o}</span>
+                    </li>
+                  ))}
+                </ul>
               )}
-              <ul className="space-y-3">
-                {study.solution.map((s) => (
+            {study.keyOutcomes.length > 0 && (
+              <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {study.keyOutcomes.map((o) => (
                   <li
-                    key={s}
-                    className="flex gap-3 text-[0.95rem] leading-relaxed text-cube27-text-secondary"
+                    key={o}
+                    className="flex gap-2.5 text-[0.95rem] leading-relaxed text-cube27-text-primary"
                   >
-                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-cube27-accent-primary" />
-                    <span>{s}</span>
+                    <Check
+                      className="mt-0.5 size-4 shrink-0 text-cube27-accent-primary"
+                      strokeWidth={2}
+                    />
+                    <span>{o}</span>
                   </li>
                 ))}
               </ul>
-            </NarrativeGroup>
-          </Reveal>
+            )}
+          </NarrativeGroup>
         </div>
+      )}
 
-        {/* Impact / key outcomes */}
-        {(study.impact || study.impactList || study.keyOutcomes.length > 0) && (
-          <Reveal delay={0.12}>
-            <div className="mt-10 border-t border-cube27-border-primary pt-8">
-              <NarrativeGroup title={study.keyOutcomesTitle ?? "Impact"}>
-                {study.impact && (
-                  <p className="max-w-3xl text-[0.98rem] leading-relaxed text-cube27-text-secondary">
-                    {study.impact}
-                  </p>
-                )}
-                {!study.impact &&
-                  study.impactList &&
-                  study.impactList.length > 0 && (
-                    <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      {study.impactList.map((o) => (
-                        <li
-                          key={o}
-                          className="flex gap-2.5 text-[0.95rem] leading-relaxed text-cube27-text-primary"
-                        >
-                          <Check
-                            className="mt-0.5 size-4 shrink-0 text-cube27-accent-primary"
-                            strokeWidth={2}
-                          />
-                          <span>{o}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                {study.impact && study.keyOutcomes.length > 0 && (
-                  <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    {study.keyOutcomes.map((o) => (
-                      <li
-                        key={o}
-                        className="flex gap-2.5 text-[0.95rem] leading-relaxed text-cube27-text-primary"
-                      >
-                        <Check
-                          className="mt-0.5 size-4 shrink-0 text-cube27-accent-primary"
-                          strokeWidth={2}
-                        />
-                        <span>{o}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </NarrativeGroup>
-            </div>
-          </Reveal>
-        )}
-
-        {/* Tags */}
-        <Reveal delay={0.14}>
-          <div className="mt-8 flex flex-wrap gap-2">
-            {study.tags.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-cube27-border-primary px-3 py-1 text-[0.78rem] text-cube27-text-secondary"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        </Reveal>
+      {/* Tags */}
+      <div className="mt-8 flex flex-wrap gap-2">
+        {study.tags.map((t) => (
+          <span
+            key={t}
+            className="rounded-full border border-cube27-border-primary px-3 py-1 text-[0.78rem] text-cube27-text-secondary"
+          >
+            {t}
+          </span>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -335,9 +338,9 @@ function NarrativeGroup({
 }) {
   return (
     <div>
-      <h3 className="typography-eyebrow text-[0.7rem] uppercase tracking-wide text-cube27-text-primary">
+      <h4 className="typography-eyebrow text-[0.7rem] uppercase tracking-wide text-cube27-text-primary">
         {title}
-      </h3>
+      </h4>
       <div className="mt-3">{children}</div>
     </div>
   );

@@ -30,7 +30,8 @@ import { statSync, readdirSync, mkdirSync, existsSync } from "node:fs";
 const publicDir = join(dirname(fileURLToPath(import.meta.url)), "..", "public");
 
 /** @param {string} file */
-const kb = (file) => `${(statSync(join(publicDir, file)).size / 1024).toFixed(1)} KB`;
+const kb = (file) =>
+  `${(statSync(join(publicDir, file)).size / 1024).toFixed(1)} KB`;
 
 /** Hero background: master is the 1600px cube27-bg.webp; emit smaller tiers. */
 const BG_MASTER = "cube27-bg.webp";
@@ -56,7 +57,9 @@ async function buildBackground() {
 async function buildLogo() {
   const out = "cube27_logo.webp";
   if (!existsSync(join(publicDir, "cube27_logo.png"))) {
-    console.log(`  (skipped ${out} — cube27_logo.png not found; committed WebP kept)`);
+    console.log(
+      `  (skipped ${out} — cube27_logo.png not found; committed WebP kept)`,
+    );
     return;
   }
   await sharp(join(publicDir, "cube27_logo.png"))
@@ -77,8 +80,12 @@ async function buildPartnerLogos() {
   mkdirSync(outDir, { recursive: true });
   const files = readdirSync(srcDir).filter((f) => /^\d+\.png$/i.test(f));
   if (files.length === 0) {
-    const have = readdirSync(outDir).filter((f) => /^\d+\.webp$/i.test(f)).length;
-    console.log(`  (skipped partner logos — no source PNGs; ${have} committed in opt/)`);
+    const have = readdirSync(outDir).filter((f) =>
+      /^\d+\.webp$/i.test(f),
+    ).length;
+    console.log(
+      `  (skipped partner logos — no source PNGs; ${have} committed in opt/)`,
+    );
     return have;
   }
   for (const file of files) {
@@ -88,7 +95,12 @@ async function buildPartnerLogos() {
       .toBuffer();
     await sharp(trimmed)
       .extend({ top: 8, bottom: 8, left: 8, right: 8, background: "#ffffff" })
-      .resize({ width: 320, height: 320, fit: "inside", withoutEnlargement: true })
+      .resize({
+        width: 320,
+        height: 320,
+        fit: "inside",
+        withoutEnlargement: true,
+      })
       .webp({ quality: 90, effort: 6 })
       .toFile(join(outDir, `${n}.webp`));
   }
@@ -110,8 +122,12 @@ async function buildOfficePhotos() {
     .filter((f) => /\.(jpe?g|png)$/i.test(f))
     .sort((a, b) => a.localeCompare(b, "en"));
   if (files.length === 0) {
-    const have = readdirSync(outDir).filter((f) => /^life-\d+\.webp$/i.test(f)).length;
-    console.log(`  (skipped office photos — no source JPGs; ${have} committed in opt/)`);
+    const have = readdirSync(outDir).filter((f) =>
+      /^life-\d+\.webp$/i.test(f),
+    ).length;
+    console.log(
+      `  (skipped office photos — no source JPGs; ${have} committed in opt/)`,
+    );
     return have;
   }
   let i = 0;
@@ -119,7 +135,12 @@ async function buildOfficePhotos() {
     const name = `life-${String(++i).padStart(2, "0")}.webp`;
     await sharp(join(srcDir, file))
       .rotate() // honor EXIF orientation from phone photos
-      .resize({ width: 1600, height: 1200, fit: "inside", withoutEnlargement: true })
+      .resize({
+        width: 1600,
+        height: 1200,
+        fit: "inside",
+        withoutEnlargement: true,
+      })
       .webp({ quality: 72, effort: 6 })
       .toFile(join(outDir, name));
   }
@@ -133,4 +154,6 @@ await buildLogo();
 const logoCount = await buildPartnerLogos();
 const officeCount = await buildOfficePhotos();
 console.log("Done.");
-console.log(`\nCounts for components: ${logoCount} logos, ${officeCount} office photos.`);
+console.log(
+  `\nCounts for components: ${logoCount} logos, ${officeCount} office photos.`,
+);

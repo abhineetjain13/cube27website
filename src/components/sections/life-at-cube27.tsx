@@ -126,7 +126,8 @@ export function LifeAtCube27({
 
               {/* Counter */}
               <span className="absolute bottom-3 right-4 font-mono text-[0.72rem] font-medium tracking-wide text-white/90">
-                {String(active + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+                {String(active + 1).padStart(2, "0")} /{" "}
+                {String(count).padStart(2, "0")}
               </span>
             </div>
 

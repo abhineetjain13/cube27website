@@ -5,8 +5,6 @@ description: "Cube27's Terms of Service — governing use of and access to CUBE2
 lastUpdated: "2026-07-22"
 ---
 
-_Last Updated: 22nd July 2026_
-
 Your use of and access to our services, software, website(s) (located at [https://www.cube27.com](https://www.cube27.com/), and/or applications ("Services") are governed by these Terms of service ("Terms").
 
 The Services may be provided to you online, in the form of a mobile, desktop application(s) and may be integrated in a third-party service. The Services allow you to process, upload, submit, store, share, receive, collect, capture, visualize products and your data, or data of your clients or other content, including permitted and authorized third party content used by you ("Content").

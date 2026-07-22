@@ -77,12 +77,12 @@ We are building next-generation AI-powered commerce infrastructure and intellige
 
 ### AI Research Intern
 
-| Field                | Value         |
-| -------------------- | ------------- |
-| Location             | Pune          |
-| Duration             | 3–6 months    |
-| Work Mode            | Remote/Hybrid |
-| Employment Type      | Internship    |
+| Field           | Value         |
+| --------------- | ------------- |
+| Location        | Pune          |
+| Duration        | 3–6 months    |
+| Work Mode       | Remote/Hybrid |
+| Employment Type | Internship    |
 
 **About the Role**
 We are looking for curious and highly motivated AI Research Interns to work on applied AI problems involving LLMs, AI agents, semantic search, automation, and intelligent commerce systems. You will work closely with engineering and product teams to prototype, evaluate, and improve AI-driven features.

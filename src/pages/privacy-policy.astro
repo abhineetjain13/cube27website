@@ -5,6 +5,38 @@ import { Footer } from "@/components/sections/footer";
 import { Content as PrivacyPolicy } from "../../files/privacy-policy.md";
 
 export const prerender = true;
+
+const LAST_UPDATED = "22 July 2026";
+
+interface Section {
+  id: string;
+  label: string;
+}
+
+const sections: Section[] = [
+  { id: "introduction", label: "Introduction" },
+  { id: "scope", label: "Scope" },
+  { id: "definitions", label: "Definitions" },
+  { id: "terms", label: "Terms" },
+  { id: "processing-activities", label: "Processing Activities" },
+  { id: "personal-data-we-collect", label: "Personal Data We Collect" },
+  { id: "how-we-collect-your-data", label: "How We Collect Your Data" },
+  { id: "device-and-usage-data", label: "Device and Usage Data" },
+  { id: "cookies", label: "Cookies" },
+  {
+    id: "retention-deletion--security",
+    label: "Retention, Deletion & Security",
+  },
+  { id: "how-we-keep-your-data-safe", label: "How We Keep Your Data Safe" },
+  {
+    id: "your-rights-for-your-personal-data",
+    label: "Your Rights for Your Personal Data",
+  },
+  { id: "child-data", label: "Child Data" },
+  { id: "merger--amalgamation", label: "Merger & Amalgamation" },
+  { id: "changes", label: "Changes" },
+  { id: "contact-us", label: "Contact Us" },
+];
 ---
 
 <Layout
@@ -15,16 +47,60 @@ export const prerender = true;
     class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
   >
     <Navbar client:load />
-    <main class="px-5 py-20 sm:px-8 lg:py-28">
-      <article class="prose prose-neutral mx-auto max-w-3xl">
+    <main class="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
+      <header class="max-w-3xl">
         <p
-          class="not-prose typography-eyebrow text-xs uppercase text-cube27-accent-primary"
+          class="typography-eyebrow text-xs uppercase text-cube27-accent-primary"
         >
           Legal
         </p>
-        <h1>Privacy Policy</h1>
-        <PrivacyPolicy />
-      </article>
+        <h1
+          class="typography-heading mt-4 text-balance text-[clamp(2rem,4vw,2.75rem)] font-medium leading-[1.05] tracking-[-0.02em] text-cube27-text-primary"
+        >
+          Privacy Policy
+        </h1>
+        <p
+          class="mt-5 text-[1.1rem] leading-relaxed text-cube27-text-secondary"
+        >
+          How Cube27 collects, uses, retains, and protects your personal data —
+          and the rights you have over it.
+        </p>
+        <p class="mt-4 text-[0.85rem] text-cube27-text-secondary">
+          Last updated: {LAST_UPDATED}
+        </p>
+      </header>
+
+      <div
+        class="mt-12 grid grid-cols-1 gap-x-12 border-t border-cube27-border-primary pt-12 lg:grid-cols-12"
+      >
+        <aside class="hidden lg:col-span-3 lg:block">
+          <nav aria-label="On this page" class="sticky top-24">
+            <p
+              class="typography-eyebrow text-[0.68rem] uppercase text-cube27-text-secondary"
+            >
+              On this page
+            </p>
+            <ul class="mt-4 space-y-2.5 border-l border-cube27-border-primary">
+              {
+                sections.map((s: Section) => (
+                  <li>
+                    <a
+                      href={`#${s.id}`}
+                      class="-ml-px block border-l border-transparent py-0.5 pl-4 text-[0.88rem] text-cube27-text-secondary transition-colors hover:border-cube27-accent-primary hover:text-cube27-text-primary"
+                    >
+                      {s.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </aside>
+
+        <article class="prose prose-neutral lg:col-span-9">
+          <PrivacyPolicy />
+        </article>
+      </div>
     </main>
     <Footer />
   </div>

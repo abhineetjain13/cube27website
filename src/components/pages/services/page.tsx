@@ -10,12 +10,14 @@ import {
   Layers,
   ShieldCheck,
 } from "lucide-react";
+import type { ReactNode } from "react";
 import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
 import { HomeHero } from "@/components/pages/home/sections/hero";
 import { Contact } from "@/components/sections/contact";
 import { Faq } from "@/components/sections/faq";
 import { Reveal } from "@/components/ui/reveal";
+import { SplitExplorer, type SplitItem } from "@/components/ui/split-explorer";
 import { SITE_CONFIG } from "@/site-config";
 import type { FaqItem } from "@/components/seo-json";
 
@@ -53,6 +55,33 @@ const SERVICES_FAQ: readonly FaqItem[] = [
 ];
 
 export function ServicesPage() {
+  const items: SplitItem[] = [
+    {
+      id: "ai",
+      eyebrow: "AI & Automation",
+      title: "Agentic AI & Process Automation",
+      render: AiServiceDetail,
+    },
+    {
+      id: "engineering",
+      eyebrow: "Product Engineering",
+      title: "Digital Product Engineering",
+      render: EngineeringServiceDetail,
+    },
+    {
+      id: "commerce",
+      eyebrow: "Commerce & Platforms",
+      title: "Salesforce & Enterprise Platforms",
+      render: CommerceServiceDetail,
+    },
+    {
+      id: "gcc",
+      eyebrow: "Global Capability Centers",
+      title: "GCC-as-a-Service",
+      render: GccServiceDetail,
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
       <Navbar />
@@ -68,605 +97,18 @@ export function ServicesPage() {
           overlayBadge="150+"
         />
 
-        {/* Anchor Nav Bar */}
-        <section className="sticky top-16 z-40 border-y border-cube27-border-primary bg-cube27-background-primary/95 backdrop-blur-md">
-          <div className="mx-auto flex max-w-7xl items-center justify-start overflow-x-auto px-5 py-3.5 sm:px-8">
-            <div className="flex items-center gap-6 text-[0.88rem] font-medium text-cube27-text-secondary">
-              <span className="typography-eyebrow text-[0.68rem] uppercase text-cube27-accent-primary">
-                Jump to:
-              </span>
-              <a
-                href="#ai"
-                className="whitespace-nowrap transition-colors hover:text-cube27-text-primary"
-              >
-                AI & Automation
-              </a>
-              <a
-                href="#engineering"
-                className="whitespace-nowrap transition-colors hover:text-cube27-text-primary"
-              >
-                Product Engineering
-              </a>
-              <a
-                href="#commerce"
-                className="whitespace-nowrap transition-colors hover:text-cube27-text-primary"
-              >
-                Commerce & Platforms
-              </a>
-              <a
-                href="#gcc"
-                className="whitespace-nowrap transition-colors hover:text-cube27-text-primary"
-              >
-                GCC-as-a-Service
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 1: AI & Automation */}
-        <section
-          id="ai"
-          className="border-b border-cube27-border-primary py-20 lg:py-28"
-        >
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <section className="border-t border-cube27-border-primary py-20 lg:py-28">
+          <div className="mx-auto mb-12 max-w-7xl px-5 sm:px-8">
             <Reveal>
-              <div className="flex items-center gap-2 text-cube27-accent-primary">
-                <Bot className="size-5" />
-                <p className="typography-eyebrow text-[0.7rem] uppercase">
-                  Agentic AI & Process Automation
-                </p>
-              </div>
-              <h2 className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
-                Intelligent, autonomous systems that streamline enterprise
-                workflows.
-              </h2>
-              <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
-                Accelerate product delivery, reduce operational friction, and
-                optimize digital commerce operations with autonomous AI models
-                and structured workflows.
+              <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
+                What we do
               </p>
-            </Reveal>
-
-            {/* Core Features Grid */}
-            <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3">
-              <Reveal
-                delay={0.05}
-                className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 sm:p-8"
-              >
-                <Zap className="size-6 text-cube27-accent-primary" />
-                <h3 className="typography-heading mt-4 text-[1.15rem] font-medium text-cube27-text-primary">
-                  Autonomous Commerce Flows
-                </h3>
-                <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-                  Recover abandoned carts, route complex orders, and manage
-                  post-purchase exception workflows without human intervention.
-                </p>
-              </Reveal>
-
-              <Reveal
-                delay={0.1}
-                className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 sm:p-8"
-              >
-                <Layers className="size-6 text-cube27-accent-primary" />
-                <h3 className="typography-heading mt-4 text-[1.15rem] font-medium text-cube27-text-primary">
-                  End-to-End Process Automation
-                </h3>
-                <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-                  Automate repetitive or complex multi-step workflows across
-                  back-office operations, finance, and product lifecycles.
-                </p>
-              </Reveal>
-
-              <Reveal
-                delay={0.15}
-                className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 sm:p-8"
-              >
-                <Sparkles className="size-6 text-cube27-accent-primary" />
-                <h3 className="typography-heading mt-4 text-[1.15rem] font-medium text-cube27-text-primary">
-                  Data-Driven AI Pods
-                </h3>
-                <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-                  Dedicated pods for rapid development of customized AI
-                  solutions that surface actionable insights and drive process
-                  efficiency.
-                </p>
-              </Reveal>
-            </div>
-
-            {/* Stats & Testimonial Row */}
-            <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
-              <Reveal delay={0.1} className="lg:col-span-7">
-                <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-4">
-                  <div className="bg-cube27-background-primary p-5 text-center sm:p-6">
-                    <dt className="typography-heading text-2xl font-medium text-cube27-text-primary">
-                      40%
-                    </dt>
-                    <dd className="mt-1 text-[0.78rem] text-cube27-text-secondary">
-                      Ops Reduction
-                    </dd>
-                  </div>
-                  <div className="bg-cube27-background-primary p-5 text-center sm:p-6">
-                    <dt className="typography-heading text-2xl font-medium text-cube27-text-primary">
-                      24/7
-                    </dt>
-                    <dd className="mt-1 text-[0.78rem] text-cube27-text-secondary">
-                      Autonomous Op
-                    </dd>
-                  </div>
-                  <div className="bg-cube27-background-primary p-5 text-center sm:p-6">
-                    <dt className="typography-heading text-2xl font-medium text-cube27-text-primary">
-                      22%
-                    </dt>
-                    <dd className="mt-1 text-[0.78rem] text-cube27-text-secondary">
-                      Conversion Lift
-                    </dd>
-                  </div>
-                  <div className="bg-cube27-background-primary p-5 text-center sm:p-6">
-                    <dt className="typography-heading text-2xl font-medium text-cube27-text-primary">
-                      60D
-                    </dt>
-                    <dd className="mt-1 text-[0.78rem] text-cube27-text-secondary">
-                      MVP Deployment
-                    </dd>
-                  </div>
-                </dl>
-                <div className="mt-6 rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/40 p-6">
-                  <p className="text-[0.95rem] italic text-cube27-text-primary">
-                    &ldquo;Cube27&apos;s AI agents reduced our checkout friction
-                    by 22% in 60 days.&rdquo;
-                  </p>
-                </div>
-              </Reveal>
-
-              <Reveal delay={0.15} className="lg:col-span-5">
-                <div className="h-full rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8">
-                  <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
-                    AI Offerings
-                  </h4>
-                  <ul className="mt-4 space-y-4">
-                    <li className="flex items-start gap-3">
-                      <Check className="mt-1 size-4 text-cube27-accent-primary" />
-                      <div>
-                        <strong className="block text-[0.95rem] text-cube27-text-primary">
-                          AI Capability Assessment
-                        </strong>
-                        <span className="text-[0.88rem] text-cube27-text-secondary">
-                          Identify high-impact opportunities for automation and
-                          data-driven decision-making.
-                        </span>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="mt-1 size-4 text-cube27-accent-primary" />
-                      <div>
-                        <strong className="block text-[0.95rem] text-cube27-text-primary">
-                          AI Ideation & Prototyping
-                        </strong>
-                        <span className="text-[0.88rem] text-cube27-text-secondary">
-                          Validate AI solutions for commerce, operations, and
-                          product workflows.
-                        </span>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Check className="mt-1 size-4 text-cube27-accent-primary" />
-                      <div>
-                        <strong className="block text-[0.95rem] text-cube27-text-primary">
-                          Embedded AI Teams
-                        </strong>
-                        <span className="text-[0.88rem] text-cube27-text-secondary">
-                          Dedicated teams that deploy, scale, and maintain
-                          AI-driven automation.
-                        </span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 2: Digital Product Engineering */}
-        <section
-          id="engineering"
-          className="border-b border-cube27-border-primary bg-cube27-neutral-secondary/20 py-20 lg:py-28"
-        >
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <Reveal>
-              <div className="flex items-center gap-2 text-cube27-accent-primary">
-                <Code2 className="size-5" />
-                <p className="typography-eyebrow text-[0.7rem] uppercase">
-                  Digital Product Engineering
-                </p>
-              </div>
-              <h2 className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
-                Product engineering built for digital growth.
+              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+                Four capabilities, one integrated partner.
               </h2>
-              <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
-                Digital products that power acquisition, conversion, and
-                monetization across commerce, marketing, analytics, and partner
-                platforms: product-led, data-driven, AI-accelerated, and built
-                for scale.
-              </p>
-            </Reveal>
-
-            {/* Pillars & Proprietary Tools */}
-            <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
-              <Reveal delay={0.05} className="space-y-6 lg:col-span-7">
-                <div className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6">
-                  <h3 className="typography-heading text-lg font-medium text-cube27-text-primary">
-                    Product-First Engineering
-                  </h3>
-                  <p className="mt-1 text-[0.9rem] text-cube27-text-secondary">
-                    Digital initiatives designed as end-to-end products, with
-                    clear outcomes, user journeys, and analytics metrics
-                    embedded from inception.
-                  </p>
-                </div>
-                <div className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6">
-                  <h3 className="typography-heading text-lg font-medium text-cube27-text-primary">
-                    Growth-Native Architecture
-                  </h3>
-                  <p className="mt-1 text-[0.9rem] text-cube27-text-secondary">
-                    Products architected for acquisition, conversion, and global
-                    scalability, ensuring every feature drives measurable
-                    business impact.
-                  </p>
-                </div>
-                <div className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6">
-                  <h3 className="typography-heading text-lg font-medium text-cube27-text-primary">
-                    Partner-Integrated Execution
-                  </h3>
-                  <p className="mt-1 text-[0.9rem] text-cube27-text-secondary">
-                    Seamless integration with platforms like Feedonomics,
-                    providing cataloging, product feed optimization, and partner
-                    channel enablement.
-                  </p>
-                </div>
-              </Reveal>
-
-              <Reveal delay={0.1} className="lg:col-span-5">
-                <div className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8">
-                  <h4 className="typography-heading text-base font-medium uppercase text-cube27-accent-primary">
-                    Proprietary Frameworks & Tools
-                  </h4>
-                  <ul className="mt-4 space-y-3">
-                    <li className="flex items-center gap-3 border-b border-cube27-border-primary pb-3">
-                      <span className="font-mono text-[0.88rem] font-semibold text-cube27-text-primary">
-                        AQ360 Audit
-                      </span>
-                      <span className="text-[0.85rem] text-cube27-text-secondary">
-                        — Deep architecture quality audit
-                      </span>
-                    </li>
-                    <li className="flex items-center gap-3 border-b border-cube27-border-primary pb-3">
-                      <span className="font-mono text-[0.88rem] font-semibold text-cube27-text-primary">
-                        DSMM Framework
-                      </span>
-                      <span className="text-[0.85rem] text-cube27-text-secondary">
-                        — Digital System Maturity Model
-                      </span>
-                    </li>
-                    <li className="flex items-center gap-3 pb-1">
-                      <span className="font-mono text-[0.88rem] font-semibold text-cube27-text-primary">
-                        Fractional Ownership
-                      </span>
-                      <span className="text-[0.85rem] text-cube27-text-secondary">
-                        — Embedded lead architect engine
-                      </span>
-                    </li>
-                  </ul>
-
-                  <h4 className="typography-heading mt-8 text-base font-medium uppercase text-cube27-accent-primary">
-                    Delivery Squads
-                  </h4>
-                  <ul className="mt-3 space-y-2 text-[0.9rem] text-cube27-text-primary">
-                    <li>• Web & App Development Pods</li>
-                    <li>• Go-to-Market Product Labs</li>
-                    <li>• Data & Intelligence Centers</li>
-                  </ul>
-                </div>
-              </Reveal>
-            </div>
-
-            {/* Tech Stack Grid */}
-            <Reveal delay={0.15} className="mt-12">
-              <h3 className="typography-heading text-lg font-medium text-cube27-text-primary">
-                Enterprise Tech Stack
-              </h3>
-              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-                <div className="rounded-lg border border-cube27-border-primary bg-cube27-background-primary p-5">
-                  <span className="typography-eyebrow text-[0.65rem] uppercase text-cube27-accent-primary">
-                    Backend
-                  </span>
-                  <p className="mt-2 text-[0.9rem] font-medium text-cube27-text-primary">
-                    Node.js, Go, Python, PHP, .NET
-                  </p>
-                </div>
-                <div className="rounded-lg border border-cube27-border-primary bg-cube27-background-primary p-5">
-                  <span className="typography-eyebrow text-[0.65rem] uppercase text-cube27-accent-primary">
-                    Frontend
-                  </span>
-                  <p className="mt-2 text-[0.9rem] font-medium text-cube27-text-primary">
-                    React.js, Next.js, Vue.js, React Native, Flutter
-                  </p>
-                </div>
-                <div className="rounded-lg border border-cube27-border-primary bg-cube27-background-primary p-5">
-                  <span className="typography-eyebrow text-[0.65rem] uppercase text-cube27-accent-primary">
-                    Cloud
-                  </span>
-                  <p className="mt-2 text-[0.9rem] font-medium text-cube27-text-primary">
-                    AWS, Azure, GCP, Docker, Kubernetes, Serverless
-                  </p>
-                </div>
-                <div className="rounded-lg border border-cube27-border-primary bg-cube27-background-primary p-5">
-                  <span className="typography-eyebrow text-[0.65rem] uppercase text-cube27-accent-primary">
-                    Data
-                  </span>
-                  <p className="mt-2 text-[0.9rem] font-medium text-cube27-text-primary">
-                    PostgreSQL, MongoDB, Snowflake, Redis, BigQuery
-                  </p>
-                </div>
-                <div className="rounded-lg border border-cube27-border-primary bg-cube27-background-primary p-5">
-                  <span className="typography-eyebrow text-[0.65rem] uppercase text-cube27-accent-primary">
-                    AI / Intelligence
-                  </span>
-                  <p className="mt-2 text-[0.9rem] font-medium text-cube27-text-primary">
-                    GPT-5, Claude, Llama, LangChain, AutoGPT
-                  </p>
-                </div>
-              </div>
             </Reveal>
           </div>
-        </section>
-
-        {/* Section 3: Enterprise Commerce & Platforms */}
-        <section
-          id="commerce"
-          className="border-b border-cube27-border-primary py-20 lg:py-28"
-        >
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <Reveal>
-              <div className="flex items-center gap-2 text-cube27-accent-primary">
-                <ShoppingCart className="size-5" />
-                <p className="typography-eyebrow text-[0.7rem] uppercase">
-                  Salesforce & Enterprise Platforms
-                </p>
-              </div>
-              <h2 className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
-                Enterprise Commerce & Platform Implementations.
-              </h2>
-              <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
-                Implementations across Salesforce Commerce Cloud (Demandware),
-                SAP Hybris, Adobe Commerce, Shopify Plus, BigCommerce, and
-                custom headless architectures — fully integrated with CRM, ERP,
-                and operations.
-              </p>
-            </Reveal>
-
-            <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3">
-              <Reveal
-                delay={0.05}
-                className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 sm:p-8"
-              >
-                <h3 className="typography-heading text-[1.15rem] font-medium text-cube27-text-primary">
-                  Composable & Headless
-                </h3>
-                <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-                  API-first builds that decouple storefronts from core systems
-                  for faster changes, multi-region scale, and omnichannel
-                  flexibility.
-                </p>
-              </Reveal>
-
-              <Reveal
-                delay={0.1}
-                className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 sm:p-8"
-              >
-                <h3 className="typography-heading text-[1.15rem] font-medium text-cube27-text-primary">
-                  Go-to-Market Commerce Labs
-                </h3>
-                <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-                  Rapid product and feature launches with iterative A/B testing
-                  to optimize conversions and buyer experience.
-                </p>
-              </Reveal>
-
-              <Reveal
-                delay={0.15}
-                className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 sm:p-8"
-              >
-                <h3 className="typography-heading text-[1.15rem] font-medium text-cube27-text-primary">
-                  Autonomous Order & Fulfillment
-                </h3>
-                <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-                  AI-assisted order routing, post-purchase exception workflows,
-                  and automated checkout recovery for seamless operations.
-                </p>
-              </Reveal>
-            </div>
-
-            <div className="mt-12 rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8 lg:p-10">
-              <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-                <div className="lg:col-span-6">
-                  <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
-                    Enterprise Revenue & Commerce Stack
-                  </h4>
-                  <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-                    Sales, Service, and Commerce Clouds architected as a single
-                    enterprise operating system — connecting demand generation,
-                    transactions, and post-purchase execution.
-                  </p>
-                  <div className="mt-6">
-                    <strong className="block text-[0.88rem] uppercase text-cube27-accent-primary">
-                      Engagement Models
-                    </strong>
-                    <ul className="mt-2 space-y-1.5 text-[0.9rem] text-cube27-text-primary">
-                      <li>• Implementation & Rescue</li>
-                      <li>• Custom Agentforce Development & Orchestration</li>
-                      <li>• Managed Services Pods</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="lg:col-span-6 lg:border-l lg:border-cube27-border-primary lg:pl-8">
-                  <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
-                    Agentforce for Commerce & RevOps
-                  </h4>
-                  <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-                    Autonomous agents that manage lead qualification, order
-                    routing, service exceptions, and post-purchase workflows
-                    across the enterprise revenue stack.
-                  </p>
-                  <div className="mt-6">
-                    <strong className="block text-[0.88rem] uppercase text-cube27-accent-primary">
-                      Commerce-to-ERP Execution
-                    </strong>
-                    <p className="mt-1 text-[0.9rem] text-cube27-text-secondary">
-                      Tightly coupled sales and commerce platforms integrated
-                      with SAP, Oracle, or custom ERPs to power quote-to-cash
-                      workflows.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 4: GCC-as-a-Service */}
-        <section
-          id="gcc"
-          className="border-b border-cube27-border-primary bg-cube27-neutral-secondary/20 py-20 lg:py-28"
-        >
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <Reveal>
-              <div className="flex items-center gap-2 text-cube27-accent-primary">
-                <Building2 className="size-5" />
-                <p className="typography-eyebrow text-[0.7rem] uppercase">
-                  Global Capability Centers
-                </p>
-              </div>
-              <h2 className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
-                GCC-as-a-Service (GCCaaS)
-              </h2>
-              <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
-                Scale your engineering and operational capabilities without
-                losing control. We establish and operate dedicated teams aligned
-                to your culture, processes, and architecture — delivered through
-                BOT (Build-Operate-Transfer) and BO (Build-Operate) engagement
-                models.
-              </p>
-            </Reveal>
-
-            {/* Stats Row */}
-            <Reveal delay={0.05} className="mt-12">
-              <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary lg:grid-cols-4">
-                <div className="bg-cube27-background-primary p-6">
-                  <dt className="typography-heading text-3xl font-medium text-cube27-text-primary">
-                    90+ Day
-                  </dt>
-                  <dd className="mt-1 text-[0.88rem] text-cube27-text-secondary">
-                    Operational Startup
-                  </dd>
-                </div>
-                <div className="bg-cube27-background-primary p-6">
-                  <dt className="typography-heading text-3xl font-medium text-cube27-text-primary">
-                    150+
-                  </dt>
-                  <dd className="mt-1 text-[0.88rem] text-cube27-text-secondary">
-                    Team Specialists
-                  </dd>
-                </div>
-                <div className="bg-cube27-background-primary p-6">
-                  <dt className="typography-heading text-3xl font-medium text-cube27-text-primary">
-                    &lt;10%
-                  </dt>
-                  <dd className="mt-1 text-[0.88rem] text-cube27-text-secondary">
-                    Annual Attrition
-                  </dd>
-                </div>
-                <div className="bg-cube27-background-primary p-6">
-                  <dt className="typography-heading text-3xl font-medium text-cube27-text-primary">
-                    10%
-                  </dt>
-                  <dd className="mt-1 text-[0.88rem] text-cube27-text-secondary">
-                    YoY Efficiency Gain
-                  </dd>
-                </div>
-              </dl>
-            </Reveal>
-
-            <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3">
-              <Reveal
-                delay={0.1}
-                className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8"
-              >
-                <ShieldCheck className="size-6 text-cube27-accent-primary" />
-                <h3 className="typography-heading mt-4 text-[1.15rem] font-medium text-cube27-text-primary">
-                  Market Entry & Risk Management
-                </h3>
-                <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-                  Location selection, legal setup, compliance, and strict IP
-                  protection in new geographies with zero operational drag.
-                </p>
-              </Reveal>
-
-              <Reveal
-                delay={0.15}
-                className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8"
-              >
-                <Building2 className="size-6 text-cube27-accent-primary" />
-                <h3 className="typography-heading mt-4 text-[1.15rem] font-medium text-cube27-text-primary">
-                  Operating Model Alignment
-                </h3>
-                <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-                  Seamless teams that mirror your engineering culture,
-                  communication cadence, and architectural standards.
-                </p>
-              </Reveal>
-
-              <Reveal
-                delay={0.2}
-                className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8"
-              >
-                <Zap className="size-6 text-cube27-accent-primary" />
-                <h3 className="typography-heading mt-4 text-[1.15rem] font-medium text-cube27-text-primary">
-                  Innovation-Led CoEs
-                </h3>
-                <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-                  Centers of Excellence designed to drive continuous process
-                  improvement and architectural evolution — not just basic
-                  delivery.
-                </p>
-              </Reveal>
-            </div>
-
-            <Reveal
-              delay={0.25}
-              className="mt-12 rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/50 p-6 sm:p-8"
-            >
-              <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
-                    Ideal for CTOs & CIOs Scaling Global Capabilities
-                  </h4>
-                  <p className="mt-1 max-w-2xl text-[0.92rem] text-cube27-text-secondary">
-                    Proven ability to scale teams from 5 to 50+ specialists in
-                    under 120 days with full data and IP protection.
-                  </p>
-                </div>
-                <a
-                  href="#contact"
-                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md bg-cube27-button-secondary-background px-6 py-3 text-sm font-medium text-cube27-button-secondary-text transition-colors hover:bg-cube27-accent-primary"
-                >
-                  Start Your Journey
-                  <ArrowRight className="size-4" />
-                </a>
-              </div>
-            </Reveal>
-          </div>
+          <SplitExplorer items={items} ariaLabel="Service lines" />
         </section>
 
         {/* FAQ Section */}
@@ -685,6 +127,445 @@ export function ServicesPage() {
         />
       </main>
       <Footer />
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------------------------
+ * Service detail bodies — rendered inside the SplitExplorer detail panel.
+ * ------------------------------------------------------------------------- */
+
+function ServiceHeader({
+  icon,
+  eyebrow,
+  title,
+  body,
+}: {
+  icon: ReactNode;
+  eyebrow: string;
+  title: string;
+  body: string;
+}) {
+  return (
+    <>
+      <div className="flex items-center gap-2 text-cube27-accent-primary">
+        {icon}
+        <p className="typography-eyebrow text-[0.7rem] uppercase">{eyebrow}</p>
+      </div>
+      <h3 className="typography-heading mt-4 text-balance text-[clamp(1.6rem,3vw,2.15rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+        {title}
+      </h3>
+      <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
+        {body}
+      </p>
+    </>
+  );
+}
+
+function FeatureCard({
+  icon,
+  title,
+  children,
+}: {
+  icon?: ReactNode;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6">
+      {icon}
+      <h4 className="typography-heading mt-4 text-[1.1rem] font-medium text-cube27-text-primary">
+        {title}
+      </h4>
+      <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
+        {children}
+      </p>
+    </div>
+  );
+}
+
+function AiServiceDetail() {
+  return (
+    <div>
+      <ServiceHeader
+        icon={<Bot className="size-5" />}
+        eyebrow="Agentic AI & Process Automation"
+        title="Intelligent, autonomous systems that streamline enterprise workflows."
+        body="Accelerate product delivery, reduce operational friction, and optimize digital commerce operations with autonomous AI models and structured workflows."
+      />
+
+      <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <FeatureCard
+          icon={<Zap className="size-6 text-cube27-accent-primary" />}
+          title="Autonomous Commerce Flows"
+        >
+          Recover abandoned carts, route complex orders, and manage
+          post-purchase exception workflows without human intervention.
+        </FeatureCard>
+        <FeatureCard
+          icon={<Layers className="size-6 text-cube27-accent-primary" />}
+          title="End-to-End Process Automation"
+        >
+          Automate repetitive or complex multi-step workflows across back-office
+          operations, finance, and product lifecycles.
+        </FeatureCard>
+        <FeatureCard
+          icon={<Sparkles className="size-6 text-cube27-accent-primary" />}
+          title="Data-Driven AI Pods"
+        >
+          Dedicated pods for rapid development of customized AI solutions that
+          surface actionable insights and drive process efficiency.
+        </FeatureCard>
+        <div className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/40 p-6">
+          <p className="text-[0.95rem] italic leading-relaxed text-cube27-text-primary">
+            &ldquo;Cube27&apos;s AI agents reduced our checkout friction by 22%
+            in 60 days.&rdquo;
+          </p>
+        </div>
+      </div>
+
+      <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-4">
+        <StatCell value="40%" label="Ops Reduction" />
+        <StatCell value="24/7" label="Autonomous Op" />
+        <StatCell value="22%" label="Conversion Lift" />
+        <StatCell value="60D" label="MVP Deployment" />
+      </dl>
+
+      <div className="mt-6 rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8">
+        <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
+          AI Offerings
+        </h4>
+        <ul className="mt-4 space-y-4">
+          <OfferingItem title="AI Capability Assessment">
+            Identify high-impact opportunities for automation and data-driven
+            decision-making.
+          </OfferingItem>
+          <OfferingItem title="AI Ideation & Prototyping">
+            Validate AI solutions for commerce, operations, and product
+            workflows.
+          </OfferingItem>
+          <OfferingItem title="Embedded AI Teams">
+            Dedicated teams that deploy, scale, and maintain AI-driven
+            automation.
+          </OfferingItem>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function EngineeringServiceDetail() {
+  return (
+    <div>
+      <ServiceHeader
+        icon={<Code2 className="size-5" />}
+        eyebrow="Digital Product Engineering"
+        title="Product engineering built for digital growth."
+        body="Digital products that power acquisition, conversion, and monetization across commerce, marketing, analytics, and partner platforms: product-led, data-driven, AI-accelerated, and built for scale."
+      />
+
+      <div className="mt-10 space-y-5">
+        <div className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6">
+          <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
+            Product-First Engineering
+          </h4>
+          <p className="mt-1 text-[0.9rem] text-cube27-text-secondary">
+            Digital initiatives designed as end-to-end products, with clear
+            outcomes, user journeys, and analytics metrics embedded from
+            inception.
+          </p>
+        </div>
+        <div className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6">
+          <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
+            Growth-Native Architecture
+          </h4>
+          <p className="mt-1 text-[0.9rem] text-cube27-text-secondary">
+            Products architected for acquisition, conversion, and global
+            scalability, ensuring every feature drives measurable business
+            impact.
+          </p>
+        </div>
+        <div className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6">
+          <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
+            Partner-Integrated Execution
+          </h4>
+          <p className="mt-1 text-[0.9rem] text-cube27-text-secondary">
+            Seamless integration with platforms like Feedonomics, providing
+            cataloging, product feed optimization, and partner channel
+            enablement.
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-6 rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8">
+        <h4 className="typography-heading text-base font-medium uppercase text-cube27-accent-primary">
+          Proprietary Frameworks & Tools
+        </h4>
+        <ul className="mt-4 space-y-3">
+          <li className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-cube27-border-primary pb-3">
+            <span className="font-mono text-[0.88rem] font-semibold text-cube27-text-primary">
+              AQ360 Audit
+            </span>
+            <span className="text-[0.85rem] text-cube27-text-secondary">
+              — Deep architecture quality audit
+            </span>
+          </li>
+          <li className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-cube27-border-primary pb-3">
+            <span className="font-mono text-[0.88rem] font-semibold text-cube27-text-primary">
+              DSMM Framework
+            </span>
+            <span className="text-[0.85rem] text-cube27-text-secondary">
+              — Digital System Maturity Model
+            </span>
+          </li>
+          <li className="flex flex-wrap items-center gap-x-3 gap-y-1 pb-1">
+            <span className="font-mono text-[0.88rem] font-semibold text-cube27-text-primary">
+              Fractional Ownership
+            </span>
+            <span className="text-[0.85rem] text-cube27-text-secondary">
+              — Embedded lead architect engine
+            </span>
+          </li>
+        </ul>
+
+        <h4 className="typography-heading mt-8 text-base font-medium uppercase text-cube27-accent-primary">
+          Delivery Squads
+        </h4>
+        <ul className="mt-3 space-y-2 text-[0.9rem] text-cube27-text-primary">
+          <li>• Web & App Development Pods</li>
+          <li>• Go-to-Market Product Labs</li>
+          <li>• Data & Intelligence Centers</li>
+        </ul>
+      </div>
+
+      <div className="mt-6">
+        <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
+          Enterprise Tech Stack
+        </h4>
+        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <TechCell label="Backend" value="Node.js, Go, Python, PHP, .NET" />
+          <TechCell
+            label="Frontend"
+            value="React.js, Next.js, Vue.js, React Native, Flutter"
+          />
+          <TechCell
+            label="Cloud"
+            value="AWS, Azure, GCP, Docker, Kubernetes, Serverless"
+          />
+          <TechCell
+            label="Data"
+            value="PostgreSQL, MongoDB, Snowflake, Redis, BigQuery"
+          />
+          <TechCell
+            label="AI / Intelligence"
+            value="GPT-5, Claude, Llama, LangChain, AutoGPT"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CommerceServiceDetail() {
+  return (
+    <div>
+      <ServiceHeader
+        icon={<ShoppingCart className="size-5" />}
+        eyebrow="Salesforce & Enterprise Platforms"
+        title="Enterprise Commerce & Platform Implementations."
+        body="Implementations across Salesforce Commerce Cloud (Demandware), SAP Hybris, Adobe Commerce, Shopify Plus, BigCommerce, and custom headless architectures — fully integrated with CRM, ERP, and operations."
+      />
+
+      <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3">
+        <FeatureCard title="Composable & Headless">
+          API-first builds that decouple storefronts from core systems for
+          faster changes, multi-region scale, and omnichannel flexibility.
+        </FeatureCard>
+        <FeatureCard title="Go-to-Market Commerce Labs">
+          Rapid product and feature launches with iterative A/B testing to
+          optimize conversions and buyer experience.
+        </FeatureCard>
+        <FeatureCard title="Autonomous Order & Fulfillment">
+          AI-assisted order routing, post-purchase exception workflows, and
+          automated checkout recovery for seamless operations.
+        </FeatureCard>
+      </div>
+
+      <div className="mt-6 rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div>
+            <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
+              Enterprise Revenue & Commerce Stack
+            </h4>
+            <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
+              Sales, Service, and Commerce Clouds architected as a single
+              enterprise operating system — connecting demand generation,
+              transactions, and post-purchase execution.
+            </p>
+            <div className="mt-6">
+              <strong className="block text-[0.88rem] uppercase text-cube27-accent-primary">
+                Engagement Models
+              </strong>
+              <ul className="mt-2 space-y-1.5 text-[0.9rem] text-cube27-text-primary">
+                <li>• Implementation & Rescue</li>
+                <li>• Custom Agentforce Development & Orchestration</li>
+                <li>• Managed Services Pods</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="md:border-l md:border-cube27-border-primary md:pl-8">
+            <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
+              Agentforce for Commerce & RevOps
+            </h4>
+            <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
+              Autonomous agents that manage lead qualification, order routing,
+              service exceptions, and post-purchase workflows across the
+              enterprise revenue stack.
+            </p>
+            <div className="mt-6">
+              <strong className="block text-[0.88rem] uppercase text-cube27-accent-primary">
+                Commerce-to-ERP Execution
+              </strong>
+              <p className="mt-1 text-[0.9rem] text-cube27-text-secondary">
+                Tightly coupled sales and commerce platforms integrated with
+                SAP, Oracle, or custom ERPs to power quote-to-cash workflows.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GccServiceDetail() {
+  return (
+    <div>
+      <ServiceHeader
+        icon={<Building2 className="size-5" />}
+        eyebrow="Global Capability Centers"
+        title="GCC-as-a-Service (GCCaaS)"
+        body="Scale your engineering and operational capabilities without losing control. We establish and operate dedicated teams aligned to your culture, processes, and architecture — delivered through BOT (Build-Operate-Transfer) and BO (Build-Operate) engagement models."
+      />
+
+      <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary lg:grid-cols-4">
+        <StatCell value="90+ Day" label="Operational Startup" large />
+        <StatCell value="150+" label="Team Specialists" large />
+        <StatCell value="<10%" label="Annual Attrition" large />
+        <StatCell value="10%" label="YoY Efficiency Gain" large />
+      </dl>
+
+      <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-3">
+        <FeatureCard
+          icon={<ShieldCheck className="size-6 text-cube27-accent-primary" />}
+          title="Market Entry & Risk Management"
+        >
+          Location selection, legal setup, compliance, and strict IP protection
+          in new geographies with zero operational drag.
+        </FeatureCard>
+        <FeatureCard
+          icon={<Building2 className="size-6 text-cube27-accent-primary" />}
+          title="Operating Model Alignment"
+        >
+          Seamless teams that mirror your engineering culture, communication
+          cadence, and architectural standards.
+        </FeatureCard>
+        <FeatureCard
+          icon={<Zap className="size-6 text-cube27-accent-primary" />}
+          title="Innovation-Led CoEs"
+        >
+          Centers of Excellence designed to drive continuous process improvement
+          and architectural evolution — not just basic delivery.
+        </FeatureCard>
+      </div>
+
+      <div className="mt-6 rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/50 p-6 sm:p-8">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
+              Ideal for CTOs & CIOs Scaling Global Capabilities
+            </h4>
+            <p className="mt-1 max-w-2xl text-[0.92rem] text-cube27-text-secondary">
+              Proven ability to scale teams from 5 to 50+ specialists in under
+              120 days with full data and IP protection.
+            </p>
+          </div>
+          <a
+            href="#contact"
+            className="inline-flex min-h-[3rem] shrink-0 items-center justify-center gap-2 rounded-md bg-cube27-button-secondary-background px-6 py-3 text-sm font-medium text-cube27-button-secondary-text transition-colors hover:bg-cube27-accent-primary"
+          >
+            Start Your Journey
+            <ArrowRight className="size-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------------------------
+ * Small shared cells
+ * ------------------------------------------------------------------------- */
+
+function StatCell({
+  value,
+  label,
+  large,
+}: {
+  value: string;
+  label: string;
+  large?: boolean;
+}) {
+  return (
+    <div className="bg-cube27-background-primary p-5 sm:p-6">
+      <dt
+        className={
+          large
+            ? "typography-heading text-2xl font-medium text-cube27-text-primary sm:text-3xl"
+            : "typography-heading text-2xl font-medium text-cube27-text-primary"
+        }
+      >
+        {value}
+      </dt>
+      <dd className="mt-1 text-[0.78rem] text-cube27-text-secondary">
+        {label}
+      </dd>
+    </div>
+  );
+}
+
+function OfferingItem({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <li className="flex items-start gap-3">
+      <Check className="mt-1 size-4 shrink-0 text-cube27-accent-primary" />
+      <div>
+        <strong className="block text-[0.95rem] text-cube27-text-primary">
+          {title}
+        </strong>
+        <span className="text-[0.88rem] text-cube27-text-secondary">
+          {children}
+        </span>
+      </div>
+    </li>
+  );
+}
+
+function TechCell({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-lg border border-cube27-border-primary bg-cube27-background-primary p-5">
+      <span className="typography-eyebrow text-[0.65rem] uppercase text-cube27-accent-primary">
+        {label}
+      </span>
+      <p className="mt-2 text-[0.9rem] font-medium text-cube27-text-primary">
+        {value}
+      </p>
     </div>
   );
 }
