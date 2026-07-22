@@ -20,7 +20,7 @@ export function HomeHero({
   headlineLines = DEFAULT_HEADLINE,
   body = DEFAULT_BODY,
   ctaLabel = "Start a conversation",
-  ctaHref = "#contact",
+  ctaHref = "/contact",
   overlayEyebrow = "INTELLIGENT OPERATIONS",
   overlayTitle = "Signal. Context. Action.",
   overlayDescription = "Continuous intelligence across data, marketing, and operations.",
@@ -57,6 +57,8 @@ export function HomeHero({
           {/* Main hero background image (LCP — eager + high priority) */}
           <img
             src="/cube27-bg.webp"
+            srcSet="/cube27-bg-640.webp 640w, /cube27-bg-960.webp 960w, /cube27-bg-1280.webp 1280w, /cube27-bg.webp 1600w"
+            sizes="(min-width: 1024px) 690px, 100vw"
             alt="Cube27 core operations background"
             width={1600}
             height={893}
@@ -79,9 +81,9 @@ export function HomeHero({
                 {overlayEyebrow}
               </span>
             </div>
-            <h3 className="mt-2 text-lg sm:text-xl font-medium leading-tight text-cube27-text-primary tracking-[-0.01em]">
+            <p className="mt-2 text-lg sm:text-xl font-medium leading-tight text-cube27-text-primary tracking-[-0.01em]">
               {overlayTitle}
-            </h3>
+            </p>
             <p className="mt-1 text-[0.82rem] leading-normal text-cube27-text-secondary">
               {overlayDescription}
             </p>

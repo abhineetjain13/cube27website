@@ -53,6 +53,22 @@ The endpoint returns **HTTP 503** until all three secrets below are set.
    **Settings → Environment variables** and add the three keys as
    **encrypted secrets** for the Production (and Preview) environments.
 
+## Image assets
+
+Source images live in [public/](public/). Responsive/optimized variants are
+generated with [sharp](https://sharp.pixelplumbing.com) and committed so the
+build needs no image tooling:
+
+```bash
+pnpm run optimize:images
+```
+
+This produces downscaled hero-background tiers (`cube27-bg-640/960/1280.webp`
+alongside the 1600px master `cube27-bg.webp`, wired up via `srcset`/`sizes` in
+the hero) and a WebP twin of the logo (`cube27_logo.webp`, served through a
+`<picture>` with the PNG as fallback). Re-run it whenever you replace a source
+image. The `cube27_logo.png` is retained for schema.org structured data.
+
 ## Deployment
 
 Push to the connected GitHub repository; Cloudflare Pages builds and deploys

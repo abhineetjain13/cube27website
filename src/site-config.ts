@@ -18,7 +18,6 @@ interface SiteConfig {
   organization: {
     legalName: string;
     email: string;
-    telephone: string;
     address: OrgAddress;
     /** Social / external profile URLs for schema.org `sameAs`. */
     sameAs: string[];
@@ -37,7 +36,6 @@ export const SITE_CONFIG: SiteConfig = {
   organization: {
     legalName: "Cube27 IT Pvt. Ltd.",
     email: "contact@cube27.com",
-    telephone: "+91-9881720375",
     address: {
       streetAddress: "Plot 12, Mulberry Garden 1, Magarpatta City, Hadapsar",
       addressLocality: "Pune",

@@ -134,4 +134,4 @@ We reserve the right to change this Privacy Policy from time to time. If we make
 To request a copy for your information, unsubscribe from our email list, request for your data to be deleted, or ask a question about your data privacy, please contact us:
 
 - **Email:** [contact@cube27.com](mailto:contact@cube27.com)
-- **Phone:** [+91-9881720375](tel:+919881720375)
+- **LinkedIn:** [linkedin.com/company/cube27ltd](https://www.linkedin.com/company/cube27ltd)

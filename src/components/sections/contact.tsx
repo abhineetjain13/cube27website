@@ -1,5 +1,12 @@
 import { useState, type ReactNode, type SyntheticEvent } from "react";
-import { ArrowRight, MapPin, Phone, Mail, Globe, CheckCircle2 } from "lucide-react";
+import {
+  ArrowRight,
+  MapPin,
+  Linkedin,
+  Mail,
+  Globe,
+  CheckCircle2,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -97,21 +104,18 @@ export function Contact({
             </div>
 
             <div className="flex items-center gap-3 text-[0.95rem] text-cube27-text-secondary">
-              <Phone
+              <Linkedin
                 className="size-5 shrink-0 text-cube27-accent-primary"
                 strokeWidth={1.5}
               />
-              <div>
-                <a
-                  href="tel:+919881720375"
-                  className="text-cube27-text-primary hover:text-cube27-accent-primary"
-                >
-                  +91-9881720375
-                </a>
-                <span className="ml-2 text-xs text-cube27-text-secondary">
-                  (Business hours IST)
-                </span>
-              </div>
+              <a
+                href="https://www.linkedin.com/company/cube27ltd"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cube27-text-primary hover:text-cube27-accent-primary"
+              >
+                Connect on LinkedIn
+              </a>
             </div>
 
             <div className="flex items-center gap-3 text-[0.95rem] text-cube27-text-secondary">
@@ -140,9 +144,9 @@ export function Contact({
 
           {/* Why Partner highlights */}
           <div className="mt-10 rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/40 p-6">
-            <h4 className="typography-eyebrow text-[0.72rem] uppercase text-cube27-accent-primary">
+            <h3 className="typography-eyebrow text-[0.72rem] uppercase text-cube27-accent-primary">
               Why Partner with Cube27?
-            </h4>
+            </h3>
             <ul className="mt-3 space-y-2 text-[0.88rem] text-cube27-text-primary">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="size-4 text-cube27-accent-primary shrink-0" />

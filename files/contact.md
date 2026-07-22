@@ -32,9 +32,9 @@ We typically respond within 24 business hours.
 [contact@cube27.com](mailto:contact@cube27.com)
 For general inquiries and partnership discussions.
 
-**Call Us**
-[+91-9881720375](tel:+919881720375)
-Available during business hours (IST).
+**Connect on LinkedIn**
+[linkedin.com/company/cube27ltd](https://www.linkedin.com/company/cube27ltd)
+Follow us and reach out for partnership discussions.
 
 **Global Support**
 24/7 support across NORAM, EMEA, APAC, and India for existing clients.

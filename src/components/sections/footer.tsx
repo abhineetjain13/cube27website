@@ -75,10 +75,12 @@ export function Footer({
                 contact@cube27.com
               </a>
               <a
-                href="tel:+919881720375"
+                href="https://www.linkedin.com/company/cube27ltd"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-cube27-accent-primary"
               >
-                +91-9881720375
+                LinkedIn
               </a>
             </div>
           </div>

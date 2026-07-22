@@ -109,7 +109,6 @@ function buildJsonLdGraph({
       ...(siteUrl && { url: siteUrl }),
       ...(siteUrl && { logo: `${siteUrl}/cube27_logo.png` }),
       email: organization.email,
-      telephone: organization.telephone,
       address: {
         "@type": "PostalAddress",
         streetAddress: organization.address.streetAddress,
