@@ -587,6 +587,29 @@
   }
 }
 
+/* ============================================
+   Marquee. Infinite logo strip (Trusted Partners)
+   ============================================ */
+/* The track holds two identical copies of the logo set side by side and
+   translates left by exactly half its width, so the loop is seamless. */
+@keyframes cube27-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.cube27-marquee-track {
+  animation: cube27-marquee var(--cube27-marquee-duration, 60s) linear infinite;
+}
+
+/* Pause the scroll when the user hovers the strip. */
+.cube27-marquee:hover .cube27-marquee-track {
+  animation-play-state: paused;
+}
+
 /* Reduced motion: disable animations and transitions */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -596,6 +619,18 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Marquee: no infinite scroll — a static, horizontally scrollable row. */
+  .cube27-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+  .cube27-marquee {
+    overflow-x: auto;
+  }
+  .cube27-marquee-dup {
+    display: none;
   }
 }
 

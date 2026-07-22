@@ -55,19 +55,32 @@ The endpoint returns **HTTP 503** until all three secrets below are set.
 
 ## Image assets
 
-Source images live in [public/](public/). Responsive/optimized variants are
-generated with [sharp](https://sharp.pixelplumbing.com) and committed so the
-build needs no image tooling:
+Optimized WebP variants live in [public/](public/) and are committed directly,
+so the build needs no image tooling. They were generated with
+[sharp](https://sharp.pixelplumbing.com):
 
 ```bash
 pnpm run optimize:images
 ```
 
-This produces downscaled hero-background tiers (`cube27-bg-640/960/1280.webp`
-alongside the 1600px master `cube27-bg.webp`, wired up via `srcset`/`sizes` in
-the hero) and a WebP twin of the logo (`cube27_logo.webp`, served through a
-`<picture>` with the PNG as fallback). Re-run it whenever you replace a source
-image. The `cube27_logo.png` is retained for schema.org structured data.
+The committed assets are:
+
+- **Hero background** — `cube27-bg.webp` (1600px master) plus downscaled tiers
+  `cube27-bg-640/960/1280.webp`, wired up via `srcset`/`sizes` in the hero.
+- **Logo** — `cube27_logo.webp`, used both for on-page display and as the
+  schema.org structured-data logo.
+- **Partner logos** — `images/logos/opt/{n}.webp` for the Trusted Partners
+  marquee, whitespace-trimmed so each mark fills its frame (no card chrome).
+- **Life at Cube27 photos** — `images/office/opt/life-NN.webp` (ordered
+  numerically) for the culture gallery.
+
+The heavy source masters (original logo PNGs, office JPGs) have been removed
+from the repo to keep it lean — the optimized `opt/*.webp` are now the assets of
+record. To add or re-optimize images, drop the source files back into
+`public/images/logos/` or `public/images/office/` and re-run the script; it
+regenerates the hero tiers from `cube27-bg.webp` and skips any step whose source
+is absent. If you change the number of images, update the `count` on
+`<PartnerMarquee>` (home) and `<LifeAtCube27>` (about) accordingly.
 
 ## Deployment
 

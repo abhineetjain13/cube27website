@@ -4,6 +4,7 @@ import { Footer } from "@/components/sections/footer";
 import { HomeHero } from "@/components/pages/home/sections/hero";
 import { HomeProof } from "@/components/pages/home/sections/proof";
 import { Contact } from "@/components/sections/contact";
+import { LifeAtCube27 } from "@/components/sections/life-at-cube27";
 import { Reveal } from "@/components/ui/reveal";
 
 export function AboutPage() {
@@ -40,6 +41,7 @@ export function AboutPage() {
           ]}
         />
         <PeopleBand />
+        <LifeAtCube27 />
         <Contact
           eyebrow="Partner with Cube27"
           headlineLines={["Let's engineer your", "intelligent enterprise."]}

@@ -4,6 +4,7 @@ import { HomeHero } from "./sections/hero";
 import { HomePlatform } from "./sections/platform";
 import { HomeSolutions } from "./sections/solutions";
 import { HomeProof } from "./sections/proof";
+import { PartnerMarquee } from "@/components/sections/partner-marquee";
 import { Contact } from "@/components/sections/contact";
 
 /**
@@ -23,6 +24,7 @@ export function HomePage() {
         <HomePlatform />
         <HomeSolutions />
         <HomeProof />
+        <PartnerMarquee />
         <Contact />
       </main>
       <Footer />

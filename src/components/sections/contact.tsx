@@ -186,7 +186,7 @@ export function Contact({
                 id="areaOfInterest"
                 name="areaOfInterest"
                 required
-                className={fieldClass()}
+                className={fieldClass("h-12")}
               >
                 <option value="">Select an option…</option>
                 {AREA_OPTIONS.map((opt) => (
@@ -204,7 +204,7 @@ export function Contact({
               <textarea
                 id="message"
                 name="message"
-                rows={5}
+                rows={8}
                 required
                 className={fieldClass("resize-none py-3")}
                 placeholder="A brief description of your idea, process, or website…"
@@ -264,7 +264,7 @@ export function Contact({
 }
 
 const fieldClass = (extra = "") =>
-  `h-12 w-full rounded-lg border border-cube27-border-primary bg-cube27-background-primary px-4 text-[0.95rem] text-cube27-text-primary outline-none transition-colors placeholder:text-cube27-text-secondary/60 focus:border-cube27-accent-primary ${extra}`;
+  `w-full rounded-lg border border-cube27-border-primary bg-cube27-background-primary px-4 text-[0.95rem] text-cube27-text-primary outline-none transition-colors placeholder:text-cube27-text-secondary/60 focus:border-cube27-accent-primary ${extra}`;
 
 function FieldLabel({
   htmlFor,
@@ -302,7 +302,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className={fieldClass()}
+        className={fieldClass("h-12")}
       />
     </div>
   );
