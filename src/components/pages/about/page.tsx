@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, UserCheck } from "lucide-react";
 import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
 import { HomeHero } from "@/components/pages/home/sections/hero";
@@ -6,14 +6,6 @@ import { HomeProof } from "@/components/pages/home/sections/proof";
 import { Contact } from "@/components/sections/contact";
 import { Reveal } from "@/components/ui/reveal";
 
-/**
- * @cube27Component
- * @cube27ComponentId AboutPage
- * @cube27ComponentType page
- * @cube27ComponentPattern landing
- * @cube27ComponentStatus stable
- * @cube27ComponentDescription cube27 About / Company page shell (Cinematic Enterprise direction). Reuses the shared Navbar + Footer and the home HomeHero/HomeProof/HomeOperatorsCta sections with About-specific copy, plus three page-local native sections that match the home anatomy: a company-story band (eyebrow + grotesk headline + two-column narrative on warm white), a "how we work" principles list (hairline-ruled rows, plain monoline accent dots — no card grid), and a people/culture band on the secondary surface. Warm-white canvas, ink-black grotesk type, single electric-blue accent reserved for eyebrows/dots/links. Drop-in copy lives in the DEFAULT_* constants below.
- */
 export function AboutPage() {
   return (
     <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
@@ -25,25 +17,33 @@ export function AboutPage() {
             "the intelligent",
             "enterprise.",
           ]}
-          body="CUBE27 is a Pune-based partner pairing capability centers, agentic AI, and data engineering to help global brands operate with measurable impact."
+          body="Cube27 is a Global Capability Center (GCC) partner bridging operational stability and high-end technical innovation."
           ctaLabel="Work with us"
           ctaHref="#contact"
           overlayEyebrow="GLOBAL DELIVERY"
           overlayTitle="People. Process. Pride."
           overlayDescription="Operating as a seamless extension from our Pune hub."
-          overlayBadge="100+"
+          overlayBadge="150+"
         />
         <CompanyStory />
+        <LeadershipSection />
+        <InfrastructureSection />
         <Principles />
         <HomeProof
           eyebrow="Our track record"
-          statement="For over a decade, 100+ brands — including Fortune 500 enterprises across the US — have trusted CUBE27 to build and run the operations behind their growth."
+          statement="With over two decades of combined leadership experience in eCommerce, digital marketing, and enterprise technology, we deliver on our promises while innovating."
+          stats={[
+            { value: "150+", label: "Team Members" },
+            { value: "95%", label: "Enterprise SLA" },
+            { value: "$1B+", label: "Ad Spend Optimized" },
+            { value: "20+", label: "Years Experience" },
+          ]}
         />
         <PeopleBand />
         <Contact
-          eyebrow="Partner with CUBE27"
+          eyebrow="Partner with Cube27"
           headlineLines={["Let's engineer your", "intelligent enterprise."]}
-          body="Tell us where you want to see earlier, decide faster, or automate the work. Share a brief and our experts will be in touch shortly."
+          body="Whether you're looking to extend your team or join ours, we'd love to hear from you."
         />
       </main>
       <Footer />
@@ -52,26 +52,10 @@ export function AboutPage() {
 }
 
 /* ----------------------------------------------------------------------------
- * Company story — eyebrow + grotesk headline + two-column narrative on warm white
+ * Company story — Vision ("Not a dev shop. A GCC Partner.")
  * ------------------------------------------------------------------------- */
 
-interface StoryParagraphProps {
-  eyebrow?: string;
-  headlineLines?: string[];
-  paragraphs?: string[];
-}
-
-const DEFAULT_STORY: Required<StoryParagraphProps> = {
-  eyebrow: "Who we are",
-  headlineLines: ["A delivery partner,", "not just a vendor."],
-  paragraphs: [
-    "CUBE27 was built on a simple conviction: global enterprises don't need another point tool — they need a partner who can stand up real capability and run it. From our hub in Pune, we operate as an extension of our clients' teams, owning outcomes across marketing, data, automation, and engineering.",
-    "Over the last decade we've grown into a trusted GCC-as-a-Service partner for 100+ brands, including Fortune 500 enterprises across the US. We bring the people, the platforms, and the operating discipline to engineer measurable impact — then we stay accountable for it.",
-  ],
-};
-
 function CompanyStory() {
-  const { eyebrow, headlineLines, paragraphs } = DEFAULT_STORY;
   return (
     <section
       id="company"
@@ -80,26 +64,32 @@ function CompanyStory() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-y-8 px-5 sm:px-8 lg:grid-cols-12 lg:gap-x-8">
         <Reveal className="lg:col-span-5">
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
-            {eyebrow}
+            Our Vision
           </p>
           <h2 className="typography-heading mt-4 text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
-            {headlineLines.map((line, i) => (
-              <span key={i} className="block">
-                {line}
-              </span>
-            ))}
+            Not a dev shop.
+            <span className="block">A GCC Partner.</span>
           </h2>
         </Reveal>
 
         <Reveal delay={0.1} className="space-y-5 lg:col-span-7 lg:pl-6 lg:pt-2">
-          {paragraphs.map((p, i) => (
-            <p
-              key={i}
-              className="max-w-xl text-[1.05rem] leading-relaxed text-cube27-text-secondary"
-            >
-              {p}
-            </p>
-          ))}
+          <p className="max-w-xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
+            Cube27 is not just a development company. We are a Global Capability
+            Center (GCC) partner that bridges the gap between operational
+            stability and high-end technical innovation.
+          </p>
+          <p className="max-w-xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
+            We don&apos;t sell &ldquo;hours&rdquo; — we sell outcomes and
+            extended teams. Our clients don&apos;t see us as vendors; they see
+            us as an extension of their own organization, aligned with their
+            culture, values, and business objectives.
+          </p>
+          <p className="max-w-xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
+            With over two decades of combined leadership experience in
+            eCommerce, digital marketing, and enterprise technology, we&apos;ve
+            built a company that delivers on its promises while maintaining the
+            flexibility to innovate.
+          </p>
         </Reveal>
       </div>
     </section>
@@ -107,16 +97,140 @@ function CompanyStory() {
 }
 
 /* ----------------------------------------------------------------------------
- * Principles — calm hairline-ruled list (matches HomeSolutions anatomy)
+ * Leadership Section — Meet Our Leaders
  * ------------------------------------------------------------------------- */
 
-interface Principle {
-  name: string;
-  description: string;
-  active?: boolean;
+function LeadershipSection() {
+  return (
+    <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/30 py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <Reveal>
+          <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
+            Leadership
+          </p>
+          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
+            Meet Our Leaders
+          </h2>
+        </Reveal>
+
+        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+          <Reveal
+            delay={0.05}
+            className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8"
+          >
+            <div className="flex items-center gap-3 text-cube27-accent-primary">
+              <UserCheck className="size-6" />
+              <span className="typography-eyebrow text-[0.75rem] uppercase font-semibold">
+                20+ Years Experience
+              </span>
+            </div>
+            <h3 className="typography-heading mt-4 text-2xl font-medium text-cube27-text-primary">
+              Arpan Jain
+            </h3>
+            <p className="text-[0.88rem] font-medium text-cube27-text-secondary">
+              Chief Executive Officer
+            </p>
+            <p className="mt-4 text-[0.95rem] leading-relaxed text-cube27-text-secondary">
+              20+ years in eCommerce and Digital Marketing. B. Tech in Computer
+              Science. Arpan brings deep technical expertise combined with
+              business acumen, ensuring that Cube27 delivers solutions that are
+              both technically excellent and commercially viable.
+            </p>
+          </Reveal>
+
+          <Reveal
+            delay={0.1}
+            className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8"
+          >
+            <div className="flex items-center gap-3 text-cube27-accent-primary">
+              <UserCheck className="size-6" />
+              <span className="typography-eyebrow text-[0.75rem] uppercase font-semibold">
+                24+ Years Experience
+              </span>
+            </div>
+            <h3 className="typography-heading mt-4 text-2xl font-medium text-cube27-text-primary">
+              Amber Jain
+            </h3>
+            <p className="text-[0.88rem] font-medium text-cube27-text-secondary">
+              Chief Technology Officer
+            </p>
+            <p className="mt-4 text-[0.95rem] leading-relaxed text-cube27-text-secondary">
+              24+ years as a Digital Marketing Technologist. MS in Computer
+              Science from USC. Amber&apos;s academic and practical rigor drives
+              our technical excellence, ensuring every solution meets the
+              highest standards of engineering quality.
+            </p>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
 }
 
-const DEFAULT_PRINCIPLES: Principle[] = [
+/* ----------------------------------------------------------------------------
+ * Infrastructure Section — Built for Enterprise Scale
+ * ------------------------------------------------------------------------- */
+
+function InfrastructureSection() {
+  return (
+    <section className="border-t border-cube27-border-primary bg-cube27-background-primary py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <Reveal>
+          <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
+            Infrastructure
+          </p>
+          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
+            Built for Enterprise Scale
+          </h2>
+        </Reveal>
+
+        <Reveal delay={0.1} className="mt-12">
+          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-2 lg:grid-cols-4">
+            <div className="bg-cube27-neutral-secondary/30 p-6">
+              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+                150+ Specialists
+              </dt>
+              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
+                Engineers, architects, and consultants across multiple
+                technology domains.
+              </dd>
+            </div>
+            <div className="bg-cube27-neutral-secondary/30 p-6">
+              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+                95% SLA Achievement
+              </dt>
+              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
+                Consistent delivery on enterprise support commitments.
+              </dd>
+            </div>
+            <div className="bg-cube27-neutral-secondary/30 p-6">
+              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+                $1B+ Ad Spend Managed
+              </dt>
+              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
+                Optimizations via our proprietary MarTech tools.
+              </dd>
+            </div>
+            <div className="bg-cube27-neutral-secondary/30 p-6">
+              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+                24/7 Global Coverage
+              </dt>
+              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
+                Support across NORAM, EMEA, APAC, and India.
+              </dd>
+            </div>
+          </dl>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ----------------------------------------------------------------------------
+ * Principles — calm hairline-ruled list
+ * ------------------------------------------------------------------------- */
+
+const DEFAULT_PRINCIPLES = [
   {
     name: "Own the outcome",
     description:
@@ -140,35 +254,21 @@ const DEFAULT_PRINCIPLES: Principle[] = [
   },
 ];
 
-interface PrinciplesProps {
-  eyebrow?: string;
-  headlineLines?: string[];
-  principles?: Principle[];
-}
-
-function Principles({
-  eyebrow = "How we work",
-  headlineLines = ["The principles behind", "every engagement."],
-  principles = DEFAULT_PRINCIPLES,
-}: PrinciplesProps) {
+function Principles() {
   return (
-    <section className="border-t border-cube27-border-primary bg-cube27-background-primary py-20 lg:py-28">
+    <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/20 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
-            {eyebrow}
+            How we work
           </p>
           <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
-            {headlineLines.map((line, i) => (
-              <span key={i} className="block">
-                {line}
-              </span>
-            ))}
+            The principles behind every engagement.
           </h2>
         </Reveal>
 
         <div className="mt-12 border-t border-cube27-border-primary">
-          {principles.map((p, i) => (
+          {DEFAULT_PRINCIPLES.map((p, i) => (
             <Reveal key={p.name} delay={Math.min(i * 0.06, 0.24)}>
               <div className="flex flex-col gap-4 border-b border-cube27-border-primary py-7 sm:flex-row sm:items-baseline sm:gap-8">
                 <div className="flex items-center gap-3 sm:w-[20rem] sm:shrink-0">
@@ -192,84 +292,75 @@ function Principles({
 }
 
 /* ----------------------------------------------------------------------------
- * People / culture band — secondary surface, quiet typographic capability tiles
+ * People / culture band
  * ------------------------------------------------------------------------- */
 
-interface Capability {
-  value: string;
-  label: string;
-}
-
-const DEFAULT_CAPABILITIES: Capability[] = [
-  {
-    value: "Pune",
-    label: "Global delivery hub, serving enterprises worldwide",
-  },
-  {
-    value: "Cross-functional",
-    label: "Marketing, data, AI, and engineering under one roof",
-  },
-  {
-    value: "Embedded teams",
-    label: "Operating as an extension of client organizations",
-  },
-  {
-    value: "Outcome-owned",
-    label: "Accountable from strategy through operations",
-  },
-];
-
-interface PeopleBandProps {
-  eyebrow?: string;
-  headlineLines?: string[];
-  body?: string;
-  capabilities?: Capability[];
-}
-
-function PeopleBand({
-  eyebrow = "Our people",
-  headlineLines = ["The team that runs", "the operation."],
-  body = "CUBE27 brings together specialists across marketing, analytics, AI, and engineering — a multidisciplinary team that plugs into your organization and operates as one.",
-  capabilities = DEFAULT_CAPABILITIES,
-}: PeopleBandProps) {
+function PeopleBand() {
   return (
     <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/40 py-20 lg:py-28">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-y-10 px-5 sm:px-8 lg:grid-cols-12 lg:gap-x-8">
         <Reveal className="lg:col-span-5">
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
-            {eyebrow}
+            Life at Cube27
           </p>
           <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
-            {headlineLines.map((line, i) => (
-              <span key={i} className="block">
-                {line}
-              </span>
-            ))}
+            Join Our Team or Partner With Us
           </h2>
           <p className="mt-6 max-w-md text-[1.05rem] leading-relaxed text-cube27-text-secondary">
-            {body}
+            Whether you&apos;re looking to extend your team or join ours,
+            we&apos;d love to hear from you.
           </p>
-          <a
-            href="#contact"
-            className="mt-7 inline-flex items-center gap-1.5 text-[0.9rem] font-medium text-cube27-text-primary transition-colors hover:text-cube27-accent-primary"
-          >
-            Join the team
-            <ArrowRight className="size-4 text-cube27-accent-primary" />
-          </a>
+          <div className="mt-7 flex flex-wrap items-center gap-4">
+            <a
+              href="/contact"
+              className="inline-flex items-center gap-1.5 rounded-md bg-cube27-button-primary-background px-5 py-2.5 text-[0.9rem] font-medium text-cube27-button-primary-text transition-colors hover:bg-cube27-accent-secondary"
+            >
+              Partner with Us
+              <ArrowRight className="size-4" />
+            </a>
+            <a
+              href="/careers"
+              className="inline-flex items-center gap-1.5 rounded-md border border-cube27-border-primary bg-cube27-background-primary px-5 py-2.5 text-[0.9rem] font-medium text-cube27-text-primary transition-colors hover:border-cube27-accent-primary"
+            >
+              View Careers
+            </a>
+          </div>
         </Reveal>
 
         <Reveal delay={0.1} className="lg:col-span-7 lg:pl-6">
           <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-2">
-            {capabilities.map((c) => (
-              <div key={c.label} className="bg-cube27-background-primary p-6">
-                <dt className="typography-heading text-[clamp(1.2rem,2.2vw,1.5rem)] font-medium tracking-[-0.015em] text-cube27-text-primary">
-                  {c.value}
-                </dt>
-                <dd className="mt-1.5 text-[0.85rem] leading-snug text-cube27-text-secondary">
-                  {c.label}
-                </dd>
-              </div>
-            ))}
+            <div className="bg-cube27-background-primary p-6">
+              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+                Pune
+              </dt>
+              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
+                Global delivery hub, serving enterprises worldwide
+              </dd>
+            </div>
+            <div className="bg-cube27-background-primary p-6">
+              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+                Cross-functional
+              </dt>
+              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
+                Marketing, data, AI, and engineering under one roof
+              </dd>
+            </div>
+            <div className="bg-cube27-background-primary p-6">
+              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+                Embedded teams
+              </dt>
+              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
+                Operating as an extension of client organizations
+              </dd>
+            </div>
+            <div className="bg-cube27-background-primary p-6">
+              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+                Outcome-owned
+              </dt>
+              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
+                Accountable from strategy through operations
+              </dd>
+            </div>
           </dl>
         </Reveal>
       </div>

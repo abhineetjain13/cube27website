@@ -1,0 +1,26 @@
+{
+  "name": "Cube27 — Engineering the Intelligent Enterprise",
+  "short_name": "Cube27",
+  "description": "Cube27 engineers the intelligent enterprise — agentic AI, digital product engineering, enterprise commerce, and GCC-as-a-Service.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafaf7",
+  "theme_color": "#fafaf7",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

@@ -6,33 +6,33 @@ import jsxA11y from "eslint-plugin-jsx-a11y";
 import globals from "globals";
 
 export default [
-	{
-		ignores: [
-			"dist/",
-			".astro/",
-			".wrangler/",
-			"node_modules/",
-			"worker-configuration.d.ts",
-		],
-	},
-	js.configs.recommended,
-	...tseslint.configs.recommended,
-	...astro.configs.recommended,
-	{
-		files: ["**/*.{js,mjs,cjs,jsx,ts,tsx}"],
-		languageOptions: {
-			globals: { ...globals.browser, ...globals.node },
-		},
-		plugins: {
-			"react-hooks": reactHooks,
-			"jsx-a11y": jsxA11y,
-		},
-		rules: {
-			...reactHooks.configs.recommended.rules,
-			"@typescript-eslint/no-unused-vars": [
-				"warn",
-				{ argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
-			],
-		},
-	},
+  {
+    ignores: [
+      "dist/",
+      ".astro/",
+      ".wrangler/",
+      "node_modules/",
+      "worker-configuration.d.ts",
+    ],
+  },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...astro.configs.recommended,
+  {
+    files: ["**/*.{js,mjs,cjs,jsx,ts,tsx}"],
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node },
+    },
+    plugins: {
+      "react-hooks": reactHooks,
+      "jsx-a11y": jsxA11y,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
+    },
+  },
 ];

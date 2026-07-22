@@ -4,6 +4,7 @@ import {
   type SeoJsonNode,
   type SeoJsonSchema,
 } from "@/components/seo-json";
+import { SITE_CONFIG } from "@/site-config";
 
 const SCHEMA_CONTEXT = "https://schema.org" as const;
 
@@ -30,9 +31,13 @@ export function SEO({
   siteName,
   jsonLd,
 }: SEOProps) {
-  const resolvedSiteName = siteName ?? title;
-  const fullTitle =
-    title === resolvedSiteName ? title : `${title} | ${resolvedSiteName}`;
+  const resolvedSiteName = siteName ?? SITE_CONFIG.brand;
+  // Append the short brand as a suffix, but never when the title already
+  // carries it — this avoids "Cube27 … | Cube27" style duplication.
+  const alreadyBranded = title
+    .toLowerCase()
+    .includes(resolvedSiteName.toLowerCase());
+  const fullTitle = alreadyBranded ? title : `${title} | ${resolvedSiteName}`;
   const robots = noindex ? "noindex, nofollow" : "index, follow";
   const twitterCard = imageUrl ? "summary_large_image" : "summary";
 
@@ -93,13 +98,27 @@ function buildJsonLdGraph({
   extras,
 }: BuildGraphArgs): SeoJsonSchema[] {
   const siteUrl = canonicalUrl ? new URL(canonicalUrl).origin : undefined;
+  const { organization } = SITE_CONFIG;
 
   const defaults = [
     {
       "@context": SCHEMA_CONTEXT,
       "@type": "Organization",
       name: siteName,
+      legalName: organization.legalName,
       ...(siteUrl && { url: siteUrl }),
+      ...(siteUrl && { logo: `${siteUrl}/cube27_logo.png` }),
+      email: organization.email,
+      telephone: organization.telephone,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: organization.address.streetAddress,
+        addressLocality: organization.address.addressLocality,
+        addressRegion: organization.address.addressRegion,
+        postalCode: organization.address.postalCode,
+        addressCountry: organization.address.addressCountry,
+      },
+      ...(organization.sameAs.length > 0 && { sameAs: organization.sameAs }),
     },
     {
       "@context": SCHEMA_CONTEXT,

@@ -1,0 +1,80 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { CareersPage } from "@/components/pages/careers/page";
+import { SITE_CONFIG } from "@/site-config";
+import type { SeoJsonSchema } from "@/components/seo-json";
+
+export const prerender = true;
+
+const { organization, brand, url } = SITE_CONFIG;
+
+const hiringOrganization = {
+  "@type": "Organization",
+  name: brand,
+  legalName: organization.legalName,
+  url,
+  logo: `${url}/cube27_logo.png`,
+} as const;
+
+const jobLocation = {
+  "@type": "Place",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: organization.address.streetAddress,
+    addressLocality: organization.address.addressLocality,
+    addressRegion: organization.address.addressRegion,
+    postalCode: organization.address.postalCode,
+    addressCountry: organization.address.addressCountry,
+  },
+} as const;
+
+// Static posting dates keep the build deterministic; refresh when roles change.
+const datePosted = "2026-07-01";
+const validThrough = "2026-12-31";
+
+const roles: {
+  title: string;
+  slug: string;
+  employmentType: string;
+  description: string;
+}[] = [
+  {
+    title: "AI Engineer",
+    slug: "AI+Engineer",
+    employmentType: "FULL_TIME",
+    description:
+      "Design, build, and deploy scalable AI/ML systems and LLM-powered applications — RAG systems, AI agents, and multi-agent workflows — using Python, Node.js, and TypeScript. 4–7 years of software engineering experience. Remote/Hybrid, based in Pune.",
+  },
+  {
+    title: "AI Research Intern",
+    slug: "AI+Research+Intern",
+    employmentType: "INTERN",
+    description:
+      "Research and prototype applied AI: LLMs, AI agents, semantic search, prompt engineering, model evaluation, and automation workflows. For students or recent graduates in CS, AI, or Data Science with Python fundamentals. Remote/Hybrid, based in Pune.",
+  },
+];
+
+const jsonLd: SeoJsonSchema[] = roles.map((role) => ({
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  title: role.title,
+  description: role.description,
+  datePosted,
+  validThrough,
+  employmentType: role.employmentType,
+  hiringOrganization,
+  jobLocation,
+  jobLocationType: "TELECOMMUTE",
+  applicantLocationRequirements: { "@type": "Country", name: "India" },
+  directApply: true,
+  url: `${url}/contact?role=${role.slug}`,
+}));
+---
+
+<Layout
+  title="Careers — AI Engineering Roles in Pune"
+  description="Current job openings at Cube27 — AI Engineer and AI Research Intern roles in Pune. Join us to build next-generation AI infrastructure."
+  jsonLd={jsonLd}
+>
+  <CareersPage client:load />
+</Layout>

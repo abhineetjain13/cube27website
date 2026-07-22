@@ -15,22 +15,29 @@ interface FooterColumn {
 
 const DEFAULT_COLUMNS: FooterColumn[] = [
   {
-    title: "Solutions",
+    title: "Services",
     links: [
-      { label: "GCC-as-a-Service", href: "/solutions" },
-      { label: "Agentic AI & automation", href: "/solutions" },
-      { label: "Data, BI & analytics", href: "/solutions" },
-      { label: "Digital marketing", href: "/solutions" },
+      { label: "GCC & BOT Model", href: "/services#gcc" },
+      { label: "Salesforce & Platforms", href: "/services#commerce" },
+      { label: "Digital Product Engineering", href: "/services#engineering" },
+      { label: "AI & Automation", href: "/services#ai" },
     ],
   },
   {
     title: "Company",
     links: [
-      { label: "About", href: "/about" },
-      { label: "Case studies", href: "/case-studies" },
-      { label: "Contact", href: "/contact" },
-      { label: "Privacy policy", href: "/privacy-policy" },
-      { label: "Terms of service", href: "/terms-of-service" },
+      { label: "About Us", href: "/about" },
+      { label: "Success Stories", href: "/success-stories" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "Careers", href: "/careers" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "CSR", href: "/csr" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms of Service", href: "/terms-of-service" },
     ],
   },
 ];
@@ -42,7 +49,7 @@ interface FooterProps {
 
 export function Footer({
   columns = DEFAULT_COLUMNS,
-  tagline = "Engineering the intelligent enterprise.",
+  tagline = "Stability. Intelligence. Scale. Building high-performance GCCs and enterprise solutions.",
 }: FooterProps) {
   const year = new Date().getFullYear();
 
@@ -51,9 +58,30 @@ export function Footer({
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 py-16 sm:px-8 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Cube27Logo className="text-cube27-text-primary" />
-          <p className="mt-4 max-w-xs text-[0.95rem] leading-relaxed text-cube27-text-secondary">
+          <p className="mt-4 max-w-sm text-[0.95rem] leading-relaxed text-cube27-text-secondary">
             {tagline}
           </p>
+          <div className="mt-6 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
+            <p className="font-medium text-cube27-text-primary">
+              Cube27 IT Pvt. Ltd.
+            </p>
+            <p>Plot No. 12, Mulberry Gardens 1,</p>
+            <p>Magarpatta City, Hadapsar, Pune 411013</p>
+            <div className="mt-2 flex flex-col gap-1 sm:flex-row sm:gap-4">
+              <a
+                href="mailto:contact@cube27.com"
+                className="hover:text-cube27-accent-primary"
+              >
+                contact@cube27.com
+              </a>
+              <a
+                href="tel:+919881720375"
+                className="hover:text-cube27-accent-primary"
+              >
+                +91-9881720375
+              </a>
+            </div>
+          </div>
         </div>
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7">
           {columns.map((col) => (
@@ -79,7 +107,7 @@ export function Footer({
       </div>
       <div className="border-t border-cube27-border-primary">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-6 text-[0.8rem] text-cube27-text-secondary sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <span>© {year} CUBE27. All rights reserved.</span>
+          <span>© {year} Cube27. All rights reserved.</span>
           <span>Pune, India · Serving enterprises worldwide</span>
         </div>
       </div>

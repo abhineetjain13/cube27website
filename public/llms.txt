@@ -1,0 +1,37 @@
+# Cube27
+
+> Cube27 (Cube27 IT Pvt. Ltd.) is a Pune, India-based technology and operations partner that engineers the intelligent enterprise for ambitious organizations. Cube27 builds and operates Global Capability Centers (GCCs) and delivers agentic AI, digital product engineering, enterprise commerce, Salesforce, data, and digital-marketing solutions. Trusted by 100+ global brands, including Fortune 500 companies, with 150+ specialists and 24/7 global coverage across NORAM, EMEA, APAC, and India.
+
+## About
+
+- [About Cube27](https://www.cube27.com/about): Company vision ("Not a dev shop. A GCC Partner."), leadership, infrastructure, and operating principles.
+- Leadership: Arpan Jain (CEO, 20+ years in eCommerce & digital marketing) and Amber Jain (CTO, 24+ years as a digital-marketing technologist, MS Computer Science, USC).
+- Model: Cube27 sells outcomes and embedded extended teams, not billable hours — operating as an extension of client organizations.
+
+## Services
+
+- [Services overview](https://www.cube27.com/services): Four core service lines.
+- Agentic AI & Process Automation: autonomous commerce flows, end-to-end process automation, and data-driven AI pods; ~40% ops reduction, 24/7 autonomous operations.
+- Digital Product Engineering: product-first, growth-native architecture; proprietary AQ360 audit and DSMM framework; stacks across Node.js, Go, Python, React, Next.js, AWS/Azure/GCP.
+- Salesforce & Enterprise Platforms: Salesforce Commerce Cloud, SAP Hybris, Adobe Commerce, Shopify Plus, BigCommerce, and headless commerce; Agentforce for commerce and RevOps.
+- GCC-as-a-Service (GCCaaS): Build-Operate-Transfer (BOT) and Build-Operate (BO) engagement models; dedicated teams aligned to client culture, process, and architecture; <10% attrition.
+
+## Work & proof
+
+- [Success stories & case studies](https://www.cube27.com/success-stories): GCC/operations center build-out and a scalable supplier ERP system, with measurable outcomes.
+
+## Careers
+
+- [Careers](https://www.cube27.com/careers): Open roles in Pune — AI Engineer (4–7 yrs) and AI Research Intern.
+
+## Contact
+
+- [Contact](https://www.cube27.com/contact): Start a consultation with a Solutions Architect.
+- Email: contact@cube27.com — Phone: +91-9881720375
+- Address: Cube27 IT Pvt. Ltd., Plot 12, Mulberry Garden 1, Magarpatta City, Hadapsar, Pune, Maharashtra 411013, India.
+
+## Policies
+
+- [Privacy Policy](https://www.cube27.com/privacy-policy)
+- [Terms of Service](https://www.cube27.com/terms-of-service)
+- [CSR Policy](https://www.cube27.com/csr)

@@ -24,11 +24,11 @@ const {
   title = SITE_CONFIG.name,
   description = SITE_CONFIG.description,
   canonical,
-  image = "/social-preview.png",
-  imageAlt = "cube27 - Engineering the intelligent enterprise.",
+  image = "/social-preview.jpg",
+  imageAlt = "Cube27 - Engineering the intelligent enterprise.",
   noindex = false,
   type = "website",
-  siteName = SITE_CONFIG.name,
+  siteName = SITE_CONFIG.brand,
   jsonLd,
 } = Astro.props;
 
@@ -53,6 +53,9 @@ const imageUrl = resolveUrl(image);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#fafaf7" />
     <meta name="generator" content="Astro" />
     <SEO
       title={title}

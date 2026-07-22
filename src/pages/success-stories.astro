@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { CaseStudiesPage } from "@/components/pages/case-studies/page";
+
+export const prerender = true;
+---
+
+<Layout
+  title="Client Success Stories & Case Studies"
+  description="Real outcomes and measurable impact — how Cube27 has helped enterprises build Global Capability Centers and transform digital operations."
+>
+  <CaseStudiesPage client:load />
+</Layout>

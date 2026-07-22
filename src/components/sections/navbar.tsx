@@ -18,8 +18,9 @@ interface NavLink {
 
 const DEFAULT_LINKS: NavLink[] = [
   { label: "About", href: "/about" },
-  { label: "Solutions", href: "/solutions" },
-  { label: "Case studies", href: "/case-studies" },
+  { label: "Services", href: "/services" },
+  { label: "Success Stories", href: "/success-stories" },
+  { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
 ];
 

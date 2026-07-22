@@ -1,0 +1,17 @@
+# Cloudflare Pages Functions — local dev secrets
+# Copy this file to `.dev.vars` (gitignored) for `wrangler pages dev`,
+# and set the same keys as encrypted secrets in the Cloudflare dashboard
+# (Pages project → Settings → Environment variables) for production.
+#
+# The contact form (functions/api/contact.ts) returns HTTP 503 until all
+# three are configured.
+
+# Resend API key — https://resend.com/api-keys
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxx
+
+# Where contact-form submissions are delivered.
+CONTACT_TO_EMAIL=contact@cube27.com
+
+# Verified Resend sender. The domain must be verified in Resend before
+# delivery works. Use a subdomain like "no-reply@mail.cube27.com".
+CONTACT_FROM_EMAIL=no-reply@mail.cube27.com

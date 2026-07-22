@@ -9,6 +9,7 @@ interface ContactPayload {
   email?: unknown;
   company?: unknown;
   phone?: unknown;
+  areaOfInterest?: unknown;
   message?: unknown;
   website?: unknown;
 }
@@ -46,6 +47,7 @@ export const onRequestPost = async ({
   const email = asText(payload.email);
   const company = asText(payload.company);
   const phone = asText(payload.phone);
+  const areaOfInterest = asText(payload.areaOfInterest);
   const message = asText(payload.message);
 
   if (
@@ -62,7 +64,9 @@ export const onRequestPost = async ({
   }
 
   if (
-    [name, email, company, phone, message].some((value) => value.length > 2000)
+    [name, email, company, phone, areaOfInterest, message].some(
+      (value) => value.length > 2000,
+    )
   ) {
     return json({ ok: false, error: "One or more fields are too long." }, 422);
   }
@@ -90,6 +94,7 @@ export const onRequestPost = async ({
         `Email: ${email}`,
         `Company: ${company}`,
         `Phone: ${phone}`,
+        `Area of Interest: ${areaOfInterest || "N/A"}`,
         "",
         message,
       ].join("\n"),

@@ -1,18 +1,10 @@
-import { Check } from "lucide-react";
+import { Check, ArrowRight, Building, Award, Shield } from "lucide-react";
 import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
 import { HomeHero } from "@/components/pages/home/sections/hero";
 import { Contact } from "@/components/sections/contact";
 import { Reveal } from "@/components/ui/reveal";
 
-/**
- * @cube27Component
- * @cube27ComponentId CaseStudiesPage
- * @cube27ComponentType page
- * @cube27ComponentPattern landing
- * @cube27ComponentStatus stable
- * @cube27ComponentDescription cube27 Case Studies page shell (Cinematic Enterprise direction). Reuses the shared Navbar + Footer, the home HomeHero, and the shared Contact section as the closing band. Body is a stack of page-local case-study blocks rendered from the CASE_STUDIES data array — each block has a tracked category eyebrow, grotesk title, intro, Challenge/Solution narrative, a hairline-ruled results stat grid (proof-tile anatomy), key-outcome checklist with same-color accent checks, and a quiet tag row. Blocks alternate warm-white and neutral-secondary backgrounds for separation. Content is verbatim from client-provided case studies — keep facts and figures exact. Warm-white canvas, single electric-blue accent reserved for eyebrows/checks.
- */
 interface CaseStudy {
   category: string;
   title: string;
@@ -44,7 +36,7 @@ const CASE_STUDIES: CaseStudy[] = [
       "AI-accelerated operations (Agentic AI & Process Automation): embedded intelligent automation for operational workflows, enabling faster execution and actionable insights across business functions.",
     ],
     impact:
-      "The partner was able to scale rapidly, focusing internal efforts on technology and product innovation, while leveraging CUBE27’s full suite of capabilities — GCC, enterprise commerce, product engineering, and AI-driven process automation — to enable operational excellence. This model is repeatable for other growth-stage partners seeking to establish knowledge, technology, or process centers while concentrating on scaling their core business.",
+      "The partner was able to scale rapidly, focusing internal efforts on technology and product innovation, while leveraging Cube27’s full suite of capabilities — GCC, enterprise commerce, product engineering, and AI-driven process automation — to enable operational excellence. This model is repeatable for other growth-stage partners seeking to establish knowledge, technology, or process centers while concentrating on scaling their core business.",
     results: [
       { value: "100%", label: "Seamless integration" },
       { value: "<10%", label: "Attrition rate" },
@@ -87,7 +79,12 @@ const CASE_STUDIES: CaseStudy[] = [
     ],
     keyOutcomesTitle: "Impact",
     keyOutcomes: [],
-    tags: ["Angular", "Node.js", "ERP", "Workflow Automation"],
+    tags: [
+      "Python",
+      "Next.js",
+      "ERP",
+      "Workflow Automation",
+    ],
   },
 ];
 
@@ -97,8 +94,12 @@ export function CaseStudiesPage() {
       <Navbar />
       <main>
         <HomeHero
-          headlineLines={["Outcomes we've", "engineered for", "our partners."]}
-          body="From standing up global capability centers to digitizing core operations, here's how CUBE27 turns strategy into measurable, repeatable results."
+          headlineLines={[
+            "Success Stories &",
+            "proven enterprise",
+            "outcomes.",
+          ]}
+          body="Real outcomes, measurable impact — explore how Cube27 has helped enterprises build Global Capability Centers and transform digital operations."
           ctaLabel="Discuss your project"
           ctaHref="#contact"
           overlayEyebrow="OUTCOMES DELIVERED"
@@ -109,14 +110,81 @@ export function CaseStudiesPage() {
         {CASE_STUDIES.map((cs, i) => (
           <CaseStudyBlock key={cs.title} study={cs} index={i} />
         ))}
+
+        <ClientsAndBrandsSection />
+
         <Contact
-          eyebrow="Start your project"
-          headlineLines={["Let's engineer your", "next outcome."]}
-          body="Tell us about the capability, platform, or process you want to scale. Our experts will map the right approach and get back to you quickly."
+          eyebrow="Your Success Story Starts Here"
+          headlineLines={["Ready to achieve", "similar results?"]}
+          body="Let's discuss how Cube27 can help you build capability, not just deliver projects."
+          submitLabel="Start a Conversation"
         />
       </main>
       <Footer />
     </div>
+  );
+}
+
+function ClientsAndBrandsSection() {
+  return (
+    <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/30 py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <Reveal>
+          <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
+            Trusted Partnership
+          </p>
+          <h2 className="typography-heading mt-3 text-balance text-[clamp(1.5rem,2.8vw,2.1rem)] font-medium text-cube27-text-primary">
+            Clients & Brands We Have Helped
+          </h2>
+          <p className="mt-3 max-w-xl text-[0.98rem] text-cube27-text-secondary">
+            From Fortune 500 enterprises to fast-growing commerce partners, we
+            deliver engineering rigor across North America, Europe, APAC, and
+            India.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.1} className="mt-10">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+              <Building className="size-8 text-cube27-accent-primary mb-2" />
+              <span className="typography-heading text-lg font-medium text-cube27-text-primary">
+                100+
+              </span>
+              <span className="text-[0.82rem] text-cube27-text-secondary">
+                Global Brands
+              </span>
+            </div>
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+              <Award className="size-8 text-cube27-accent-primary mb-2" />
+              <span className="typography-heading text-lg font-medium text-cube27-text-primary">
+                Fortune 500
+              </span>
+              <span className="text-[0.82rem] text-cube27-text-secondary">
+                Enterprise Clients
+              </span>
+            </div>
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+              <Shield className="size-8 text-cube27-accent-primary mb-2" />
+              <span className="typography-heading text-lg font-medium text-cube27-text-primary">
+                95%
+              </span>
+              <span className="text-[0.82rem] text-cube27-text-secondary">
+                SLA Adherence
+              </span>
+            </div>
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+              <ArrowRight className="size-8 text-cube27-accent-primary mb-2" />
+              <span className="typography-heading text-lg font-medium text-cube27-text-primary">
+                24/7
+              </span>
+              <span className="text-[0.82rem] text-cube27-text-secondary">
+                Global Delivery Hub
+              </span>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
   );
 }
 

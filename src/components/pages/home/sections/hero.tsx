@@ -54,10 +54,15 @@ export function HomeHero({
         </div>
 
         <div className="relative lg:col-span-7 w-full h-[24rem] sm:h-[28rem] lg:h-[32rem] overflow-hidden rounded-2xl border border-cube27-border-primary shadow-[0_24px_80px_rgba(15,17,23,0.06)] group">
-          {/* Main Calgary Dome background image */}
+          {/* Main hero background image (LCP — eager + high priority) */}
           <img
-            src="/cube27-bg.png"
-            alt="CUBE27 core operations background"
+            src="/cube27-bg.webp"
+            alt="Cube27 core operations background"
+            width={1600}
+            height={893}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
           />
           {/* Subtle overlay gradient to ensure text readability */}
@@ -80,13 +85,13 @@ export function HomeHero({
             <p className="mt-1 text-[0.82rem] leading-normal text-cube27-text-secondary">
               {overlayDescription}
             </p>
-            
+
             <div className="mt-4 flex items-center justify-between border-t border-cube27-border-primary/50 pt-3">
               <span className="inline-flex items-center gap-1 text-[0.82rem] font-medium text-cube27-accent-primary hover:text-cube27-accent-secondary group/link transition-colors">
                 See how it works
                 <ArrowRight className="size-3.5 transition-transform duration-150 group-hover/link:translate-x-0.5" />
               </span>
-              
+
               <div className="flex items-center gap-3">
                 {/* Custom Sparkline drawing inside a mini-SVG */}
                 <svg

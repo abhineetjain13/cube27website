@@ -1,5 +1,5 @@
 import { useState, type ReactNode, type SyntheticEvent } from "react";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Phone, Mail, Globe, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -13,15 +13,24 @@ interface ContactProps {
 }
 
 const DEFAULT_ADDRESS = [
-  "Plot No. 12, Mulberry Gardens 1,",
+  "Cube27 IT Pvt. Ltd.",
+  "Plot 12, Mulberry Garden 1,",
   "Magarpatta City, Hadapsar,",
-  "Pune (MH) — 411013, India",
+  "Pune Maharashtra India 411013",
+];
+
+const AREA_OPTIONS = [
+  "GCC / BOT Setup",
+  "Salesforce & Enterprise Platforms",
+  "Digital Product & Commerce",
+  "Agentic AI & Automation",
+  "Other / General Inquiry",
 ];
 
 export function Contact({
   eyebrow = "Get in touch",
-  headlineLines = ["Tell us about your", "idea or process."],
-  body = "Reach out with a brief description of your new idea or an existing process or website. Our experts will get back to you at the earliest.",
+  headlineLines = ["Ready to Transform?", "Schedule a consultation."],
+  body = "Schedule a consultation with our Solutions Architect to explore how we can extend your team with stability, intelligence, and scale.",
   address = DEFAULT_ADDRESS,
   email = "contact@cube27.com",
   submitLabel = "Send message",
@@ -72,24 +81,86 @@ export function Contact({
             {body}
           </p>
 
-          <div className="mt-8 flex items-start gap-3">
-            <MapPin
-              className="mt-0.5 size-5 shrink-0 text-cube27-accent-primary"
-              strokeWidth={1.5}
-            />
-            <address className="not-italic text-[0.95rem] leading-relaxed text-cube27-text-secondary">
-              {address.map((line) => (
-                <span key={line} className="block">
-                  {line}
+          <div className="mt-8 space-y-4">
+            <div className="flex items-start gap-3">
+              <MapPin
+                className="mt-0.5 size-5 shrink-0 text-cube27-accent-primary"
+                strokeWidth={1.5}
+              />
+              <address className="not-italic text-[0.95rem] leading-relaxed text-cube27-text-secondary">
+                {address.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </address>
+            </div>
+
+            <div className="flex items-center gap-3 text-[0.95rem] text-cube27-text-secondary">
+              <Phone
+                className="size-5 shrink-0 text-cube27-accent-primary"
+                strokeWidth={1.5}
+              />
+              <div>
+                <a
+                  href="tel:+919881720375"
+                  className="text-cube27-text-primary hover:text-cube27-accent-primary"
+                >
+                  +91-9881720375
+                </a>
+                <span className="ml-2 text-xs text-cube27-text-secondary">
+                  (Business hours IST)
                 </span>
-              ))}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 text-[0.95rem] text-cube27-text-secondary">
+              <Mail
+                className="size-5 shrink-0 text-cube27-accent-primary"
+                strokeWidth={1.5}
+              />
               <a
-                className="mt-2 block text-cube27-text-primary hover:text-cube27-accent-primary"
                 href={`mailto:${email}`}
+                className="text-cube27-text-primary hover:text-cube27-accent-primary"
               >
                 {email}
               </a>
-            </address>
+            </div>
+
+            <div className="flex items-center gap-3 text-[0.95rem] text-cube27-text-secondary">
+              <Globe
+                className="size-5 shrink-0 text-cube27-accent-primary"
+                strokeWidth={1.5}
+              />
+              <span>
+                24/7 Global Support across NORAM, EMEA, APAC, and India.
+              </span>
+            </div>
+          </div>
+
+          {/* Why Partner highlights */}
+          <div className="mt-10 rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/40 p-6">
+            <h4 className="typography-eyebrow text-[0.72rem] uppercase text-cube27-accent-primary">
+              Why Partner with Cube27?
+            </h4>
+            <ul className="mt-3 space-y-2 text-[0.88rem] text-cube27-text-primary">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="size-4 text-cube27-accent-primary shrink-0" />
+                <span>Top 1% talent with stringent hiring</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="size-4 text-cube27-accent-primary shrink-0" />
+                <span>6-week resource onboarding</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="size-4 text-cube27-accent-primary shrink-0" />
+                <span>&lt;10% attrition for project continuity</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="size-4 text-cube27-accent-primary shrink-0" />
+                <span>95% SLA for enterprise support</span>
+              </li>
+            </ul>
           </div>
         </Reveal>
 
@@ -98,13 +169,33 @@ export function Contact({
             onSubmit={handleSubmit}
             className="grid grid-cols-1 gap-5 sm:grid-cols-2"
           >
-            <Field label="Name" name="name" required />
-            <Field label="Email" name="email" type="email" required />
-            <Field label="Company name" name="company" required />
-            <Field label="Phone number" name="phone" type="tel" required />
+            <Field label="Full Name *" name="name" required />
+            <Field label="Work Email *" name="email" type="email" required />
+            <Field label="Company Name *" name="company" required />
+            <Field label="Phone Number *" name="phone" type="tel" required />
+
+            <div className="sm:col-span-2">
+              <FieldLabel htmlFor="areaOfInterest">
+                Area of Interest *
+              </FieldLabel>
+              <select
+                id="areaOfInterest"
+                name="areaOfInterest"
+                required
+                className={fieldClass()}
+              >
+                <option value="">Select an option…</option>
+                {AREA_OPTIONS.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div className="sm:col-span-2">
               <FieldLabel htmlFor="message">
-                Tell us about your project
+                Tell Us About Your Project *
               </FieldLabel>
               <textarea
                 id="message"
@@ -115,6 +206,7 @@ export function Contact({
                 placeholder="A brief description of your idea, process, or website…"
               />
             </div>
+
             <div
               className="absolute -left-[9999px] h-px w-px overflow-hidden"
               aria-hidden="true"
@@ -128,32 +220,37 @@ export function Contact({
               />
             </div>
 
-            <div className="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center">
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                disabled={status === "sending"}
-              >
-                {status === "sending" ? "Sending…" : submitLabel}
-                <ArrowRight className="size-4" />
-              </Button>
-              {status === "sent" && (
-                <p
-                  className="text-[0.9rem] font-medium text-cube27-accent-primary"
-                  aria-live="polite"
+            <div className="sm:col-span-2 flex flex-col gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="lg"
+                  disabled={status === "sending"}
                 >
-                  Thanks — our experts will be in touch shortly.
-                </p>
-              )}
-              {status === "error" && (
-                <p
-                  className="text-[0.9rem] font-medium text-cube27-text-primary"
-                  aria-live="polite"
-                >
-                  Something went wrong. Please try again.
-                </p>
-              )}
+                  {status === "sending" ? "Sending…" : submitLabel}
+                  <ArrowRight className="size-4" />
+                </Button>
+                {status === "sent" && (
+                  <p
+                    className="text-[0.9rem] font-medium text-cube27-accent-primary"
+                    aria-live="polite"
+                  >
+                    Thanks — our experts will be in touch shortly.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p
+                    className="text-[0.9rem] font-medium text-cube27-text-primary"
+                    aria-live="polite"
+                  >
+                    Something went wrong. Please try again.
+                  </p>
+                )}
+              </div>
+              <p className="text-[0.82rem] text-cube27-text-secondary">
+                We typically respond within 24 business hours.
+              </p>
             </div>
           </form>
         </Reveal>

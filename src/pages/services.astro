@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ServicesPage } from "@/components/pages/services/page";
+import { SITE_CONFIG } from "@/site-config";
+import type { SeoJsonSchema } from "@/components/seo-json";
+
+export const prerender = true;
+
+const provider = {
+  "@type": "Organization",
+  name: SITE_CONFIG.brand,
+  url: SITE_CONFIG.url,
+} as const;
+
+const services: { name: string; serviceType: string; description: string }[] = [
+  {
+    name: "Agentic AI & Process Automation",
+    serviceType: "AI & Automation",
+    description:
+      "Autonomous commerce flows, end-to-end process automation, and dedicated AI pods that reduce operational friction and run 24/7.",
+  },
+  {
+    name: "Digital Product Engineering",
+    serviceType: "Software Engineering",
+    description:
+      "Product-first, growth-native engineering across web, app, and data platforms using Node.js, Go, Python, React, Next.js, and cloud-native architectures.",
+  },
+  {
+    name: "Salesforce & Enterprise Platforms",
+    serviceType: "Enterprise Commerce",
+    description:
+      "Implementations across Salesforce Commerce Cloud, SAP Hybris, Adobe Commerce, Shopify Plus, BigCommerce, and headless commerce, with Agentforce for commerce and RevOps.",
+  },
+  {
+    name: "GCC-as-a-Service",
+    serviceType: "Global Capability Center",
+    description:
+      "Dedicated Global Capability Centers built and operated on your behalf via Build-Operate-Transfer (BOT) and Build-Operate (BO) engagement models.",
+  },
+];
+
+const jsonLd: SeoJsonSchema[] = services.map((service) => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: service.name,
+  serviceType: service.serviceType,
+  description: service.description,
+  provider,
+  areaServed: [
+    { "@type": "Place", name: "North America" },
+    { "@type": "Place", name: "EMEA" },
+    { "@type": "Place", name: "APAC" },
+    { "@type": "Place", name: "India" },
+  ],
+  url: `${SITE_CONFIG.url}/services`,
+}));
+---
+
+<Layout
+  title="Services — GCC, AI, Commerce & Salesforce"
+  description="Cube27's services across Agentic AI & Automation, Digital Product Engineering, Salesforce & Enterprise Platforms, and GCC-as-a-Service."
+  jsonLd={jsonLd}
+>
+  <ServicesPage client:load />
+</Layout>
