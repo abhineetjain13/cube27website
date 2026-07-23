@@ -1,0 +1,7 @@
+{
+  "name": "GCC-as-a-Service",
+  "serviceType": "Global Capability Center",
+  "description": "Dedicated Global Capability Centers built and operated on your behalf via Build-Operate-Transfer (BOT) and Build-Operate (BO) engagement models.",
+  "anchorId": "gcc",
+  "order": 4
+}

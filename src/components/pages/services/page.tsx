@@ -23,40 +23,11 @@ import { FeatureCard } from "@/components/ui/feature-card";
 import { COMPANY_FACTS, SITE_CONFIG } from "@/site-config";
 import type { FaqItem } from "@/components/seo-json";
 
-const SERVICES_FAQ: readonly FaqItem[] = [
-  {
-    question: "What services does Cube27 offer?",
-    answer:
-      "Cube27 delivers four core service lines: Agentic AI & Process Automation, Digital Product Engineering, Salesforce & Enterprise Platforms (commerce), and GCC-as-a-Service. Engagements span strategy, build, and long-term operation as an embedded extension of your team.",
-  },
-  {
-    question: "What is GCC-as-a-Service (GCCaaS)?",
-    answer:
-      "GCC-as-a-Service is our model for establishing and operating a dedicated Global Capability Center on your behalf. We handle location selection, legal setup, compliance, hiring, and day-to-day operations through Build-Operate-Transfer (BOT) or Build-Operate (BO) engagements, with dedicated teams aligned to your culture, processes, and architecture.",
-  },
-  {
-    question: "Which engagement models does Cube27 support?",
-    answer:
-      "We work through Build-Operate-Transfer (BOT), Build-Operate (BO), embedded delivery pods, and managed-services teams. You buy outcomes and an extended team, not billable hours — with the option to transfer the operation fully in-house over time.",
-  },
-  {
-    question: "Which commerce and Salesforce platforms does Cube27 implement?",
-    answer:
-      "We implement and rescue projects across Salesforce Commerce Cloud (Demandware), SAP Hybris, Adobe Commerce, Shopify Plus, BigCommerce, and custom headless architectures, integrated with CRM, ERP, and Agentforce for commerce and RevOps.",
-  },
-  {
-    question: "How quickly can Cube27 stand up a dedicated team?",
-    answer:
-      "GCC operations typically reach operational startup in 90+ days, and we have scaled teams from 5 to 50+ specialists in under 120 days, with full data and IP protection and under 10% annual attrition.",
-  },
-  {
-    question: "Where is Cube27 based?",
-    answer:
-      "Cube27 operates from Pune, India, with 150+ specialists providing 24/7 global coverage across NORAM, EMEA, APAC, and India.",
-  },
-];
-
-export function ServicesPage() {
+export function ServicesPage({
+  faqItems,
+}: {
+  faqItems: readonly FaqItem[];
+}) {
   const items: SplitItem[] = [
     {
       id: "ai",
@@ -121,7 +92,7 @@ export function ServicesPage() {
         <Faq
           eyebrow="Questions"
           heading="Services & engagement FAQs"
-          items={SERVICES_FAQ}
+          items={faqItems}
           schemaUrl={`${SITE_CONFIG.url}/services`}
         />
 

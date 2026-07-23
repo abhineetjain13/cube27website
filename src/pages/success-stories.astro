@@ -1,13 +1,21 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import { CaseStudiesPage } from "@/components/pages/case-studies/page";
+import {
+  CaseStudiesPage,
+  type CaseStudy,
+} from "@/components/pages/case-studies/page";
 
 export const prerender = true;
+
+const studies: CaseStudy[] = (await getCollection("caseStudies"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({ id: entry.id, ...entry.data }));
 ---
 
 <Layout
   title="Client Success Stories & Case Studies"
   description="Real outcomes and measurable impact — how Cube27 has helped enterprises build Global Capability Centers and transform digital operations."
 >
-  <CaseStudiesPage client:load />
+  <CaseStudiesPage client:load studies={studies} />
 </Layout>

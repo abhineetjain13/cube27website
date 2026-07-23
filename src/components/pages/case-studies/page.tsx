@@ -9,7 +9,7 @@ import { StatGrid, StatCell } from "@/components/ui/stat-grid";
 import { isNumericStat } from "@/lib/utils";
 import { COMPANY_FACTS } from "@/site-config";
 
-interface CaseStudy {
+export interface CaseStudy {
   id: string;
   category: string;
   title: string;
@@ -25,73 +25,8 @@ interface CaseStudy {
   tags: string[];
 }
 
-const CASE_STUDIES: CaseStudy[] = [
-  {
-    id: "gcc-operations",
-    category: "GCC & Operations",
-    title:
-      "Establishing an Excellence & Operations Center for a growing commerce & technology partner",
-    intro:
-      "A leading commerce and technology partner sought to scale rapidly while maintaining seamless alignment with its headquarters. The goal was to create a high-performance center that integrated technical capability, process rigor, and organizational culture.",
-    challenge:
-      "The partner wanted to focus on rapid growth while ensuring operational, technical, and process excellence across commerce, digital marketing, and technology initiatives.",
-    solution: [
-      "Excellence & Operations Center setup: implemented a “Build-Operate” model, managing entity setup, infrastructure, and compliance to accelerate operational readiness.",
-      "Targeted talent deployment (Product Engineering): recruited teams with deep expertise in technology, commerce platforms, and operational processes to support growth initiatives.",
-      "Commerce & tech enablement (Enterprise Commerce): optimized tech and operational process and platform integrations to scale commerce operations seamlessly.",
-      "AI-accelerated operations (Agentic AI & Process Automation): embedded intelligent automation for operational workflows, enabling faster execution and actionable insights across business functions.",
-    ],
-    impact:
-      "The partner was able to scale rapidly, focusing internal efforts on technology and product innovation, while leveraging Cube27’s full suite of capabilities — GCC, enterprise commerce, product engineering, and AI-driven process automation — to enable operational excellence. This model is repeatable for other growth-stage partners seeking to establish knowledge, technology, or process centers while concentrating on scaling their core business.",
-    results: [
-      { value: "100%", label: "Seamless integration" },
-      { value: "<10%", label: "Attrition rate" },
-      { value: "24/7", label: "Global coverage" },
-      { value: "6 weeks", label: "Onboarding time" },
-    ],
-    keyOutcomes: [
-      "Fully operational team functioning as dedicated contractors",
-      "High retention rates ensured knowledge continuity",
-      "Successfully scaled to support global operations 24/7",
-    ],
-    tags: ["GCC Setup", "Culture Mirroring", "Build-Operate Model"],
-  },
-  {
-    id: "digital-transformation",
-    category: "Digital Transformation",
-    title: "Building a scalable supplier ERP system",
-    challenge:
-      "A leading manufacturing supplier managed its Purchase Order, Challan, and Invoice processes through disconnected Excel files. With no centralized database, the company faced frequent data errors, duplicate entries, poor traceability, and zero visibility into historical pricing and volume trends. As transaction volumes grew, manual handling became unsustainable.",
-    solutionIntro:
-      "A customized, web-based ERP system was developed to streamline and digitize the entire procurement and billing lifecycle.",
-    solution: [
-      "Designed a structured 4-step reconciliation workflow with automatic document conversion.",
-      "Built on Python and Next.js with a centralized, secure database.",
-      "Integrated Material Code mapping aligned with industry standards.",
-      "Implemented validation rules and approval controls.",
-      "Added built-in analytics for historical trend analysis and reporting.",
-    ],
-    results: [
-      { value: "100%", label: "Digitization" },
-      { value: "0", label: "Manual errors" },
-      { value: "Real-time", label: "Analytics" },
-      { value: "Full", label: "Audit trail" },
-    ],
-    impactList: [
-      "Significant reduction in manual data entry and processing time",
-      "Elimination of most billing and documentation errors",
-      "Faster invoicing cycles and improved cash flow",
-      "Complete audit trail across all transactions",
-      "Improved management visibility through real-time reporting",
-    ],
-    keyOutcomesTitle: "Impact",
-    keyOutcomes: [],
-    tags: ["Python", "Next.js", "ERP", "Workflow Automation"],
-  },
-];
-
-export function CaseStudiesPage() {
-  const items: SplitItem[] = CASE_STUDIES.map((cs) => ({
+export function CaseStudiesPage({ studies }: { studies: CaseStudy[] }) {
+  const items: SplitItem[] = studies.map((cs) => ({
     id: cs.id,
     eyebrow: cs.category,
     title: cs.title,

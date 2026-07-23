@@ -1,0 +1,43 @@
+{
+  "title": "AI Research Intern",
+  "slug": "AI+Research+Intern",
+  "departmentTag": "Research & Development",
+  "employmentType": "INTERN",
+  "description": "Research and prototype applied AI: LLMs, AI agents, semantic search, prompt engineering, model evaluation, and automation workflows. For students or recent graduates in CS, AI, or Data Science with Python fundamentals. Remote/Hybrid, based in Pune.",
+  "metaItems": [
+    { "icon": "mapPin", "label": "Location", "value": "Pune" },
+    { "icon": "clock", "label": "Duration", "value": "3–6 months" },
+    { "icon": "laptop", "label": "Work Mode", "value": "Remote/Hybrid" },
+    { "icon": "briefcase", "label": "Type", "value": "Internship" }
+  ],
+  "about": "We are looking for curious and highly motivated AI Research Interns to work on applied AI problems involving LLMs, AI agents, semantic search, automation, and intelligent commerce systems. You will work closely with engineering and product teams to prototype, evaluate, and improve AI-driven features.",
+  "responsibilities": [
+    "Research and experiment with latest AI/LLM models and frameworks.",
+    "Assist in building prototypes for AI agents, RAG systems, and automation workflows.",
+    "Work on prompt engineering, model evaluation, and AI experimentation.",
+    "Analyze AI outputs and improve quality, accuracy, and reliability.",
+    "Support dataset preparation, embeddings generation, and vector search workflows."
+  ],
+  "listGroups": [
+    {
+      "title": "Required & Preferred Skills",
+      "items": [
+        "Degree or pursuing degree in CS, AI, Data Science",
+        "Basic understanding of machine learning and LLMs",
+        "Familiarity with Python & API fundamentals",
+        "Exposure to OpenAI, LangChain, Hugging Face, vector DBs",
+        "Curiosity about AI research and emerging tech"
+      ]
+    },
+    {
+      "title": "What You'll Gain",
+      "items": [
+        "Hands-on experience building real-world AI systems",
+        "Mentorship from experienced AI engineers",
+        "Exposure to modern AI tooling & architectures",
+        "Potential full-time opportunity based on performance"
+      ]
+    }
+  ],
+  "order": 2
+}

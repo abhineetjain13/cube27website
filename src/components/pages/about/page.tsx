@@ -9,7 +9,15 @@ import { Reveal } from "@/components/ui/reveal";
 import { StatGrid, StatCell } from "@/components/ui/stat-grid";
 import { COMPANY_FACTS } from "@/site-config";
 
-export function AboutPage() {
+/** Leadership profile, sourced from the `leadership` content collection. */
+export interface Leader {
+  name: string;
+  role: string;
+  experience: string;
+  bio: string;
+}
+
+export function AboutPage({ leaders }: { leaders: Leader[] }) {
   return (
     <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
       <Navbar />
@@ -30,7 +38,7 @@ export function AboutPage() {
           overlayLinkHref="#company"
         />
         <CompanyStory />
-        <LeadershipSection />
+        <LeadershipSection leaders={leaders} />
         <InfrastructureSection />
         <Principles />
         <HomeProof
@@ -114,7 +122,10 @@ function CompanyStory() {
  * Leadership Section — Meet Our Leaders
  * ------------------------------------------------------------------------- */
 
-function LeadershipSection() {
+/* Card entrance delays preserved from the pre-collection layout. */
+const LEADER_DELAYS = [0.06, 0.1];
+
+function LeadershipSection({ leaders }: { leaders: Leader[] }) {
   return (
     <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/30 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -128,53 +139,29 @@ function LeadershipSection() {
         </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
-          <Reveal
-            delay={0.06}
-            className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8 motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md"
-          >
-            <div className="flex items-center gap-3 text-cube27-accent-primary">
-              <UserCheck className="size-6" />
-              <span className="typography-eyebrow text-[0.7rem] uppercase">
-                20+ Years Experience
-              </span>
-            </div>
-            <h3 className="typography-heading mt-4 text-2xl font-medium text-cube27-text-primary">
-              Arpan Jain
-            </h3>
-            <p className="text-[0.88rem] font-medium text-cube27-text-secondary">
-              Chief Executive Officer
-            </p>
-            <p className="mt-4 text-[0.95rem] leading-relaxed text-cube27-text-secondary">
-              20+ years in eCommerce and Digital Marketing. B. Tech in Computer
-              Science. Arpan brings deep technical expertise combined with
-              business acumen, ensuring that Cube27 delivers solutions that are
-              both technically excellent and commercially viable.
-            </p>
-          </Reveal>
-
-          <Reveal
-            delay={0.1}
-            className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8 motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md"
-          >
-            <div className="flex items-center gap-3 text-cube27-accent-primary">
-              <UserCheck className="size-6" />
-              <span className="typography-eyebrow text-[0.7rem] uppercase">
-                24+ Years Experience
-              </span>
-            </div>
-            <h3 className="typography-heading mt-4 text-2xl font-medium text-cube27-text-primary">
-              Amber Jain
-            </h3>
-            <p className="text-[0.88rem] font-medium text-cube27-text-secondary">
-              Chief Technology Officer
-            </p>
-            <p className="mt-4 text-[0.95rem] leading-relaxed text-cube27-text-secondary">
-              24+ years as a Digital Marketing Technologist. MS in Computer
-              Science from USC. Amber&apos;s academic and practical rigor drives
-              our technical excellence, ensuring every solution meets the
-              highest standards of engineering quality.
-            </p>
-          </Reveal>
+          {leaders.map((leader, i) => (
+            <Reveal
+              key={leader.name}
+              delay={LEADER_DELAYS[i] ?? 0.1}
+              className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8 motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <div className="flex items-center gap-3 text-cube27-accent-primary">
+                <UserCheck className="size-6" />
+                <span className="typography-eyebrow text-[0.7rem] uppercase">
+                  {leader.experience}
+                </span>
+              </div>
+              <h3 className="typography-heading mt-4 text-2xl font-medium text-cube27-text-primary">
+                {leader.name}
+              </h3>
+              <p className="text-[0.88rem] font-medium text-cube27-text-secondary">
+                {leader.role}
+              </p>
+              <p className="mt-4 text-[0.95rem] leading-relaxed text-cube27-text-secondary">
+                {leader.bio}
+              </p>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
