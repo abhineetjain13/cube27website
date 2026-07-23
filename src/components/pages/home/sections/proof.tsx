@@ -38,7 +38,7 @@ export function HomeProof({
   stats = DEFAULT_STATS,
 }: ProofProps) {
   return (
-    <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/40 py-20 lg:py-24">
+    <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/40 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">

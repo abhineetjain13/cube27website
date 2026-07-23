@@ -70,7 +70,7 @@ export function Contact({
   return (
     <section
       id="contact"
-      className="border-t border-cube27-border-primary bg-cube27-background-primary py-24 lg:py-32"
+      className="border-t border-cube27-border-primary bg-cube27-background-primary py-20 lg:py-28"
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-y-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-x-12">
         <Reveal className="lg:col-span-5">
@@ -144,7 +144,7 @@ export function Contact({
 
           {/* Why Partner highlights */}
           <div className="mt-10 rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/40 p-6">
-            <h3 className="typography-eyebrow text-[0.72rem] uppercase text-cube27-accent-primary">
+            <h3 className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
               Why Partner with Cube27?
             </h3>
             <ul className="mt-3 space-y-2 text-[0.88rem] text-cube27-text-primary">

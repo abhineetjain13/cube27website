@@ -20,7 +20,7 @@ export function CareersPage() {
         <PageIntro
           headlineLines={["Build the future", "of enterprise", "AI with us."]}
           body="Explore open roles at Cube27. We are building next-generation AI-powered commerce infrastructure and intelligent platforms that help businesses become AI-agent ready."
-          ctaLabel="View Openings"
+          ctaLabel="View openings"
           ctaHref="#openings"
           overlayEyebrow="CAREERS AT CUBE27"
           overlayTitle="Impact. Ownership. Scale."

@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  * @cube27ComponentType section
  * @cube27ComponentPattern navbar
  * @cube27ComponentStatus stable
- * @cube27ComponentDescription Shared site navbar for cube27. Thin, borderless warm-white bar: cube27 wordmark at left, center sentence-case nav rendered from a single `items` array, and a single dark-charcoal "Work with us" pill at far right (the only CTA in the bar — never add a second). Nav items can be plain links or dropdown groups (Company, Services); dropdowns open on hover/click/focus and are keyboard + screen-reader accessible. Collapses to a wordmark + menu toggle on mobile with nested disclosure accordions. Pass `items` and `ctaHref` to reuse across pages.
+ * @cube27ComponentDescription Shared site navbar for cube27. Thin, borderless warm-white bar: cube27 wordmark at left, center sentence-case nav rendered from a single `items` array, and a single dark-charcoal "Schedule a consultation" pill at far right (the only CTA in the bar — never add a second). Nav items can be plain links or dropdown groups (Company, Services); dropdowns open on hover/click/focus and are keyboard + screen-reader accessible. Collapses to a wordmark + menu toggle on mobile with nested disclosure accordions. Pass `items` and `ctaHref` to reuse across pages.
  */
 interface NavLink {
   label: string;
@@ -79,7 +79,7 @@ interface NavbarProps {
 
 export function Navbar({
   items = DEFAULT_ITEMS,
-  ctaLabel = "Start a conversation",
+  ctaLabel = "Schedule a consultation",
   ctaHref = "/contact",
 }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);

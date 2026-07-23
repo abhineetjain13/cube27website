@@ -19,7 +19,7 @@ export function AboutPage() {
             "enterprise.",
           ]}
           body="Cube27 is a Global Capability Center (GCC) partner bridging operational stability and high-end technical innovation."
-          ctaLabel="Work with us"
+          ctaLabel="Schedule a consultation"
           ctaHref="#contact"
           overlayEyebrow="GLOBAL DELIVERY"
           overlayTitle="People. Process. Pride."
@@ -123,7 +123,7 @@ function LeadershipSection() {
           >
             <div className="flex items-center gap-3 text-cube27-accent-primary">
               <UserCheck className="size-6" />
-              <span className="typography-eyebrow text-[0.75rem] uppercase font-semibold">
+              <span className="typography-eyebrow text-[0.7rem] uppercase">
                 20+ Years Experience
               </span>
             </div>
@@ -147,7 +147,7 @@ function LeadershipSection() {
           >
             <div className="flex items-center gap-3 text-cube27-accent-primary">
               <UserCheck className="size-6" />
-              <span className="typography-eyebrow text-[0.75rem] uppercase font-semibold">
+              <span className="typography-eyebrow text-[0.7rem] uppercase">
                 24+ Years Experience
               </span>
             </div>
@@ -318,14 +318,14 @@ function PeopleBand() {
               href="/contact"
               className="inline-flex items-center gap-1.5 rounded-md bg-cube27-button-primary-background px-5 py-2.5 text-[0.9rem] font-medium text-cube27-button-primary-text transition-colors hover:bg-cube27-accent-secondary"
             >
-              Partner with Us
+              Schedule a consultation
               <ArrowRight className="size-4" />
             </a>
             <a
               href="/careers"
               className="inline-flex items-center gap-1.5 rounded-md border border-cube27-border-primary bg-cube27-background-primary px-5 py-2.5 text-[0.9rem] font-medium text-cube27-text-primary transition-colors hover:border-cube27-accent-primary"
             >
-              View Careers
+              View openings
             </a>
           </div>
         </Reveal>

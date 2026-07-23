@@ -499,7 +499,7 @@ function GccServiceDetail() {
             href="#contact"
             className="inline-flex min-h-[3rem] shrink-0 items-center justify-center gap-2 rounded-md bg-cube27-button-secondary-background px-6 py-3 text-sm font-medium text-cube27-button-secondary-text transition-colors hover:bg-cube27-accent-primary"
           >
-            Start Your Journey
+            Schedule a consultation
             <ArrowRight className="size-4" />
           </a>
         </div>

@@ -107,7 +107,7 @@ export function CaseStudiesPage() {
             "outcomes.",
           ]}
           body="Real outcomes, measurable impact — explore how Cube27 has helped enterprises build Global Capability Centers and transform digital operations."
-          ctaLabel="Discuss your project"
+          ctaLabel="Schedule a consultation"
           ctaHref="#contact"
           overlayEyebrow="OUTCOMES DELIVERED"
           overlayTitle="Impact. Value. Trust."
@@ -119,7 +119,7 @@ export function CaseStudiesPage() {
           <div className="mx-auto mb-12 max-w-7xl px-5 sm:px-8">
             <Reveal>
               <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
-                Case Studies
+                Success stories
               </p>
               <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
                 Select an engagement to explore the outcome.
@@ -135,7 +135,6 @@ export function CaseStudiesPage() {
           eyebrow="Your Success Story Starts Here"
           headlineLines={["Ready to achieve", "similar results?"]}
           body="Let's discuss how Cube27 can help you build capability, not just deliver projects."
-          submitLabel="Start a Conversation"
         />
       </main>
       <Footer />
@@ -145,7 +144,7 @@ export function CaseStudiesPage() {
 
 function ClientsAndBrandsSection() {
   return (
-    <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/30 py-20 lg:py-24">
+    <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/30 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
@@ -350,7 +349,7 @@ function NarrativeGroup({
 }) {
   return (
     <div>
-      <h4 className="typography-eyebrow text-[0.7rem] uppercase tracking-wide text-cube27-text-primary">
+      <h4 className="typography-eyebrow text-[0.7rem] uppercase text-cube27-text-primary">
         {title}
       </h4>
       <div className="mt-3">{children}</div>

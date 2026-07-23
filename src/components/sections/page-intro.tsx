@@ -37,7 +37,7 @@ const DEFAULT_BODY =
 export function PageIntro({
   headlineLines = DEFAULT_HEADLINE,
   body = DEFAULT_BODY,
-  ctaLabel = "Start a conversation",
+  ctaLabel = "Schedule a consultation",
   ctaHref = "/contact",
   overlayEyebrow = "INTELLIGENT OPERATIONS",
   overlayTitle = "Signal. Context. Action.",
@@ -51,7 +51,7 @@ export function PageIntro({
     <section className="overflow-hidden bg-cube27-background-primary">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 py-12 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:py-20">
         <div className="lg:col-span-5 flex flex-col justify-center">
-          <p className="typography-eyebrow text-xs uppercase tracking-[0.2em] text-cube27-accent-primary font-semibold">
+          <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             Technology and solutions partner
           </p>
           <Headline className="typography-heading mt-4 text-balance text-[clamp(2.35rem,5vw,3.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-cube27-text-primary">
