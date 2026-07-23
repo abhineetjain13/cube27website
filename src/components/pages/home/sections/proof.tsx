@@ -29,8 +29,8 @@ interface ProofProps {
 }
 
 export function HomeProof({
-  eyebrow = "Trusted by operators",
-  statement = "For over a decade, 100+ brands — including Fortune 500 enterprises — have partnered with CUBE27 to engineer their intelligent operations.",
+  eyebrow = "Trusted by Market Leaders",
+  statement = "For over a decade, 100+ brands — including Fortune 500 enterprises — have trusted CUBE27 to engineer their intelligent operations.",
   stats = DEFAULT_STATS,
 }: ProofProps) {
   return (
