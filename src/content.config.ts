@@ -1,5 +1,5 @@
 import { defineCollection, z } from "astro:content";
-import { file, glob } from "astro/loaders";
+import { glob } from "astro/loaders";
 
 /**
  * Cube27 content collections — the single source of truth for page copy and
@@ -7,17 +7,9 @@ import { file, glob } from "astro/loaders";
  * entries (frontmatter-only .md / .json); queries run in `.astro` page shells
  * or static endpoints ONLY — `astro:content` is server-only and must never be
  * imported from a `.tsx` island. Data reaches React pages as serializable
- * props. `site-config.ts` reads the same facts.json via a plain static import
- * so it stays client-safe.
+ * props. `site-config.ts` reads facts.json via a plain static import so it
+ * stays client-safe (which is why facts.json is not also a collection).
  */
-
-const site = defineCollection({
-  loader: file("src/content/site/facts.json"),
-  schema: z.object({
-    value: z.string(),
-    label: z.string(),
-  }),
-});
 
 const services = defineCollection({
   loader: glob({ pattern: "*.json", base: "./src/content/services" }),
@@ -102,7 +94,6 @@ const caseStudies = defineCollection({
 });
 
 export const collections = {
-  site,
   services,
   faqs,
   roles,

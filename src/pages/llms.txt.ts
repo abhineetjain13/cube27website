@@ -4,6 +4,12 @@ import { COMPANY_FACTS, SITE_CONFIG } from "@/site-config";
 
 export const prerender = true;
 
+/** "A" / "A and B" / "A, B, and C" — stays correct as collections grow past two entries. */
+function joinAnd(items: string[]): string {
+  if (items.length <= 2) return items.join(" and ");
+  return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
+}
+
 /**
  * /llms.txt — concise answer-engine manifest, generated from the content
  * collections + COMPANY_FACTS so wording and stats stay in sync with the
@@ -28,17 +34,17 @@ export const GET: APIRoute = async () => {
   studies.sort(byOrder);
 
   const address = organization.address;
-  const roleList = roles
-    .map((role) => {
+  const roleList = joinAnd(
+    roles.map((role) => {
       const duration = role.data.metaItems.find((m) => m.icon === "clock");
       return duration
         ? `${role.data.title} (${duration.value})`
         : role.data.title;
-    })
-    .join(" and ");
-  const leaderList = leaders
-    .map((l) => `${l.data.name} (${l.data.role}, ${l.data.experience})`)
-    .join(" and ");
+    }),
+  );
+  const leaderList = joinAnd(
+    leaders.map((l) => `${l.data.name} (${l.data.role}, ${l.data.experience})`),
+  );
 
   const body = `# Cube27
 
@@ -78,6 +84,6 @@ ${studies.map((s) => `- ${s.data.category}: ${s.data.title}.`).join("\n")}
 `;
 
   return new Response(body, {
-    headers: { "Content-Type": "text/plain" },
+    headers: { "Content-Type": "text/plain; charset=utf-8" },
   });
 };

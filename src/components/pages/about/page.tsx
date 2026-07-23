@@ -227,7 +227,6 @@ const DEFAULT_PRINCIPLES = [
     name: "Own the outcome",
     description:
       "We measure ourselves on the business result, not hours billed. Accountability is the product.",
-    active: true,
   },
   {
     name: "Engineer for scale",
@@ -267,9 +266,6 @@ function Principles() {
                   <span className="typography-heading text-[1.15rem] font-medium text-cube27-text-primary">
                     {p.name}
                   </span>
-                  {p.active && (
-                    <span className="size-1.5 rounded-full bg-cube27-accent-primary" />
-                  )}
                 </div>
                 <p className="flex-1 text-[0.95rem] leading-relaxed text-cube27-text-secondary">
                   {p.description}
@@ -324,22 +320,18 @@ function PeopleBand() {
             <StatCell
               value="Pune"
               label="Global delivery hub, serving enterprises worldwide"
-              mono={false}
             />
             <StatCell
               value="Cross-functional"
               label="Marketing, data, AI, and engineering under one roof"
-              mono={false}
             />
             <StatCell
               value="Embedded teams"
               label="Operating as an extension of client organizations"
-              mono={false}
             />
             <StatCell
               value="Outcome-owned"
               label="Accountable from strategy through operations"
-              mono={false}
             />
           </StatGrid>
         </Reveal>

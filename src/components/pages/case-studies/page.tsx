@@ -6,7 +6,6 @@ import { Contact } from "@/components/sections/contact";
 import { Reveal } from "@/components/ui/reveal";
 import { SplitExplorer, type SplitItem } from "@/components/ui/split-explorer";
 import { StatGrid, StatCell } from "@/components/ui/stat-grid";
-import { isNumericStat } from "@/lib/utils";
 import { COMPANY_FACTS } from "@/site-config";
 
 export interface CaseStudy {
@@ -165,7 +164,6 @@ function CaseStudyDetail({ study }: { study: CaseStudy }) {
             value={r.value}
             label={r.label}
             size="lg"
-            mono={isNumericStat(r.value)}
           />
         ))}
       </StatGrid>

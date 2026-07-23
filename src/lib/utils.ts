@@ -6,10 +6,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Design-system rule: the numeric part of stat tiles renders in IBM Plex
- * Mono, while word values ("Pune", "Fortune 500", "Real-time") keep the
- * heading face. A value counts as numeric when it opens with a digit, a
- * currency sign, or a comparison glyph ("100+", "$1B+", "<10%").
+ * Detects numeric-leading stat values ("100+", "$1B+", "<10%") as opposed to
+ * word values ("Pune", "Fortune 500", "Real-time"). Used to gate the count-up
+ * animation so only numeric tiles animate; word tiles stay static.
  */
 export function isNumericStat(value: string): boolean {
   return /^[\d<$]/.test(value.trim());
