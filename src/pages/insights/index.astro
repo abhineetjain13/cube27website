@@ -45,11 +45,12 @@ const jsonLd: WithContext<CollectionPage> = {
   title="Insights — GCC, Agentic AI & Salesforce"
   description="Practical guidance on GCC setup, agentic AI, Salesforce, and enterprise delivery from the Cube27 team."
   jsonLd={jsonLd}
+  preloadHero
 >
   <div
     class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
   >
-    <Navbar client:load pathname={Astro.url.pathname} />
+    <Navbar client:visible pathname={Astro.url.pathname} />
     <main id="main" tabindex="-1">
       <PageIntro
         headlineLines={["Field notes from", "enterprise delivery."]}

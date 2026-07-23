@@ -21,11 +21,12 @@ const studies: CaseStudy[] = (await getCollection("caseStudies"))
 <Layout
   title="Client Success Stories & Case Studies"
   description="Real outcomes and measurable impact — how Cube27 has helped enterprises build Global Capability Centers and transform digital operations."
+  preloadHero
 >
   <div
     class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
   >
-    <Navbar client:load pathname={Astro.url.pathname} />
+    <Navbar client:visible pathname={Astro.url.pathname} />
     <main id="main" tabindex="-1">
       <PageIntro
         headlineLines={["Success Stories &", "proven enterprise", "outcomes."]}

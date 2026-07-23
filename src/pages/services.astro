@@ -50,11 +50,12 @@ const jsonLd: SeoJsonSchema[] = services.map((service) => ({
   title="Services — GCC, AI, Commerce & Salesforce"
   description="Cube27's services across Agentic AI & Automation, Digital Product Engineering, Salesforce & Enterprise Platforms, and GCC-as-a-Service."
   jsonLd={jsonLd}
+  preloadHero
 >
   <div
     class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
   >
-    <Navbar client:load pathname={Astro.url.pathname} />
+    <Navbar client:visible pathname={Astro.url.pathname} />
     <main id="main" tabindex="-1">
       <PageIntro
         headlineLines={["Engineering the", "intelligent enterprise."]}

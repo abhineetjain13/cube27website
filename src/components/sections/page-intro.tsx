@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { COMPANY_FACTS } from "@/site-config";
+import { HERO_IMAGE } from "@/lib/hero-image";
 
 /**
  * @cube27Component
@@ -79,14 +80,17 @@ export function PageIntro({
         </div>
 
         <div className="relative lg:col-span-7 w-full h-[24rem] sm:h-[28rem] lg:h-[32rem] overflow-hidden rounded-2xl border border-cube27-border-primary shadow-[0_24px_80px_rgba(15,17,23,0.06)] group">
-          {/* Main hero background image (LCP — eager + high priority) */}
+          {/* Main hero background image (LCP — eager + high priority).
+              Descriptor is shared with the <head> preload in Layout.astro so
+              both resolve to the same candidate; see @/lib/hero-image. Pages
+              rendering this section must set `preloadHero` on Layout. */}
           <img
-            src="/cube27-bg.webp"
-            srcSet="/cube27-bg-640.webp 640w, /cube27-bg-960.webp 960w, /cube27-bg-1280.webp 1280w, /cube27-bg.webp 1600w"
-            sizes="(min-width: 1024px) 690px, 100vw"
-            alt="Cube27 core operations background"
-            width={1600}
-            height={893}
+            src={HERO_IMAGE.src}
+            srcSet={HERO_IMAGE.srcSet}
+            sizes={HERO_IMAGE.sizes}
+            alt={HERO_IMAGE.alt}
+            width={HERO_IMAGE.width}
+            height={HERO_IMAGE.height}
             loading="eager"
             fetchPriority="high"
             decoding="async"

@@ -116,13 +116,20 @@ function LogoCard({
           the strip scrolled in; lazy-loading only the off-screen tail (and
           the entire aria-hidden duplicate, which is never visible until the
           loop wraps) keeps the strip full while freeing the LCP hero image
-          from competing with 72 parallel requests. */}
+          from competing with 72 parallel requests.
+
+          Those eager logos still shared bandwidth with the hero during the
+          LCP window, so they are additionally marked low priority: eager
+          keeps them queued from the start (no blank slots) while the hero,
+          preloaded at high priority, is served first. Making them lazy
+          instead would reintroduce the blank-slot regression. */}
       <img
         src={src}
         alt={`Partner ${index + 1}`}
         width={width}
         height={height}
         loading={eager ? "eager" : "lazy"}
+        fetchPriority="low"
         decoding="async"
         className="h-auto max-h-16 w-auto max-w-[160px] object-contain sm:max-h-20 sm:max-w-[210px]"
       />

@@ -63,11 +63,12 @@ const jsonLd: SeoJsonSchema[] = roles.map((role) => ({
   title="Careers — AI Engineering Roles in Pune"
   description="Current job openings at Cube27 — AI Engineer and AI Research Intern roles in Pune. Join us to build next-generation AI infrastructure."
   jsonLd={jsonLd}
+  preloadHero
 >
   <div
     class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
   >
-    <Navbar client:load pathname={Astro.url.pathname} />
+    <Navbar client:visible pathname={Astro.url.pathname} />
     <main id="main" tabindex="-1">
       <CareersPage roles={roles} />
       <Contact

@@ -48,7 +48,7 @@ const sections: Section[] = [
   <div
     class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
   >
-    <Navbar client:load pathname={Astro.url.pathname} />
+    <Navbar client:visible pathname={Astro.url.pathname} />
     <main
       id="main"
       tabindex="-1"

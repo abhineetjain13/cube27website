@@ -7,6 +7,7 @@ import "../styles/globals.css";
 import { SEO } from "@/components/seo";
 import { SITE_CONFIG } from "@/site-config";
 import type { SeoJsonSchema } from "@/components/seo-json";
+import { HERO_IMAGE } from "@/lib/hero-image";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
@@ -19,6 +20,14 @@ interface Props {
   type?: "website" | "article";
   siteName?: string;
   jsonLd?: SeoJsonSchema | SeoJsonSchema[];
+  /**
+   * Preload the `PageIntro` hero background. Set this on every page that
+   * renders `PageIntro` and on no others — the hero is the LCP element there,
+   * and `fetchpriority` on the `<img>` only reorders the request once the
+   * parser has reached it, whereas the preload starts the fetch during head
+   * parsing. On a page without the hero it would download an unused image.
+   */
+  preloadHero?: boolean;
 }
 
 const {
@@ -31,6 +40,7 @@ const {
   type = "website",
   siteName = SITE_CONFIG.brand,
   jsonLd,
+  preloadHero = false,
 } = Astro.props;
 
 const site = Astro.site;
@@ -58,6 +68,24 @@ const imageUrl = resolveUrl(image);
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#fafaf7" />
     <meta name="generator" content="Astro" />
+    {
+      /* Ahead of the fonts: this is the LCP element on pages that render
+         PageIntro, and it is the largest single download in the critical
+         window. imagesrcset/imagesizes must mirror the <img> exactly — both
+         read from @/lib/hero-image so they cannot drift. */
+    }
+    {
+      preloadHero && (
+        <link
+          rel="preload"
+          as="image"
+          href={HERO_IMAGE.src}
+          imagesrcset={HERO_IMAGE.srcSet}
+          imagesizes={HERO_IMAGE.sizes}
+          fetchpriority="high"
+        />
+      )
+    }
     <link
       rel="preload"
       href={archivoWoff2}

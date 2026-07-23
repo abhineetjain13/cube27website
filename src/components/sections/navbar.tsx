@@ -104,6 +104,21 @@ interface NavbarProps {
   pathname?: string;
 }
 
+/**
+ * Mount with `client:visible`, not `client:load`.
+ *
+ * This island pulls React, jsx-runtime, `button`, and four lucide icon chunks
+ * — under `client:load` that whole chain sits on the critical path in front of
+ * the hero's LCP paint, even though nothing here is needed to *render* the
+ * bar. The markup (including the icons) is server-rendered; hydration only
+ * adds the mobile sheet, the dropdowns, and the shrink-on-scroll border.
+ *
+ * The header is `sticky top-0`, so it is in the initial viewport and the
+ * IntersectionObserver fires on first paint — hydration still happens
+ * immediately, just after the paint rather than before it. The window where a
+ * tap on the hamburger is inert is correspondingly small, and the links
+ * underneath are real anchors that work unhydrated.
+ */
 export function Navbar({
   items = DEFAULT_ITEMS,
   ctaLabel = "Schedule a consultation",
