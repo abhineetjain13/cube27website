@@ -33,7 +33,7 @@ export function HomeHero({
           <p className="typography-eyebrow text-xs uppercase tracking-[0.2em] text-cube27-accent-primary font-semibold">
             Technology and solutions partner
           </p>
-          <h1 className="typography-heading mt-4 text-balance text-[clamp(2.35rem,5vw,3.5rem)] font-medium leading-[1.08] tracking-[-0.03em] text-cube27-text-primary">
+          <h1 className="typography-heading mt-4 text-balance text-[clamp(2.35rem,5vw,3.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-cube27-text-primary">
             {headlineLines.map((line, idx) => (
               <span key={idx} className="block">
                 {line}

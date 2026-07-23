@@ -68,7 +68,7 @@ function CompanyStory() {
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             Our Vision
           </p>
-          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
             Not a dev shop.
             <span className="block">A GCC Partner.</span>
           </h2>
@@ -110,7 +110,7 @@ function LeadershipSection() {
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             Leadership
           </p>
-          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
             Meet Our Leaders
           </h2>
         </Reveal>
@@ -181,7 +181,7 @@ function InfrastructureSection() {
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             Infrastructure
           </p>
-          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
             Built for Enterprise Scale
           </h2>
         </Reveal>
@@ -189,7 +189,7 @@ function InfrastructureSection() {
         <Reveal delay={0.1} className="mt-12">
           <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-2 lg:grid-cols-4">
             <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+              <dt className="font-mono text-xl font-medium text-cube27-text-primary">
                 150+ Specialists
               </dt>
               <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
@@ -198,7 +198,7 @@ function InfrastructureSection() {
               </dd>
             </div>
             <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+              <dt className="font-mono text-xl font-medium text-cube27-text-primary">
                 95% SLA Achievement
               </dt>
               <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
@@ -206,7 +206,7 @@ function InfrastructureSection() {
               </dd>
             </div>
             <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+              <dt className="font-mono text-xl font-medium text-cube27-text-primary">
                 $1B+ Ad Spend Managed
               </dt>
               <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
@@ -214,7 +214,7 @@ function InfrastructureSection() {
               </dd>
             </div>
             <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
+              <dt className="font-mono text-xl font-medium text-cube27-text-primary">
                 24/7 Global Coverage
               </dt>
               <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
@@ -264,7 +264,7 @@ function Principles() {
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             How we work
           </p>
-          <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
             The principles behind every engagement.
           </h2>
         </Reveal>
@@ -305,7 +305,7 @@ function PeopleBand() {
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             Life at Cube27
           </p>
-          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
             Join Our Team or Partner With Us
           </h2>
           <p className="mt-6 max-w-md text-[1.05rem] leading-relaxed text-cube27-text-secondary">

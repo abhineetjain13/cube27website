@@ -5,6 +5,7 @@ import { HomeHero } from "@/components/pages/home/sections/hero";
 import { Contact } from "@/components/sections/contact";
 import { Reveal } from "@/components/ui/reveal";
 import { SplitExplorer, type SplitItem } from "@/components/ui/split-explorer";
+import { cn } from "@/lib/utils";
 
 interface CaseStudy {
   id: string;
@@ -120,7 +121,7 @@ export function CaseStudiesPage() {
               <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
                 Case Studies
               </p>
-              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
                 Select an engagement to explore the outcome.
               </h2>
             </Reveal>
@@ -150,7 +151,7 @@ function ClientsAndBrandsSection() {
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             Trusted Partnership
           </p>
-          <h2 className="typography-heading mt-3 text-balance text-[clamp(1.5rem,2.8vw,2.1rem)] font-medium text-cube27-text-primary">
+          <h2 className="typography-heading mt-3 text-balance text-[clamp(1.5rem,2.8vw,2.1rem)] font-semibold text-cube27-text-primary">
             Clients & Brands We Have Helped
           </h2>
           <p className="mt-3 max-w-xl text-[0.98rem] text-cube27-text-secondary">
@@ -205,13 +206,17 @@ function ClientsAndBrandsSection() {
   );
 }
 
+/* Numeric result values render in IBM Plex Mono; word values ("Real-time",
+   "Full") keep the heading face. */
+const NUMERIC_STAT = /^[\d<$]/;
+
 function CaseStudyDetail({ study }: { study: CaseStudy }) {
   return (
     <div>
       <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
         {study.category}
       </p>
-      <h3 className="typography-heading mt-4 text-balance text-[clamp(1.4rem,2.6vw,1.95rem)] font-medium leading-[1.15] tracking-[-0.02em] text-cube27-text-primary">
+      <h3 className="typography-heading mt-4 text-balance text-[clamp(1.4rem,2.6vw,1.95rem)] font-semibold leading-[1.15] tracking-[-0.02em] text-cube27-text-primary">
         {study.title}
       </h3>
       {study.intro && (
@@ -227,7 +232,14 @@ function CaseStudyDetail({ study }: { study: CaseStudy }) {
             key={r.label}
             className="bg-cube27-background-primary p-5 sm:p-6"
           >
-            <dt className="typography-heading text-[clamp(1.5rem,3vw,2rem)] font-medium tracking-[-0.02em] text-cube27-text-primary">
+            <dt
+              className={cn(
+                "text-[clamp(1.5rem,3vw,2rem)] font-medium text-cube27-text-primary",
+                NUMERIC_STAT.test(r.value)
+                  ? "font-mono"
+                  : "typography-heading tracking-[-0.02em]",
+              )}
+            >
               {r.value}
             </dt>
             <dd className="mt-1 text-[0.82rem] text-cube27-text-secondary">

@@ -69,7 +69,7 @@ export function LifeAtCube27({
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             {eyebrow}
           </p>
-          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
             {title}
           </h2>
           <p className="mt-5 text-[1.02rem] leading-relaxed text-cube27-text-secondary">

@@ -103,7 +103,7 @@ export function ServicesPage() {
               <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
                 What we do
               </p>
-              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
                 Four capabilities, one integrated partner.
               </h2>
             </Reveal>
@@ -152,7 +152,7 @@ function ServiceHeader({
         {icon}
         <p className="typography-eyebrow text-[0.7rem] uppercase">{eyebrow}</p>
       </div>
-      <h3 className="typography-heading mt-4 text-balance text-[clamp(1.6rem,3vw,2.15rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+      <h3 className="typography-heading mt-4 text-balance text-[clamp(1.6rem,3vw,2.15rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
         {title}
       </h3>
       <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
@@ -522,8 +522,8 @@ function StatCell({
       <dt
         className={
           large
-            ? "typography-heading text-2xl font-medium text-cube27-text-primary sm:text-3xl"
-            : "typography-heading text-2xl font-medium text-cube27-text-primary"
+            ? "font-mono text-2xl font-medium text-cube27-text-primary sm:text-3xl"
+            : "font-mono text-2xl font-medium text-cube27-text-primary"
         }
       >
         {value}

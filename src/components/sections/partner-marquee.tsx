@@ -34,7 +34,7 @@ export function PartnerMarquee({
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             {eyebrow}
           </p>
-          <p className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.15rem,2vw,1.5rem)] font-medium leading-[1.3] tracking-[-0.015em] text-cube27-text-primary">
+          <p className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.15rem,2vw,1.5rem)] font-medium leading-[1.3] tracking-[-0.01em] text-cube27-text-primary">
             {statement}
           </p>
         </Reveal>
