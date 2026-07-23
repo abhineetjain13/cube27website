@@ -604,17 +604,53 @@
    ============================================ */
 /* The track holds two identical copies of the logo set side by side and
    translates left by exactly half its width, so the loop is seamless. */
+/* translate3d + will-change keep the strip on a composited layer; a plain
+   translateX can fall back to per-frame CPU repaints on mobile GPUs. */
 @keyframes cube27-marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 .cube27-marquee-track {
+  will-change: transform;
   animation: cube27-marquee var(--cube27-marquee-duration, 60s) linear infinite;
+}
+
+/* Edge fades as overlay gradients. A mask-image on the container forces the
+   masked (animated) content to be re-rastered every frame on mobile; static
+   gradient overlays composite once and are cheap. */
+.cube27-marquee::before,
+.cube27-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 5%;
+  min-width: 2rem;
+  pointer-events: none;
+}
+
+.cube27-marquee::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    var(--cube27-background-primary),
+    transparent
+  );
+}
+
+.cube27-marquee::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--cube27-background-primary),
+    transparent
+  );
 }
 
 /* Pause the scroll when the user hovers the strip. */
