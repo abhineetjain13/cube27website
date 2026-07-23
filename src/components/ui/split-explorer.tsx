@@ -114,7 +114,7 @@ export function SplitExplorer({
                       aria-hidden="true"
                     />
                     {item.eyebrow && (
-                      <span className="typography-eyebrow block text-[0.62rem] uppercase text-cube27-accent-primary">
+                      <span className="typography-eyebrow block text-[0.65rem] uppercase text-cube27-accent-primary">
                         {item.eyebrow}
                       </span>
                     )}
@@ -157,7 +157,7 @@ export function SplitExplorer({
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4">
               <span className="min-w-0">
                 {item.eyebrow && (
-                  <span className="typography-eyebrow block text-[0.62rem] uppercase text-cube27-accent-primary">
+                  <span className="typography-eyebrow block text-[0.65rem] uppercase text-cube27-accent-primary">
                     {item.eyebrow}
                   </span>
                 )}

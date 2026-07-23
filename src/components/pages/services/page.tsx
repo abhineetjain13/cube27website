@@ -13,48 +13,21 @@ import {
 import type { ReactNode } from "react";
 import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
-import { HomeHero } from "@/components/pages/home/sections/hero";
+import { PageIntro } from "@/components/sections/page-intro";
 import { Contact } from "@/components/sections/contact";
 import { Faq } from "@/components/sections/faq";
 import { Reveal } from "@/components/ui/reveal";
 import { SplitExplorer, type SplitItem } from "@/components/ui/split-explorer";
-import { SITE_CONFIG } from "@/site-config";
+import { StatGrid, StatCell } from "@/components/ui/stat-grid";
+import { FeatureCard } from "@/components/ui/feature-card";
+import { COMPANY_FACTS, SITE_CONFIG } from "@/site-config";
 import type { FaqItem } from "@/components/seo-json";
 
-const SERVICES_FAQ: readonly FaqItem[] = [
-  {
-    question: "What services does Cube27 offer?",
-    answer:
-      "Cube27 delivers four core service lines: Agentic AI & Process Automation, Digital Product Engineering, Salesforce & Enterprise Platforms (commerce), and GCC-as-a-Service. Engagements span strategy, build, and long-term operation as an embedded extension of your team.",
-  },
-  {
-    question: "What is GCC-as-a-Service (GCCaaS)?",
-    answer:
-      "GCC-as-a-Service is our model for establishing and operating a dedicated Global Capability Center on your behalf. We handle location selection, legal setup, compliance, hiring, and day-to-day operations through Build-Operate-Transfer (BOT) or Build-Operate (BO) engagements, with dedicated teams aligned to your culture, processes, and architecture.",
-  },
-  {
-    question: "Which engagement models does Cube27 support?",
-    answer:
-      "We work through Build-Operate-Transfer (BOT), Build-Operate (BO), embedded delivery pods, and managed-services teams. You buy outcomes and an extended team, not billable hours — with the option to transfer the operation fully in-house over time.",
-  },
-  {
-    question: "Which commerce and Salesforce platforms does Cube27 implement?",
-    answer:
-      "We implement and rescue projects across Salesforce Commerce Cloud (Demandware), SAP Hybris, Adobe Commerce, Shopify Plus, BigCommerce, and custom headless architectures, integrated with CRM, ERP, and Agentforce for commerce and RevOps.",
-  },
-  {
-    question: "How quickly can Cube27 stand up a dedicated team?",
-    answer:
-      "GCC operations typically reach operational startup in 90+ days, and we have scaled teams from 5 to 50+ specialists in under 120 days, with full data and IP protection and under 10% annual attrition.",
-  },
-  {
-    question: "Where is Cube27 based?",
-    answer:
-      "Cube27 operates from Pune, India, with 150+ specialists providing 24/7 global coverage across NORAM, EMEA, APAC, and India.",
-  },
-];
-
-export function ServicesPage() {
+export function ServicesPage({
+  faqItems,
+}: {
+  faqItems: readonly FaqItem[];
+}) {
   const items: SplitItem[] = [
     {
       id: "ai",
@@ -86,7 +59,7 @@ export function ServicesPage() {
     <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
       <Navbar />
       <main>
-        <HomeHero
+        <PageIntro
           headlineLines={["Engineering the", "intelligent enterprise."]}
           body="Rapid innovation through technology, and sustained operational and process capacity via GCC-as-a-Service."
           ctaLabel="Schedule a consultation"
@@ -95,15 +68,19 @@ export function ServicesPage() {
           overlayTitle="Architect. Build. Scale."
           overlayDescription="High-fidelity engineering & GCC operations for global enterprises."
           overlayBadge="150+"
+          overlayLinkHref="#capabilities"
         />
 
-        <section className="border-t border-cube27-border-primary py-20 lg:py-28">
+        <section
+          id="capabilities"
+          className="border-t border-cube27-border-primary py-20 lg:py-28"
+        >
           <div className="mx-auto mb-12 max-w-7xl px-5 sm:px-8">
             <Reveal>
               <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
                 What we do
               </p>
-              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
                 Four capabilities, one integrated partner.
               </h2>
             </Reveal>
@@ -115,7 +92,7 @@ export function ServicesPage() {
         <Faq
           eyebrow="Questions"
           heading="Services & engagement FAQs"
-          items={SERVICES_FAQ}
+          items={faqItems}
           schemaUrl={`${SITE_CONFIG.url}/services`}
         />
 
@@ -152,35 +129,13 @@ function ServiceHeader({
         {icon}
         <p className="typography-eyebrow text-[0.7rem] uppercase">{eyebrow}</p>
       </div>
-      <h3 className="typography-heading mt-4 text-balance text-[clamp(1.6rem,3vw,2.15rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+      <h3 className="typography-heading mt-4 text-balance text-[clamp(1.6rem,3vw,2.15rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
         {title}
       </h3>
       <p className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-cube27-text-secondary">
         {body}
       </p>
     </>
-  );
-}
-
-function FeatureCard({
-  icon,
-  title,
-  children,
-}: {
-  icon?: ReactNode;
-  title: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6">
-      {icon}
-      <h4 className="typography-heading mt-4 text-[1.1rem] font-medium text-cube27-text-primary">
-        {title}
-      </h4>
-      <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-        {children}
-      </p>
-    </div>
   );
 }
 
@@ -224,12 +179,12 @@ function AiServiceDetail() {
         </div>
       </div>
 
-      <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-4">
+      <StatGrid className="mt-6 sm:grid-cols-4">
         <StatCell value="40%" label="Ops Reduction" />
         <StatCell value="24/7" label="Autonomous Op" />
         <StatCell value="22%" label="Conversion Lift" />
         <StatCell value="60D" label="MVP Deployment" />
-      </dl>
+      </StatGrid>
 
       <div className="mt-6 rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8">
         <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
@@ -449,12 +404,20 @@ function GccServiceDetail() {
         body="Scale your engineering and operational capabilities without losing control. We establish and operate dedicated teams aligned to your culture, processes, and architecture — delivered through BOT (Build-Operate-Transfer) and BO (Build-Operate) engagement models."
       />
 
-      <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary lg:grid-cols-4">
-        <StatCell value="90+ Day" label="Operational Startup" large />
-        <StatCell value="150+" label="Team Specialists" large />
-        <StatCell value="<10%" label="Annual Attrition" large />
-        <StatCell value="10%" label="YoY Efficiency Gain" large />
-      </dl>
+      <StatGrid className="mt-10">
+        <StatCell value="90+ Day" label="Operational Startup" size="lg" />
+        <StatCell
+          value={COMPANY_FACTS.headcount.value}
+          label={COMPANY_FACTS.headcount.label}
+          size="lg"
+        />
+        <StatCell
+          value={COMPANY_FACTS.attrition.value}
+          label={COMPANY_FACTS.attrition.label}
+          size="lg"
+        />
+        <StatCell value="10%" label="YoY Efficiency Gain" size="lg" />
+      </StatGrid>
 
       <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-3">
         <FeatureCard
@@ -495,7 +458,7 @@ function GccServiceDetail() {
             href="#contact"
             className="inline-flex min-h-[3rem] shrink-0 items-center justify-center gap-2 rounded-md bg-cube27-button-secondary-background px-6 py-3 text-sm font-medium text-cube27-button-secondary-text transition-colors hover:bg-cube27-accent-primary"
           >
-            Start Your Journey
+            Schedule a consultation
             <ArrowRight className="size-4" />
           </a>
         </div>
@@ -505,35 +468,8 @@ function GccServiceDetail() {
 }
 
 /* ----------------------------------------------------------------------------
- * Small shared cells
+ * Small local cells
  * ------------------------------------------------------------------------- */
-
-function StatCell({
-  value,
-  label,
-  large,
-}: {
-  value: string;
-  label: string;
-  large?: boolean;
-}) {
-  return (
-    <div className="bg-cube27-background-primary p-5 sm:p-6">
-      <dt
-        className={
-          large
-            ? "typography-heading text-2xl font-medium text-cube27-text-primary sm:text-3xl"
-            : "typography-heading text-2xl font-medium text-cube27-text-primary"
-        }
-      >
-        {value}
-      </dt>
-      <dd className="mt-1 text-[0.78rem] text-cube27-text-secondary">
-        {label}
-      </dd>
-    </div>
-  );
-}
 
 function OfferingItem({
   title,

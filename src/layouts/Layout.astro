@@ -1,7 +1,10 @@
 ---
-import "@fontsource-variable/inter";
+import "@fontsource-variable/archivo";
+import "@fontsource-variable/roboto";
 import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
+import archivoWoff2 from "@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2?url";
+import robotoWoff2 from "@fontsource-variable/roboto/files/roboto-latin-wght-normal.woff2?url";
 import "../styles/globals.css";
 import { SEO } from "@/components/seo";
 import { SITE_CONFIG } from "@/site-config";
@@ -57,6 +60,20 @@ const imageUrl = resolveUrl(image);
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#fafaf7" />
     <meta name="generator" content="Astro" />
+    <link
+      rel="preload"
+      href={archivoWoff2}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={robotoWoff2}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <SEO
       title={title}
       description={description}

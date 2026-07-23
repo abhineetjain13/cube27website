@@ -1,12 +1,15 @@
 import { Check, ArrowRight, Building, Award, Shield } from "lucide-react";
 import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
-import { HomeHero } from "@/components/pages/home/sections/hero";
+import { PageIntro } from "@/components/sections/page-intro";
 import { Contact } from "@/components/sections/contact";
 import { Reveal } from "@/components/ui/reveal";
 import { SplitExplorer, type SplitItem } from "@/components/ui/split-explorer";
+import { StatGrid, StatCell } from "@/components/ui/stat-grid";
+import { isNumericStat } from "@/lib/utils";
+import { COMPANY_FACTS } from "@/site-config";
 
-interface CaseStudy {
+export interface CaseStudy {
   id: string;
   category: string;
   title: string;
@@ -22,73 +25,8 @@ interface CaseStudy {
   tags: string[];
 }
 
-const CASE_STUDIES: CaseStudy[] = [
-  {
-    id: "gcc-operations",
-    category: "GCC & Operations",
-    title:
-      "Establishing an Excellence & Operations Center for a growing commerce & technology partner",
-    intro:
-      "A leading commerce and technology partner sought to scale rapidly while maintaining seamless alignment with its headquarters. The goal was to create a high-performance center that integrated technical capability, process rigor, and organizational culture.",
-    challenge:
-      "The partner wanted to focus on rapid growth while ensuring operational, technical, and process excellence across commerce, digital marketing, and technology initiatives.",
-    solution: [
-      "Excellence & Operations Center setup: implemented a “Build-Operate” model, managing entity setup, infrastructure, and compliance to accelerate operational readiness.",
-      "Targeted talent deployment (Product Engineering): recruited teams with deep expertise in technology, commerce platforms, and operational processes to support growth initiatives.",
-      "Commerce & tech enablement (Enterprise Commerce): optimized tech and operational process and platform integrations to scale commerce operations seamlessly.",
-      "AI-accelerated operations (Agentic AI & Process Automation): embedded intelligent automation for operational workflows, enabling faster execution and actionable insights across business functions.",
-    ],
-    impact:
-      "The partner was able to scale rapidly, focusing internal efforts on technology and product innovation, while leveraging Cube27’s full suite of capabilities — GCC, enterprise commerce, product engineering, and AI-driven process automation — to enable operational excellence. This model is repeatable for other growth-stage partners seeking to establish knowledge, technology, or process centers while concentrating on scaling their core business.",
-    results: [
-      { value: "100%", label: "Seamless integration" },
-      { value: "<10%", label: "Attrition rate" },
-      { value: "24/7", label: "Global coverage" },
-      { value: "6 weeks", label: "Onboarding time" },
-    ],
-    keyOutcomes: [
-      "Fully operational team functioning as dedicated contractors",
-      "High retention rates ensured knowledge continuity",
-      "Successfully scaled to support global operations 24/7",
-    ],
-    tags: ["GCC Setup", "Culture Mirroring", "Build-Operate Model"],
-  },
-  {
-    id: "digital-transformation",
-    category: "Digital Transformation",
-    title: "Building a scalable supplier ERP system",
-    challenge:
-      "A leading manufacturing supplier managed its Purchase Order, Challan, and Invoice processes through disconnected Excel files. With no centralized database, the company faced frequent data errors, duplicate entries, poor traceability, and zero visibility into historical pricing and volume trends. As transaction volumes grew, manual handling became unsustainable.",
-    solutionIntro:
-      "A customized, web-based ERP system was developed to streamline and digitize the entire procurement and billing lifecycle.",
-    solution: [
-      "Designed a structured 4-step reconciliation workflow with automatic document conversion.",
-      "Built on Python and Next.js with a centralized, secure database.",
-      "Integrated Material Code mapping aligned with industry standards.",
-      "Implemented validation rules and approval controls.",
-      "Added built-in analytics for historical trend analysis and reporting.",
-    ],
-    results: [
-      { value: "100%", label: "Digitization" },
-      { value: "0", label: "Manual errors" },
-      { value: "Real-time", label: "Analytics" },
-      { value: "Full", label: "Audit trail" },
-    ],
-    impactList: [
-      "Significant reduction in manual data entry and processing time",
-      "Elimination of most billing and documentation errors",
-      "Faster invoicing cycles and improved cash flow",
-      "Complete audit trail across all transactions",
-      "Improved management visibility through real-time reporting",
-    ],
-    keyOutcomesTitle: "Impact",
-    keyOutcomes: [],
-    tags: ["Python", "Next.js", "ERP", "Workflow Automation"],
-  },
-];
-
-export function CaseStudiesPage() {
-  const items: SplitItem[] = CASE_STUDIES.map((cs) => ({
+export function CaseStudiesPage({ studies }: { studies: CaseStudy[] }) {
+  const items: SplitItem[] = studies.map((cs) => ({
     id: cs.id,
     eyebrow: cs.category,
     title: cs.title,
@@ -99,14 +37,14 @@ export function CaseStudiesPage() {
     <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
       <Navbar />
       <main>
-        <HomeHero
+        <PageIntro
           headlineLines={[
             "Success Stories &",
             "proven enterprise",
             "outcomes.",
           ]}
           body="Real outcomes, measurable impact — explore how Cube27 has helped enterprises build Global Capability Centers and transform digital operations."
-          ctaLabel="Discuss your project"
+          ctaLabel="Schedule a consultation"
           ctaHref="#contact"
           overlayEyebrow="OUTCOMES DELIVERED"
           overlayTitle="Impact. Value. Trust."
@@ -118,9 +56,9 @@ export function CaseStudiesPage() {
           <div className="mx-auto mb-12 max-w-7xl px-5 sm:px-8">
             <Reveal>
               <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
-                Case Studies
+                Success stories
               </p>
-              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
                 Select an engagement to explore the outcome.
               </h2>
             </Reveal>
@@ -134,7 +72,6 @@ export function CaseStudiesPage() {
           eyebrow="Your Success Story Starts Here"
           headlineLines={["Ready to achieve", "similar results?"]}
           body="Let's discuss how Cube27 can help you build capability, not just deliver projects."
-          submitLabel="Start a Conversation"
         />
       </main>
       <Footer />
@@ -144,13 +81,13 @@ export function CaseStudiesPage() {
 
 function ClientsAndBrandsSection() {
   return (
-    <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/30 py-20 lg:py-24">
+    <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/30 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             Trusted Partnership
           </p>
-          <h2 className="typography-heading mt-3 text-balance text-[clamp(1.5rem,2.8vw,2.1rem)] font-medium text-cube27-text-primary">
+          <h2 className="typography-heading mt-3 text-balance text-[clamp(1.5rem,2.8vw,2.1rem)] font-semibold text-cube27-text-primary">
             Clients & Brands We Have Helped
           </h2>
           <p className="mt-3 max-w-xl text-[0.98rem] text-cube27-text-secondary">
@@ -162,16 +99,16 @@ function ClientsAndBrandsSection() {
 
         <Reveal delay={0.1} className="mt-10">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md">
               <Building className="size-8 text-cube27-accent-primary mb-2" />
               <span className="typography-heading text-lg font-medium text-cube27-text-primary">
-                100+
+                {COMPANY_FACTS.brands.value}
               </span>
               <span className="text-[0.82rem] text-cube27-text-secondary">
                 Global Brands
               </span>
             </div>
-            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md">
               <Award className="size-8 text-cube27-accent-primary mb-2" />
               <span className="typography-heading text-lg font-medium text-cube27-text-primary">
                 Fortune 500
@@ -180,19 +117,19 @@ function ClientsAndBrandsSection() {
                 Enterprise Clients
               </span>
             </div>
-            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md">
               <Shield className="size-8 text-cube27-accent-primary mb-2" />
               <span className="typography-heading text-lg font-medium text-cube27-text-primary">
-                95%
+                {COMPANY_FACTS.sla.value}
               </span>
               <span className="text-[0.82rem] text-cube27-text-secondary">
                 SLA Adherence
               </span>
             </div>
-            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md">
               <ArrowRight className="size-8 text-cube27-accent-primary mb-2" />
               <span className="typography-heading text-lg font-medium text-cube27-text-primary">
-                24/7
+                {COMPANY_FACTS.coverage.value}
               </span>
               <span className="text-[0.82rem] text-cube27-text-secondary">
                 Global Delivery Hub
@@ -211,7 +148,7 @@ function CaseStudyDetail({ study }: { study: CaseStudy }) {
       <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
         {study.category}
       </p>
-      <h3 className="typography-heading mt-4 text-balance text-[clamp(1.4rem,2.6vw,1.95rem)] font-medium leading-[1.15] tracking-[-0.02em] text-cube27-text-primary">
+      <h3 className="typography-heading mt-4 text-balance text-[clamp(1.4rem,2.6vw,1.95rem)] font-semibold leading-[1.15] tracking-[-0.02em] text-cube27-text-primary">
         {study.title}
       </h3>
       {study.intro && (
@@ -221,21 +158,17 @@ function CaseStudyDetail({ study }: { study: CaseStudy }) {
       )}
 
       {/* Results grid */}
-      <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-4">
+      <StatGrid className="mt-10 sm:grid-cols-4">
         {study.results.map((r) => (
-          <div
+          <StatCell
             key={r.label}
-            className="bg-cube27-background-primary p-5 sm:p-6"
-          >
-            <dt className="typography-heading text-[clamp(1.5rem,3vw,2rem)] font-medium tracking-[-0.02em] text-cube27-text-primary">
-              {r.value}
-            </dt>
-            <dd className="mt-1 text-[0.82rem] text-cube27-text-secondary">
-              {r.label}
-            </dd>
-          </div>
+            value={r.value}
+            label={r.label}
+            size="lg"
+            mono={isNumericStat(r.value)}
+          />
         ))}
-      </dl>
+      </StatGrid>
 
       {/* Narrative columns */}
       <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2">
@@ -338,7 +271,7 @@ function NarrativeGroup({
 }) {
   return (
     <div>
-      <h4 className="typography-eyebrow text-[0.7rem] uppercase tracking-wide text-cube27-text-primary">
+      <h4 className="typography-eyebrow text-[0.7rem] uppercase text-cube27-text-primary">
         {title}
       </h4>
       <div className="mt-3">{children}</div>

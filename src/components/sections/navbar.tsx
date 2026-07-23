@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  * @cube27ComponentType section
  * @cube27ComponentPattern navbar
  * @cube27ComponentStatus stable
- * @cube27ComponentDescription Shared site navbar for cube27. Thin, borderless warm-white bar: cube27 wordmark at left, center sentence-case nav rendered from a single `items` array, and a single dark-charcoal "Work with us" pill at far right (the only CTA in the bar — never add a second). Nav items can be plain links or dropdown groups (Company, Services); dropdowns open on hover/click/focus and are keyboard + screen-reader accessible. Collapses to a wordmark + menu toggle on mobile with nested disclosure accordions. Pass `items` and `ctaHref` to reuse across pages.
+ * @cube27ComponentDescription Shared site navbar for cube27. Thin, borderless warm-white bar: cube27 wordmark at left, center sentence-case nav rendered from a single `items` array, and a single dark-charcoal "Schedule a consultation" pill at far right (the only CTA in the bar — never add a second). Nav items can be plain links or dropdown groups (Company, Services); dropdowns open on hover/click/focus and are keyboard + screen-reader accessible. Collapses to a wordmark + menu toggle on mobile with nested disclosure accordions. Shrinks (h-16 → h-14) and gains a hairline border once the page scrolls past ~16px. Pass `items` and `ctaHref` to reuse across pages.
  */
 interface NavLink {
   label: string;
@@ -79,13 +79,32 @@ interface NavbarProps {
 
 export function Navbar({
   items = DEFAULT_ITEMS,
-  ctaLabel = "Start a conversation",
+  ctaLabel = "Schedule a consultation",
   ctaHref = "/contact",
 }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Shrink-on-scroll: past ~16px the bar contracts (h-16 → h-14) and gains a
+  // hairline border. rAF-throttled passive listener; the height/border
+  // transition is motion-safe so reduced-motion users get an instant switch.
+  useEffect(() => {
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 16);
+        ticking = false;
+      });
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Close any open desktop dropdown or mobile menu on outside click or Escape.
   useEffect(() => {
@@ -126,10 +145,18 @@ export function Navbar({
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-cube27-background-primary/85 backdrop-blur-sm">
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full bg-cube27-background-primary/85 backdrop-blur-sm",
+        scrolled && "border-b border-cube27-border-primary",
+      )}
+    >
       <nav
         ref={navRef}
-        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8"
+        className={cn(
+          "mx-auto flex h-16 max-w-7xl items-center justify-between px-5 motion-safe:transition-[height] motion-safe:duration-200 sm:px-8",
+          scrolled && "h-14",
+        )}
       >
         <a
           href="/"

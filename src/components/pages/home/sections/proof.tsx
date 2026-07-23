@@ -1,4 +1,7 @@
 import { Reveal } from "@/components/ui/reveal";
+import { StatGrid, StatCell } from "@/components/ui/stat-grid";
+import { isNumericStat } from "@/lib/utils";
+import { COMPANY_FACTS } from "@/site-config";
 
 /**
  * @cube27Component
@@ -14,9 +17,9 @@ interface Stat {
 }
 
 const DEFAULT_STATS: Stat[] = [
-  { value: "100+", label: "Brands served worldwide" },
+  { value: COMPANY_FACTS.brands.value, label: COMPANY_FACTS.brands.label },
   { value: "Fortune 500", label: "Clients across the US" },
-  { value: "Pune", label: "Global delivery hub" },
+  { value: COMPANY_FACTS.hub.value, label: COMPANY_FACTS.hub.label },
   { value: "End-to-end", label: "Strategy to operations" },
 ];
 
@@ -32,30 +35,30 @@ export function HomeProof({
   stats = DEFAULT_STATS,
 }: ProofProps) {
   return (
-    <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/40 py-20 lg:py-24">
+    <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/40 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             {eyebrow}
           </p>
-          <p className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.3rem,2.2vw,1.75rem)] font-medium leading-[1.25] tracking-[-0.015em] text-cube27-text-primary">
+          <p className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.3rem,2.2vw,1.75rem)] font-medium leading-[1.25] tracking-[-0.01em] text-cube27-text-primary">
             {statement}
           </p>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary lg:grid-cols-4">
+          <StatGrid className="mt-12">
             {stats.map((s) => (
-              <div key={s.label} className="bg-cube27-background-primary p-6">
-                <dt className="typography-heading text-[clamp(1.4rem,2.5vw,1.85rem)] font-medium tracking-[-0.02em] text-cube27-text-primary">
-                  {s.value}
-                </dt>
-                <dd className="mt-1 text-[0.85rem] text-cube27-text-secondary">
-                  {s.label}
-                </dd>
-              </div>
+              <StatCell
+                key={s.label}
+                value={s.value}
+                label={s.label}
+                size="lg"
+                mono={isNumericStat(s.value)}
+                countUp
+              />
             ))}
-          </dl>
+          </StatGrid>
         </Reveal>
       </div>
     </section>

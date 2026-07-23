@@ -1,0 +1,10 @@
+{
+  "headcount": { "value": "150+", "label": "Specialists" },
+  "brands": { "value": "100+", "label": "Brands served worldwide" },
+  "adSpend": { "value": "$1B+", "label": "Ad spend managed" },
+  "sla": { "value": "95%", "label": "Enterprise SLA" },
+  "attrition": { "value": "<10%", "label": "Annual attrition" },
+  "coverage": { "value": "24/7", "label": "Global coverage" },
+  "hub": { "value": "Pune", "label": "Global delivery hub" },
+  "experience": { "value": "20+", "label": "Years leadership experience" }
+}

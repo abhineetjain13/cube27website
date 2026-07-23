@@ -1,0 +1,7 @@
+{
+  "name": "Salesforce & Enterprise Platforms",
+  "serviceType": "Enterprise Commerce",
+  "description": "Implementations across Salesforce Commerce Cloud, SAP Hybris, Adobe Commerce, Shopify Plus, BigCommerce, and headless commerce, with Agentforce for commerce and RevOps.",
+  "anchorId": "commerce",
+  "order": 3
+}

@@ -206,11 +206,11 @@
   --radius-input: 0.375rem;
 
   /* Font families */
-  --font-heading: "Inter Variable", Inter, system-ui, sans-serif;
-  --font-body: "Inter Variable", Inter, system-ui, sans-serif;
+  --font-heading: "Archivo Variable", Archivo, system-ui, sans-serif;
+  --font-body: "Roboto Variable", Roboto, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --font-eyebrow: "Inter Variable", Inter, system-ui, sans-serif;
-  --font-button: "Inter Variable", Inter, system-ui, sans-serif;
+  --font-eyebrow: "Archivo Variable", Archivo, system-ui, sans-serif;
+  --font-button: "Roboto Variable", Roboto, system-ui, sans-serif;
 
   /* Font sizes (type scale) */
   --font-size-9xl: 8rem;
@@ -237,7 +237,7 @@
   --font-body-letter-spacing: 0em;
   --font-body-line-height: 1.6;
   --font-eyebrow-weight: 600;
-  --font-eyebrow-letter-spacing: 0.22em;
+  --font-eyebrow-letter-spacing: 0.16em;
   --font-eyebrow-line-height: 1.2;
   --font-button-weight: 500;
   --font-button-letter-spacing: 0em;
@@ -563,27 +563,39 @@
   }
 
   .typography-heading {
+    font-family: var(--font-heading);
     font-weight: var(--font-heading-weight);
     letter-spacing: var(--font-heading-letter-spacing);
     line-height: var(--font-heading-line-height);
   }
 
   .typography-body {
+    font-family: var(--font-body);
     font-weight: var(--font-body-weight);
     letter-spacing: var(--font-body-letter-spacing);
     line-height: var(--font-body-line-height);
   }
 
   .typography-eyebrow {
+    font-family: var(--font-eyebrow);
     font-weight: var(--font-eyebrow-weight);
     letter-spacing: var(--font-eyebrow-letter-spacing);
     line-height: var(--font-eyebrow-line-height);
   }
 
   .typography-button {
+    font-family: var(--font-button);
     font-weight: var(--font-button-weight);
     letter-spacing: var(--font-button-letter-spacing);
     line-height: var(--font-button-line-height);
+  }
+}
+
+@layer components {
+  /* Inline text link with an accent underline — the canonical treatment for
+     in-copy links (contact details, document links). */
+  .cube27-link {
+    @apply text-cube27-text-primary underline decoration-cube27-accent-primary/40 underline-offset-4 transition-colors hover:text-cube27-accent-primary hover:decoration-cube27-accent-primary;
   }
 }
 
@@ -592,17 +604,53 @@
    ============================================ */
 /* The track holds two identical copies of the logo set side by side and
    translates left by exactly half its width, so the loop is seamless. */
+/* translate3d + will-change keep the strip on a composited layer; a plain
+   translateX can fall back to per-frame CPU repaints on mobile GPUs. */
 @keyframes cube27-marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 .cube27-marquee-track {
+  will-change: transform;
   animation: cube27-marquee var(--cube27-marquee-duration, 60s) linear infinite;
+}
+
+/* Edge fades as overlay gradients. A mask-image on the container forces the
+   masked (animated) content to be re-rastered every frame on mobile; static
+   gradient overlays composite once and are cheap. */
+.cube27-marquee::before,
+.cube27-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 5%;
+  min-width: 2rem;
+  pointer-events: none;
+}
+
+.cube27-marquee::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    var(--cube27-background-primary),
+    transparent
+  );
+}
+
+.cube27-marquee::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--cube27-background-primary),
+    transparent
+  );
 }
 
 /* Pause the scroll when the user hovers the strip. */

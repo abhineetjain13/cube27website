@@ -1,0 +1,46 @@
+{
+  "title": "AI Engineer",
+  "slug": "AI+Engineer",
+  "departmentTag": "Engineering",
+  "employmentType": "FULL_TIME",
+  "description": "Design, build, and deploy scalable AI/ML systems and LLM-powered applications — RAG systems, AI agents, and multi-agent workflows — using Python, Node.js, and TypeScript. 4–7 years of software engineering experience. Remote/Hybrid, based in Pune.",
+  "metaItems": [
+    { "icon": "mapPin", "label": "Location", "value": "Pune" },
+    { "icon": "clock", "label": "Experience", "value": "4–7 yrs" },
+    { "icon": "laptop", "label": "Work Mode", "value": "Remote/Hybrid" },
+    { "icon": "briefcase", "label": "Type", "value": "Full-time" }
+  ],
+  "about": "We are building next-generation AI-powered commerce infrastructure and intelligent platforms that help businesses become AI-agent ready. Our products combine LLMs, data pipelines, automation systems, agentic workflows, and scalable cloud infrastructure to solve real-world commerce and enterprise problems.",
+  "responsibilities": [
+    "Design, develop, and deploy scalable AI/ML systems, intelligent automation pipelines, and production-grade AI services.",
+    "Architect and optimize LLM-powered applications, including Retrieval-Augmented Generation (RAG) systems, AI agents, multi-agent workflows, and orchestration frameworks.",
+    "Develop robust backend services and APIs using Python, Node.js, and TypeScript to support AI-driven applications.",
+    "Integrate and manage enterprise AI models and platforms such as OpenAI, Claude, Grok, Llama, and vector database technologies.",
+    "Build and maintain data pipelines, embedding workflows, semantic search capabilities, recommendation engines, and knowledge retrieval systems.",
+    "Collaborate cross-functionally with product, engineering, and design teams to deliver scalable AI-first products and features."
+  ],
+  "listGroups": [
+    {
+      "title": "Required Skills & Tech",
+      "items": [
+        "4–7 years software engineering experience",
+        "Strong proficiency in Python, Node.js, TypeScript",
+        "REST APIs, GraphQL, PostgreSQL, MongoDB, Redis",
+        "Hands-on with OpenAI, Claude, Llama",
+        "RAG pipelines, vector databases (Pinecone, Weaviate, etc.)",
+        "Agent frameworks (LangChain, LangGraph, CrewAI)",
+        "Cloud platforms (AWS/GCP/Azure) & Docker CI/CD"
+      ]
+    },
+    {
+      "title": "What We Offer",
+      "items": [
+        "Work on cutting-edge AI products at scale",
+        "High ownership & fast-paced environment",
+        "Flexible work culture & remote/hybrid options",
+        "Competitive salary and growth opportunities"
+      ]
+    }
+  ],
+  "order": 1
+}

@@ -8,5 +8,7 @@ declare module "*.scss" {
   export default content;
 }
 
-declare module "@fontsource-variable/inter";
+declare module "@fontsource-variable/archivo";
+declare module "@fontsource-variable/roboto";
 declare module "@fontsource/ibm-plex-mono/*";
+declare module "*.woff2?url";

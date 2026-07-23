@@ -1,43 +1,63 @@
 import { ArrowRight, UserCheck } from "lucide-react";
 import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
-import { HomeHero } from "@/components/pages/home/sections/hero";
+import { PageIntro } from "@/components/sections/page-intro";
 import { HomeProof } from "@/components/pages/home/sections/proof";
 import { Contact } from "@/components/sections/contact";
 import { LifeAtCube27 } from "@/components/sections/life-at-cube27";
 import { Reveal } from "@/components/ui/reveal";
+import { StatGrid, StatCell } from "@/components/ui/stat-grid";
+import { COMPANY_FACTS } from "@/site-config";
 
-export function AboutPage() {
+/** Leadership profile, sourced from the `leadership` content collection. */
+export interface Leader {
+  name: string;
+  role: string;
+  experience: string;
+  bio: string;
+}
+
+export function AboutPage({ leaders }: { leaders: Leader[] }) {
   return (
     <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
       <Navbar />
       <main>
-        <HomeHero
+        <PageIntro
           headlineLines={[
             "Built to engineer",
             "the intelligent",
             "enterprise.",
           ]}
           body="Cube27 is a Global Capability Center (GCC) partner bridging operational stability and high-end technical innovation."
-          ctaLabel="Work with us"
+          ctaLabel="Schedule a consultation"
           ctaHref="#contact"
           overlayEyebrow="GLOBAL DELIVERY"
           overlayTitle="People. Process. Pride."
           overlayDescription="Operating as a seamless extension from our Pune hub."
           overlayBadge="150+"
+          overlayLinkHref="#company"
         />
         <CompanyStory />
-        <LeadershipSection />
+        <LeadershipSection leaders={leaders} />
         <InfrastructureSection />
         <Principles />
         <HomeProof
           eyebrow="Our track record"
           statement="With over two decades of combined leadership experience in eCommerce, digital marketing, and enterprise technology, we deliver on our promises while innovating."
           stats={[
-            { value: "150+", label: "Team Members" },
-            { value: "95%", label: "Enterprise SLA" },
-            { value: "$1B+", label: "Ad Spend Optimized" },
-            { value: "20+", label: "Years Experience" },
+            {
+              value: COMPANY_FACTS.headcount.value,
+              label: COMPANY_FACTS.headcount.label,
+            },
+            { value: COMPANY_FACTS.sla.value, label: COMPANY_FACTS.sla.label },
+            {
+              value: COMPANY_FACTS.adSpend.value,
+              label: COMPANY_FACTS.adSpend.label,
+            },
+            {
+              value: COMPANY_FACTS.experience.value,
+              label: COMPANY_FACTS.experience.label,
+            },
           ]}
         />
         <PeopleBand />
@@ -68,7 +88,7 @@ function CompanyStory() {
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             Our Vision
           </p>
-          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
             Not a dev shop.
             <span className="block">A GCC Partner.</span>
           </h2>
@@ -102,7 +122,10 @@ function CompanyStory() {
  * Leadership Section — Meet Our Leaders
  * ------------------------------------------------------------------------- */
 
-function LeadershipSection() {
+/* Card entrance delays preserved from the pre-collection layout. */
+const LEADER_DELAYS = [0.06, 0.1];
+
+function LeadershipSection({ leaders }: { leaders: Leader[] }) {
   return (
     <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/30 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -110,59 +133,35 @@ function LeadershipSection() {
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             Leadership
           </p>
-          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
             Meet Our Leaders
           </h2>
         </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
-          <Reveal
-            delay={0.05}
-            className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8"
-          >
-            <div className="flex items-center gap-3 text-cube27-accent-primary">
-              <UserCheck className="size-6" />
-              <span className="typography-eyebrow text-[0.75rem] uppercase font-semibold">
-                20+ Years Experience
-              </span>
-            </div>
-            <h3 className="typography-heading mt-4 text-2xl font-medium text-cube27-text-primary">
-              Arpan Jain
-            </h3>
-            <p className="text-[0.88rem] font-medium text-cube27-text-secondary">
-              Chief Executive Officer
-            </p>
-            <p className="mt-4 text-[0.95rem] leading-relaxed text-cube27-text-secondary">
-              20+ years in eCommerce and Digital Marketing. B. Tech in Computer
-              Science. Arpan brings deep technical expertise combined with
-              business acumen, ensuring that Cube27 delivers solutions that are
-              both technically excellent and commercially viable.
-            </p>
-          </Reveal>
-
-          <Reveal
-            delay={0.1}
-            className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8"
-          >
-            <div className="flex items-center gap-3 text-cube27-accent-primary">
-              <UserCheck className="size-6" />
-              <span className="typography-eyebrow text-[0.75rem] uppercase font-semibold">
-                24+ Years Experience
-              </span>
-            </div>
-            <h3 className="typography-heading mt-4 text-2xl font-medium text-cube27-text-primary">
-              Amber Jain
-            </h3>
-            <p className="text-[0.88rem] font-medium text-cube27-text-secondary">
-              Chief Technology Officer
-            </p>
-            <p className="mt-4 text-[0.95rem] leading-relaxed text-cube27-text-secondary">
-              24+ years as a Digital Marketing Technologist. MS in Computer
-              Science from USC. Amber&apos;s academic and practical rigor drives
-              our technical excellence, ensuring every solution meets the
-              highest standards of engineering quality.
-            </p>
-          </Reveal>
+          {leaders.map((leader, i) => (
+            <Reveal
+              key={leader.name}
+              delay={LEADER_DELAYS[i] ?? 0.1}
+              className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8 motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <div className="flex items-center gap-3 text-cube27-accent-primary">
+                <UserCheck className="size-6" />
+                <span className="typography-eyebrow text-[0.7rem] uppercase">
+                  {leader.experience}
+                </span>
+              </div>
+              <h3 className="typography-heading mt-4 text-2xl font-medium text-cube27-text-primary">
+                {leader.name}
+              </h3>
+              <p className="text-[0.88rem] font-medium text-cube27-text-secondary">
+                {leader.role}
+              </p>
+              <p className="mt-4 text-[0.95rem] leading-relaxed text-cube27-text-secondary">
+                {leader.bio}
+              </p>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -181,47 +180,38 @@ function InfrastructureSection() {
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             Infrastructure
           </p>
-          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
             Built for Enterprise Scale
           </h2>
         </Reveal>
 
         <Reveal delay={0.1} className="mt-12">
-          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-2 lg:grid-cols-4">
-            <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                150+ Specialists
-              </dt>
-              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
-                Engineers, architects, and consultants across multiple
-                technology domains.
-              </dd>
-            </div>
-            <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                95% SLA Achievement
-              </dt>
-              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
-                Consistent delivery on enterprise support commitments.
-              </dd>
-            </div>
-            <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                $1B+ Ad Spend Managed
-              </dt>
-              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
-                Optimizations via our proprietary MarTech tools.
-              </dd>
-            </div>
-            <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                24/7 Global Coverage
-              </dt>
-              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
-                Support across NORAM, EMEA, APAC, and India.
-              </dd>
-            </div>
-          </dl>
+          <StatGrid className="grid-cols-1 sm:grid-cols-2">
+            <StatCell
+              value={COMPANY_FACTS.headcount.value}
+              label={COMPANY_FACTS.headcount.label}
+              description="Engineers, architects, and consultants across multiple technology domains."
+              className="bg-cube27-neutral-secondary/30"
+            />
+            <StatCell
+              value={COMPANY_FACTS.sla.value}
+              label={COMPANY_FACTS.sla.label}
+              description="Consistent delivery on enterprise support commitments."
+              className="bg-cube27-neutral-secondary/30"
+            />
+            <StatCell
+              value={COMPANY_FACTS.adSpend.value}
+              label={COMPANY_FACTS.adSpend.label}
+              description="Optimizations via our proprietary MarTech tools."
+              className="bg-cube27-neutral-secondary/30"
+            />
+            <StatCell
+              value={COMPANY_FACTS.coverage.value}
+              label={COMPANY_FACTS.coverage.label}
+              description="Support across NORAM, EMEA, APAC, and India."
+              className="bg-cube27-neutral-secondary/30"
+            />
+          </StatGrid>
         </Reveal>
       </div>
     </section>
@@ -264,7 +254,7 @@ function Principles() {
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             How we work
           </p>
-          <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
             The principles behind every engagement.
           </h2>
         </Reveal>
@@ -305,7 +295,7 @@ function PeopleBand() {
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             Life at Cube27
           </p>
-          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-medium leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-4 text-balance text-[clamp(1.55rem,2.8vw,2.15rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-cube27-text-primary">
             Join Our Team or Partner With Us
           </h2>
           <p className="mt-6 max-w-md text-[1.05rem] leading-relaxed text-cube27-text-secondary">
@@ -317,53 +307,41 @@ function PeopleBand() {
               href="/contact"
               className="inline-flex items-center gap-1.5 rounded-md bg-cube27-button-primary-background px-5 py-2.5 text-[0.9rem] font-medium text-cube27-button-primary-text transition-colors hover:bg-cube27-accent-secondary"
             >
-              Partner with Us
+              Schedule a consultation
               <ArrowRight className="size-4" />
             </a>
             <a
               href="/careers"
               className="inline-flex items-center gap-1.5 rounded-md border border-cube27-border-primary bg-cube27-background-primary px-5 py-2.5 text-[0.9rem] font-medium text-cube27-text-primary transition-colors hover:border-cube27-accent-primary"
             >
-              View Careers
+              View openings
             </a>
           </div>
         </Reveal>
 
         <Reveal delay={0.1} className="lg:col-span-7 lg:pl-6">
-          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-2">
-            <div className="bg-cube27-background-primary p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                Pune
-              </dt>
-              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
-                Global delivery hub, serving enterprises worldwide
-              </dd>
-            </div>
-            <div className="bg-cube27-background-primary p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                Cross-functional
-              </dt>
-              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
-                Marketing, data, AI, and engineering under one roof
-              </dd>
-            </div>
-            <div className="bg-cube27-background-primary p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                Embedded teams
-              </dt>
-              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
-                Operating as an extension of client organizations
-              </dd>
-            </div>
-            <div className="bg-cube27-background-primary p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                Outcome-owned
-              </dt>
-              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
-                Accountable from strategy through operations
-              </dd>
-            </div>
-          </dl>
+          <StatGrid columns={2}>
+            <StatCell
+              value="Pune"
+              label="Global delivery hub, serving enterprises worldwide"
+              mono={false}
+            />
+            <StatCell
+              value="Cross-functional"
+              label="Marketing, data, AI, and engineering under one roof"
+              mono={false}
+            />
+            <StatCell
+              value="Embedded teams"
+              label="Operating as an extension of client organizations"
+              mono={false}
+            />
+            <StatCell
+              value="Outcome-owned"
+              label="Accountable from strategy through operations"
+              mono={false}
+            />
+          </StatGrid>
         </Reveal>
       </div>
     </section>

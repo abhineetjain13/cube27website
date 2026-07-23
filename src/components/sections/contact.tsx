@@ -70,14 +70,14 @@ export function Contact({
   return (
     <section
       id="contact"
-      className="border-t border-cube27-border-primary bg-cube27-background-primary py-24 lg:py-32"
+      className="border-t border-cube27-border-primary bg-cube27-background-primary py-20 lg:py-28"
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-y-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-x-12">
         <Reveal className="lg:col-span-5">
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             {eyebrow}
           </p>
-          <h2 className="typography-heading mt-5 text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.025em] text-cube27-text-primary">
+          <h2 className="typography-heading mt-5 text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
             {headlineLines.map((line) => (
               <span key={line} className="block">
                 {line}
@@ -112,7 +112,7 @@ export function Contact({
                 href="https://www.linkedin.com/company/cube27ltd"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-cube27-text-primary hover:text-cube27-accent-primary"
+                className="cube27-link"
               >
                 Connect on LinkedIn
               </a>
@@ -125,7 +125,7 @@ export function Contact({
               />
               <a
                 href={`mailto:${email}`}
-                className="text-cube27-text-primary hover:text-cube27-accent-primary"
+                className="cube27-link"
               >
                 {email}
               </a>
@@ -144,7 +144,7 @@ export function Contact({
 
           {/* Why Partner highlights */}
           <div className="mt-10 rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/40 p-6">
-            <h3 className="typography-eyebrow text-[0.72rem] uppercase text-cube27-accent-primary">
+            <h3 className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
               Why Partner with Cube27?
             </h3>
             <ul className="mt-3 space-y-2 text-[0.88rem] text-cube27-text-primary">

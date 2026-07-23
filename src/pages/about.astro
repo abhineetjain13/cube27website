@@ -1,13 +1,18 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import { AboutPage } from "@/components/pages/about/page";
+import { AboutPage, type Leader } from "@/components/pages/about/page";
 
 export const prerender = true;
+
+const leaders: Leader[] = (await getCollection("leadership"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => entry.data);
 ---
 
 <Layout
   title="About Cube27 — GCC & Enterprise AI Partner"
   description="Cube27 is a Pune-based technology and operations partner helping 100+ global brands — including Fortune 500 enterprises — engineer their intelligent enterprise across GCC-as-a-Service, agentic AI, data, and marketing."
 >
-  <AboutPage client:load />
+  <AboutPage client:load leaders={leaders} />
 </Layout>

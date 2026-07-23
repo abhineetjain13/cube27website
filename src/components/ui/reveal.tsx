@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
  * @cube27ComponentType component
  * @cube27ComponentPattern animation
  * @cube27ComponentStatus stable
- * @cube27ComponentDescription Single consistent entrance-reveal wrapper used across cube27 sections. Pure-CSS (tw-animate-css) fade-up that runs once on load and is fully visible by default — it never depends on JS hydration, so content can't get stuck invisible. Gated behind `motion-safe` so reduced-motion users just see static content. `delay` staggers sibling reveals via animation-delay.
+ * @cube27ComponentDescription Single consistent entrance-reveal wrapper used across cube27 sections. Pure-CSS (tw-animate-css) fade-up that runs once on load and is fully visible by default — it never depends on JS hydration, so content can't get stuck invisible. Gated behind `motion-safe` so reduced-motion users just see static content. `delay` staggers sibling reveals via animation-delay. Stagger convention: siblings use `delay={Math.min(i * 0.06, 0.24)}`; paired two-column bands use `0.1` for the trailing column.
  */
 export function Reveal({
   children,

@@ -1,6 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import { CareersPage } from "@/components/pages/careers/page";
+import {
+  CareersPage,
+  type CareerRole,
+} from "@/components/pages/careers/page";
 import { SITE_CONFIG } from "@/site-config";
 import type { SeoJsonSchema } from "@/components/seo-json";
 
@@ -32,27 +36,11 @@ const jobLocation = {
 const datePosted = "2026-07-01";
 const validThrough = "2026-12-31";
 
-const roles: {
-  title: string;
-  slug: string;
-  employmentType: string;
-  description: string;
-}[] = [
-  {
-    title: "AI Engineer",
-    slug: "AI+Engineer",
-    employmentType: "FULL_TIME",
-    description:
-      "Design, build, and deploy scalable AI/ML systems and LLM-powered applications — RAG systems, AI agents, and multi-agent workflows — using Python, Node.js, and TypeScript. 4–7 years of software engineering experience. Remote/Hybrid, based in Pune.",
-  },
-  {
-    title: "AI Research Intern",
-    slug: "AI+Research+Intern",
-    employmentType: "INTERN",
-    description:
-      "Research and prototype applied AI: LLMs, AI agents, semantic search, prompt engineering, model evaluation, and automation workflows. For students or recent graduates in CS, AI, or Data Science with Python fundamentals. Remote/Hybrid, based in Pune.",
-  },
-];
+// The roles collection is the single source for both the JobPosting JSON-LD
+// and the rendered role cards.
+const roles: CareerRole[] = (await getCollection("roles"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => entry.data);
 
 const jsonLd: SeoJsonSchema[] = roles.map((role) => ({
   "@context": "https://schema.org",
@@ -76,5 +64,5 @@ const jsonLd: SeoJsonSchema[] = roles.map((role) => ({
   description="Current job openings at Cube27 — AI Engineer and AI Research Intern roles in Pune. Join us to build next-generation AI infrastructure."
   jsonLd={jsonLd}
 >
-  <CareersPage client:load />
+  <CareersPage client:load roles={roles} />
 </Layout>

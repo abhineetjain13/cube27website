@@ -34,7 +34,7 @@ export function PartnerMarquee({
           <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
             {eyebrow}
           </p>
-          <p className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.15rem,2vw,1.5rem)] font-medium leading-[1.3] tracking-[-0.015em] text-cube27-text-primary">
+          <p className="typography-heading mt-4 max-w-3xl text-balance text-[clamp(1.15rem,2vw,1.5rem)] font-medium leading-[1.3] tracking-[-0.01em] text-cube27-text-primary">
             {statement}
           </p>
         </Reveal>
@@ -44,7 +44,7 @@ export function PartnerMarquee({
         {/* A single animated track holds two identical copies of the logo set,
             so translateX(-50%) advances by exactly one copy → seamless loop. */}
         <div
-          className="cube27-marquee group relative mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]"
+          className="cube27-marquee group relative mt-10 overflow-hidden"
           aria-label="Partner and client logos"
         >
           <div className="cube27-marquee-track flex w-max">
@@ -71,10 +71,13 @@ export function PartnerMarquee({
 function LogoCard({ src, index }: { src: string; index: number }) {
   return (
     <li className="flex h-20 shrink-0 items-center justify-center sm:h-24">
+      {/* Eager: the set totals ~160 KB of tiny webps. Lazy-loading them made
+          mobile browsers defer the leading logos, so the strip could scroll
+          in (or start) with blank slots before the first logo appeared. */}
       <img
         src={src}
         alt={`Partner ${index + 1}`}
-        loading="lazy"
+        loading="eager"
         decoding="async"
         className="max-h-16 w-auto max-w-[160px] object-contain sm:max-h-20 sm:max-w-[210px]"
       />
