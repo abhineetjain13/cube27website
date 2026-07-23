@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 
 /**
@@ -60,6 +60,40 @@ export function HomePlatform({
   );
 }
 
+/**
+ * The three engagement phases as bars on a shared week axis: Understand runs
+ * week 1, Build weeks 2–4, Operate & measure continues from week 5 with a
+ * fading tail to signal ongoing delivery. Offsets/widths are percentages of
+ * the track.
+ */
+const TIMELINE_PHASES = [
+  {
+    step: "01",
+    label: "Understand",
+    caption: "week 1",
+    offset: "0%",
+    width: "16%",
+    barClass: "bg-cube27-accent-primary",
+  },
+  {
+    step: "02",
+    label: "Build",
+    caption: "weeks 2–4",
+    offset: "16%",
+    width: "42%",
+    barClass: "bg-cube27-accent-primary/70",
+  },
+  {
+    step: "03",
+    label: "Operate & measure",
+    caption: "ongoing",
+    offset: "58%",
+    width: "42%",
+    barClass:
+      "bg-gradient-to-r from-cube27-accent-primary/45 to-cube27-accent-primary/10",
+  },
+];
+
 function DashboardMockup() {
   return (
     <div className="mx-auto w-full max-w-2xl">
@@ -76,26 +110,41 @@ function DashboardMockup() {
           </div>
         </div>
         <div className="grid grid-cols-5 gap-px bg-cube27-border-primary">
-          {/* Schematic map */}
-          <div className="relative col-span-3 bg-cube27-neutral-secondary">
+          {/* Phase timeline: the three engagement steps as bars on a week ruler */}
+          <div className="col-span-3 flex flex-col justify-center bg-cube27-neutral-light p-5 sm:p-6">
+            <p className="text-[0.65rem] uppercase tracking-[0.16em] text-cube27-text-secondary">
+              Typical timeline
+            </p>
+            <div className="mt-5 space-y-5">
+              {TIMELINE_PHASES.map((phase) => (
+                <div key={phase.step}>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <span className="typography-heading text-[0.8rem] font-semibold text-cube27-text-primary">
+                      {phase.step} · {phase.label}
+                    </span>
+                    <span className="text-[0.68rem] text-cube27-text-secondary">
+                      {phase.caption}
+                    </span>
+                  </div>
+                  <div className="mt-1.5 h-2.5 w-full rounded-full bg-cube27-neutral-secondary">
+                    <div
+                      className={`h-full rounded-full ${phase.barClass}`}
+                      style={{ marginLeft: phase.offset, width: phase.width }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
             <div
-              className="h-full min-h-[15rem] w-full opacity-60"
-              style={{
-                backgroundImage:
-                  "linear-gradient(var(--cube27-border-primary) 1px, transparent 1px), linear-gradient(90deg, var(--cube27-border-primary) 1px, transparent 1px)",
-                backgroundSize: "28px 28px",
-              }}
-            />
-            <MapPin
-              className="absolute left-[28%] top-[35%] size-5 text-cube27-accent-primary"
-              fill="var(--cube27-accent-primary)"
-              stroke="white"
-            />
-            <MapPin
-              className="absolute left-[62%] top-[58%] size-5 text-cube27-accent-primary"
-              fill="var(--cube27-accent-primary)"
-              stroke="white"
-            />
+              aria-hidden="true"
+              className="mt-3 flex justify-between text-[0.6rem] uppercase tracking-[0.12em] text-cube27-text-secondary"
+            >
+              <span>W1</span>
+              <span>W2</span>
+              <span>W3</span>
+              <span>W4</span>
+              <span>W5+</span>
+            </div>
           </div>
           {/* Stat rail */}
           <div className="col-span-2 space-y-4 bg-cube27-neutral-light p-4">
@@ -142,10 +191,10 @@ function Stat({
         {label}
       </p>
       <div className="flex items-baseline gap-2">
-        <span className="font-mono text-xl font-medium text-cube27-text-primary">
+        <span className="typography-heading text-xl font-semibold text-cube27-text-primary">
           {value}
         </span>
-        <span className="font-[var(--font-mono)] text-[0.65rem] text-cube27-text-secondary">
+        <span className="text-[0.65rem] text-cube27-text-secondary">
           {delta}
         </span>
       </div>

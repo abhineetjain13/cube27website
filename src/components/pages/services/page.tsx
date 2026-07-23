@@ -258,7 +258,7 @@ function EngineeringServiceDetail() {
         </h4>
         <ul className="mt-4 space-y-3">
           <li className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-cube27-border-primary pb-3">
-            <span className="font-mono text-[0.88rem] font-semibold text-cube27-text-primary">
+            <span className="typography-heading text-[0.88rem] font-semibold text-cube27-text-primary">
               AQ360 Audit
             </span>
             <span className="text-[0.85rem] text-cube27-text-secondary">
@@ -266,7 +266,7 @@ function EngineeringServiceDetail() {
             </span>
           </li>
           <li className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-cube27-border-primary pb-3">
-            <span className="font-mono text-[0.88rem] font-semibold text-cube27-text-primary">
+            <span className="typography-heading text-[0.88rem] font-semibold text-cube27-text-primary">
               DSMM Framework
             </span>
             <span className="text-[0.85rem] text-cube27-text-secondary">
@@ -274,7 +274,7 @@ function EngineeringServiceDetail() {
             </span>
           </li>
           <li className="flex flex-wrap items-center gap-x-3 gap-y-1 pb-1">
-            <span className="font-mono text-[0.88rem] font-semibold text-cube27-text-primary">
+            <span className="typography-heading text-[0.88rem] font-semibold text-cube27-text-primary">
               Fractional Ownership
             </span>
             <span className="text-[0.85rem] text-cube27-text-secondary">

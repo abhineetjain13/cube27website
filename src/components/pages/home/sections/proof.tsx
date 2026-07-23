@@ -1,6 +1,5 @@
 import { Reveal } from "@/components/ui/reveal";
 import { StatGrid, StatCell } from "@/components/ui/stat-grid";
-import { isNumericStat } from "@/lib/utils";
 import { COMPANY_FACTS } from "@/site-config";
 
 /**
@@ -54,7 +53,6 @@ export function HomeProof({
                 value={s.value}
                 label={s.label}
                 size="lg"
-                mono={isNumericStat(s.value)}
                 countUp
               />
             ))}

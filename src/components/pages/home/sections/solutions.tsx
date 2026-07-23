@@ -1,6 +1,6 @@
 import {
   ArrowRight,
-  Bot,
+  Sparkles,
   BarChart3,
   Megaphone,
   ShoppingCart,
@@ -16,7 +16,6 @@ interface Solution {
   name: string;
   description: string;
   href: string;
-  active?: boolean;
 }
 
 const DEFAULT_SOLUTIONS: Solution[] = [
@@ -26,7 +25,6 @@ const DEFAULT_SOLUTIONS: Solution[] = [
     description:
       "Tracking, analytics, landing pages, feed optimization, CRO, personalization, and experimentation that improve outreach.",
     href: "#contact",
-    active: true,
   },
   {
     icon: ShoppingCart,
@@ -43,17 +41,10 @@ const DEFAULT_SOLUTIONS: Solution[] = [
     href: "#contact",
   },
   {
-    icon: Bot,
-    name: "Machine learning",
+    icon: Sparkles,
+    name: "AI & agentic commerce",
     description:
-      "Applied machine learning for ecommerce and marketing teams that need better analysis and performance.",
-    href: "#contact",
-  },
-  {
-    icon: BarChart3,
-    name: "Blockchain",
-    description:
-      "Experience across permissionless and permissioned implementations for teams exploring trusted digital systems.",
+      "Autonomous AI agents and intelligent workflows engineered to automate operations, personalize journeys, and power modern commerce.",
     href: "#contact",
   },
 ];
@@ -103,9 +94,6 @@ export function HomeSolutions({
                   <span className="typography-heading text-[1.15rem] font-medium text-cube27-text-primary">
                     {s.name}
                   </span>
-                  {s.active && (
-                    <span className="size-1.5 rounded-full bg-cube27-accent-primary" />
-                  )}
                 </div>
                 <p className="flex-1 text-[0.95rem] leading-relaxed text-cube27-text-secondary">
                   {s.description}

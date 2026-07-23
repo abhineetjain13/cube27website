@@ -98,7 +98,7 @@ export function PageIntro({
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cube27-accent-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cube27-accent-primary"></span>
               </span>
-              <span className="font-mono text-[0.65rem] uppercase tracking-[0.16em] font-semibold text-cube27-text-secondary">
+              <span className="text-[0.65rem] uppercase tracking-[0.16em] font-semibold text-cube27-text-secondary">
                 {overlayEyebrow}
               </span>
             </div>
@@ -142,7 +142,7 @@ export function PageIntro({
                 </svg>
                 {/* Stat Badge */}
                 {overlayBadge && (
-                  <span className="inline-flex items-center justify-center rounded bg-cube27-accent-primary px-1.5 py-0.5 font-mono text-[0.7rem] font-semibold text-white tracking-wide animate-pulse">
+                  <span className="inline-flex items-center justify-center rounded bg-cube27-accent-primary px-1.5 py-0.5 text-[0.7rem] font-semibold text-white tracking-wide animate-pulse">
                     {overlayBadge}
                   </span>
                 )}

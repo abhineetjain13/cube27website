@@ -10,11 +10,10 @@ import { cn, isNumericStat } from "@/lib/utils";
  * @cube27ComponentStatus stable
  * @cube27ComponentDescription Shared hairline-ruled stat grid: a `<dl>` shell
  * using the gap-px-over-border track with `StatCell` tiles inside. Cell values
- * render in IBM Plex Mono by default (design-system rule: mono for the numeric
- * part of stat tiles); word values ("Pune", "Fortune 500") pass `mono={false}`
- * — `isNumericStat` from `@/lib/utils` is the single detection mechanism for
- * data-driven grids. `size="lg"` reproduces the large hero-stat variant. Cells
- * are data tiles: static, no hover affordance.
+ * render in Archivo (`typography-heading`) — the type system is Archivo for
+ * headings/display and Roboto for body, with no mono face. `size="lg"`
+ * reproduces the large hero-stat variant. Cells are data tiles: static, no
+ * hover affordance.
  */
 interface StatGridProps {
   /** Number of columns at the widest breakpoint (2 → sm:grid-cols-2, 4 → lg:grid-cols-4). */
@@ -46,8 +45,6 @@ interface StatCellProps {
   description?: string;
   /** `lg` reproduces the services-page large hero-stat variant (sm:text-3xl). */
   size?: "md" | "lg";
-  /** Mono numerals by default; set false for word values. */
-  mono?: boolean;
   /**
    * Animate the value 0 → final once on scroll into view (Home/About proof
    * grids only). Only applies to numeric-leading values — word tiles and
@@ -62,7 +59,6 @@ export function StatCell({
   label,
   description,
   size = "md",
-  mono = true,
   countUp = false,
   className,
 }: StatCellProps) {
@@ -70,8 +66,7 @@ export function StatCell({
     <div className={cn("bg-cube27-background-primary p-5 sm:p-6", className)}>
       <dt
         className={cn(
-          "font-medium text-cube27-text-primary",
-          mono ? "font-mono" : "typography-heading",
+          "typography-heading font-semibold text-cube27-text-primary",
           size === "lg" ? "text-2xl sm:text-3xl" : "text-2xl",
         )}
       >
