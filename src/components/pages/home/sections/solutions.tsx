@@ -1,15 +1,20 @@
 import {
   ArrowRight,
-  Sparkles,
-  BarChart3,
-  Megaphone,
+  Bot,
+  Code2,
   ShoppingCart,
+  Building2,
   type LucideIcon,
 } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 
 /**
  * Services as a calm, conversion-oriented list on a warm white canvas.
+ *
+ * These are the same four capabilities the services page sells, in the same
+ * order and wording — the homepage and /services must tell one story. When a
+ * pillar changes, update `src/content/services/*.json` and mirror it here and
+ * in the `items` array of `@/components/pages/services/page`.
  */
 interface Solution {
   icon: LucideIcon;
@@ -20,32 +25,32 @@ interface Solution {
 
 const DEFAULT_SOLUTIONS: Solution[] = [
   {
-    icon: Megaphone,
-    name: "Digital marketing solutions",
+    icon: Bot,
+    name: "Agentic AI & automation",
     description:
-      "Tracking, analytics, landing pages, feed optimization, CRO, personalization, and experimentation that improve outreach.",
-    href: "#contact",
+      "Autonomous commerce flows, end-to-end process automation, and dedicated AI pods that reduce operational friction and run 24/7.",
+    href: "/services#ai",
+  },
+  {
+    icon: Code2,
+    name: "Digital product engineering",
+    description:
+      "Growth-native product teams that design, build, and scale digital platforms from first release through continuous delivery.",
+    href: "/services#engineering",
   },
   {
     icon: ShoppingCart,
-    name: "Ecommerce solutions",
+    name: "Salesforce & enterprise platforms",
     description:
-      "End-to-end enterprise and open-source ecommerce delivery from experienced developers, designers, and marketing specialists.",
-    href: "#contact",
+      "Salesforce and enterprise commerce implementation, migration, and managed operations across the customer lifecycle.",
+    href: "/services#commerce",
   },
   {
-    icon: BarChart3,
-    name: "Business intelligence and analytics",
+    icon: Building2,
+    name: "GCC-as-a-Service",
     description:
-      "Large-scale BI and reporting platforms that surface insight at every stage and support better decisions.",
-    href: "#contact",
-  },
-  {
-    icon: Sparkles,
-    name: "AI & agentic commerce",
-    description:
-      "Autonomous AI agents and intelligent workflows engineered to automate operations, personalize journeys, and power modern commerce.",
-    href: "#contact",
+      "Dedicated Global Capability Centers built and operated on your behalf via Build-Operate-Transfer and Build-Operate models.",
+    href: "/services#gcc",
   },
 ];
 

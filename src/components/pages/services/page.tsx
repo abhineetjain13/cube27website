@@ -11,23 +11,19 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import type { ReactNode } from "react";
-import { Navbar } from "@/components/sections/navbar";
-import { Footer } from "@/components/sections/footer";
-import { PageIntro } from "@/components/sections/page-intro";
-import { Contact } from "@/components/sections/contact";
-import { Faq } from "@/components/sections/faq";
 import { Reveal } from "@/components/ui/reveal";
 import { SplitExplorer, type SplitItem } from "@/components/ui/split-explorer";
 import { StatGrid, StatCell } from "@/components/ui/stat-grid";
 import { FeatureCard } from "@/components/ui/feature-card";
-import { COMPANY_FACTS, SITE_CONFIG } from "@/site-config";
-import type { FaqItem } from "@/components/seo-json";
+import { COMPANY_FACTS } from "@/site-config";
 
-export function ServicesPage({
-  faqItems,
-}: {
-  faqItems: readonly FaqItem[];
-}) {
+/**
+ * Interactive capability explorer for the services page. Hydrated on its own
+ * by `src/pages/services.astro`; the hero, FAQ (native `<details>` + JSON-LD),
+ * and contact form are separate islands. `render` returns JSX, so the items
+ * array is built here rather than passed across the Astro boundary.
+ */
+export function ServicesExplorer() {
   const items: SplitItem[] = [
     {
       id: "ai",
@@ -56,55 +52,22 @@ export function ServicesPage({
   ];
 
   return (
-    <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
-      <Navbar />
-      <main>
-        <PageIntro
-          headlineLines={["Engineering the", "intelligent enterprise."]}
-          body="Rapid innovation through technology, and sustained operational and process capacity via GCC-as-a-Service."
-          ctaLabel="Schedule a consultation"
-          ctaHref="#contact"
-          overlayEyebrow="CAPABILITY ENGINE"
-          overlayTitle="Architect. Build. Scale."
-          overlayDescription="High-fidelity engineering & GCC operations for global enterprises."
-          overlayBadge="150+"
-          overlayLinkHref="#capabilities"
-        />
-
-        <section
-          id="capabilities"
-          className="border-t border-cube27-border-primary py-20 lg:py-28"
-        >
-          <div className="mx-auto mb-12 max-w-7xl px-5 sm:px-8">
-            <Reveal>
-              <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
-                What we do
-              </p>
-              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
-                Four capabilities, one integrated partner.
-              </h2>
-            </Reveal>
-          </div>
-          <SplitExplorer items={items} ariaLabel="Service lines" />
-        </section>
-
-        {/* FAQ Section */}
-        <Faq
-          eyebrow="Questions"
-          heading="Services & engagement FAQs"
-          items={faqItems}
-          schemaUrl={`${SITE_CONFIG.url}/services`}
-        />
-
-        {/* Contact Section */}
-        <Contact
-          eyebrow="Ready to Partner?"
-          headlineLines={["Let's find the right", "engagement model."]}
-          body="Whether you need a GCC, a Salesforce transformation, or an AI-powered product build — schedule a consultation with our Solutions Architect."
-        />
-      </main>
-      <Footer />
-    </div>
+    <section
+      id="capabilities"
+      className="border-t border-cube27-border-primary py-20 lg:py-28"
+    >
+      <div className="mx-auto mb-12 max-w-7xl px-5 sm:px-8">
+        <Reveal>
+          <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
+            What we do
+          </p>
+          <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+            Four capabilities, one integrated partner.
+          </h2>
+        </Reveal>
+      </div>
+      <SplitExplorer items={items} ariaLabel="Service lines" />
+    </section>
   );
 }
 
@@ -171,19 +134,33 @@ function AiServiceDetail() {
           Dedicated pods for rapid development of customized AI solutions that
           surface actionable insights and drive process efficiency.
         </FeatureCard>
-        <div className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/40 p-6">
-          <p className="text-[0.95rem] italic leading-relaxed text-cube27-text-primary">
-            &ldquo;Cube27&apos;s AI agents reduced our checkout friction by 22%
-            in 60 days.&rdquo;
-          </p>
-        </div>
+        <FeatureCard
+          icon={<ShieldCheck className="size-6 text-cube27-accent-primary" />}
+          title="Governed & Observable"
+        >
+          Every agent ships with guardrails, audit trails, and human-in-the-loop
+          escalation, so autonomous workflows stay accountable.
+        </FeatureCard>
       </div>
 
+      {/* Stats must trace to src/content/site/facts.json — no unsourced claims. */}
       <StatGrid className="mt-6 sm:grid-cols-4">
-        <StatCell value="40%" label="Ops Reduction" />
-        <StatCell value="24/7" label="Autonomous Op" />
-        <StatCell value="22%" label="Conversion Lift" />
-        <StatCell value="60D" label="MVP Deployment" />
+        <StatCell
+          value={COMPANY_FACTS.coverage.value}
+          label={COMPANY_FACTS.coverage.label}
+        />
+        <StatCell
+          value={COMPANY_FACTS.headcount.value}
+          label={COMPANY_FACTS.headcount.label}
+        />
+        <StatCell
+          value={COMPANY_FACTS.sla.value}
+          label={COMPANY_FACTS.sla.label}
+        />
+        <StatCell
+          value={COMPANY_FACTS.brands.value}
+          label={COMPANY_FACTS.brands.label}
+        />
       </StatGrid>
 
       <div className="mt-6 rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8">
@@ -405,7 +382,7 @@ function GccServiceDetail() {
       />
 
       <StatGrid className="mt-10">
-        <StatCell value="90+ Day" label="Operational Startup" size="lg" />
+        <StatCell value="6 weeks" label="Resource onboarding" size="lg" />
         <StatCell
           value={COMPANY_FACTS.headcount.value}
           label={COMPANY_FACTS.headcount.label}
@@ -416,7 +393,11 @@ function GccServiceDetail() {
           label={COMPANY_FACTS.attrition.label}
           size="lg"
         />
-        <StatCell value="10%" label="YoY Efficiency Gain" size="lg" />
+        <StatCell
+          value={COMPANY_FACTS.coverage.value}
+          label={COMPANY_FACTS.coverage.label}
+          size="lg"
+        />
       </StatGrid>
 
       <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-3">

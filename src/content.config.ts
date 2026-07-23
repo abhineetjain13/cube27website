@@ -93,10 +93,33 @@ const caseStudies = defineCollection({
   }),
 });
 
+/**
+ * Long-form articles at /insights. Unlike the other collections these are
+ * body-bearing Markdown (rendered through `render()`), not frontmatter-only
+ * data entries — the prose is the point. Every factual claim in an article
+ * must trace to `src/content/site/facts.json` or an existing case study.
+ */
+const insights = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/insights" }),
+  schema: z.object({
+    title: z.string(),
+    /** Meta description + listing-card summary. Keep under ~160 chars. */
+    description: z.string(),
+    publishDate: z.coerce.date(),
+    /** Set when materially revised; drives `dateModified` in Article JSON-LD. */
+    updatedDate: z.coerce.date().optional(),
+    author: z.string().default("Cube27"),
+    tags: z.array(z.string()).default([]),
+    /** Pins an article to the top of the listing. */
+    featured: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   services,
   faqs,
   roles,
   leadership,
   caseStudies,
+  insights,
 };

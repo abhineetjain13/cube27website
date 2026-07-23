@@ -1,11 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { HomePage } from "@/components/pages/home/page";
+import { Navbar } from "@/components/sections/navbar";
+import { Footer } from "@/components/sections/footer";
+import { PageIntro } from "@/components/sections/page-intro";
+import { PartnerMarquee } from "@/components/sections/partner-marquee";
+import { HomeSolutions } from "@/components/pages/home/sections/solutions";
+import { HomePlatform } from "@/components/pages/home/sections/platform";
+import { HomeProof } from "@/components/pages/home/sections/proof";
+import { Contact } from "@/components/sections/contact";
 import { SITE_CONFIG } from "@/site-config";
 
 export const prerender = true;
 ---
 
+{
+  /*
+  Islands, not a single React root. Only the navbar (interactive above the
+  fold), the proof plate's count-up, and the contact form need JS; every other
+  section is static markup whose entrance motion is pure CSS (see `Reveal`),
+  so it renders identically without hydration. Keeping them static is what
+  holds the homepage's initial JS down.
+*/
+}
 <Layout title={SITE_CONFIG.name} description={SITE_CONFIG.description}>
-  <HomePage client:load />
+  <div
+    class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
+  >
+    <Navbar client:load pathname={Astro.url.pathname} />
+    <main id="main" tabindex="-1">
+      <PageIntro overlayLinkHref="#platform" />
+      <PartnerMarquee />
+      <HomeSolutions />
+      <HomePlatform />
+      <HomeProof client:visible />
+      <Contact client:visible />
+    </main>
+    <Footer />
+  </div>
 </Layout>

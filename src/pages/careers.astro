@@ -1,10 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import {
-  CareersPage,
-  type CareerRole,
-} from "@/components/pages/careers/page";
+import { Navbar } from "@/components/sections/navbar";
+import { Footer } from "@/components/sections/footer";
+import { Contact } from "@/components/sections/contact";
+import { CareersPage, type CareerRole } from "@/components/pages/careers/page";
 import { SITE_CONFIG } from "@/site-config";
 import type { SeoJsonSchema } from "@/components/seo-json";
 
@@ -64,5 +64,19 @@ const jsonLd: SeoJsonSchema[] = roles.map((role) => ({
   description="Current job openings at Cube27 — AI Engineer and AI Research Intern roles in Pune. Join us to build next-generation AI infrastructure."
   jsonLd={jsonLd}
 >
-  <CareersPage client:load roles={roles} />
+  <div
+    class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
+  >
+    <Navbar client:load pathname={Astro.url.pathname} />
+    <main id="main" tabindex="-1">
+      <CareersPage roles={roles} />
+      <Contact
+        client:visible
+        eyebrow="Apply Today"
+        headlineLines={["Interested in joining", "our engineering team?"]}
+        body="Send us your details and resume link below. We typically respond within 24 business hours."
+      />
+    </main>
+    <Footer />
+  </div>
 </Layout>

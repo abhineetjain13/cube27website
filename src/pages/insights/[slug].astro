@@ -1,0 +1,141 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import type { Article, WithContext } from "schema-dts";
+import Layout from "../../layouts/Layout.astro";
+import { Navbar } from "@/components/sections/navbar";
+import { Footer } from "@/components/sections/footer";
+import { Contact } from "@/components/sections/contact";
+import { SITE_CONFIG } from "@/site-config";
+
+export const prerender = true;
+
+// Not annotated with `GetStaticPaths` — that type erases the props, leaving
+// `Astro.props` as `unknown`. Declaring the Props interface keeps `post`
+// fully typed against the collection schema.
+export async function getStaticPaths() {
+  const posts = await getCollection("insights");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"insights">;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const url = `${SITE_CONFIG.url}/insights/${post.id}`;
+const { organization, brand } = SITE_CONFIG;
+
+const dateFormat = new Intl.DateTimeFormat("en", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
+
+// `type="article"` makes the shared SEO graph emit Article instead of WebPage;
+// this node overrides that default with the full authored metadata.
+const jsonLd: WithContext<Article> = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.publishDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.publishDate).toISOString(),
+  author: { "@type": "Organization", name: post.data.author },
+  publisher: {
+    "@type": "Organization",
+    name: brand,
+    legalName: organization.legalName,
+    url: SITE_CONFIG.url,
+    logo: `${SITE_CONFIG.url}/cube27_logo.webp`,
+  },
+  mainEntityOfPage: { "@type": "WebPage", "@id": url },
+  keywords: post.data.tags.join(", "),
+  url,
+};
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  canonical={url}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <div
+    class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
+  >
+    <Navbar client:load pathname={Astro.url.pathname} />
+    <main id="main" tabindex="-1">
+      <article class="py-16 lg:py-24">
+        <div class="mx-auto max-w-3xl px-5 sm:px-8">
+          <a
+            href="/insights"
+            class="text-[0.85rem] font-medium text-cube27-accent-primary hover:text-cube27-accent-secondary"
+          >
+            ← All insights
+          </a>
+
+          <div class="mt-8 flex flex-wrap items-center gap-2">
+            {
+              post.data.tags.map((tag) => (
+                <span class="inline-block rounded-full bg-cube27-accent-primary/10 px-3 py-1 text-[0.72rem] font-semibold text-cube27-accent-primary">
+                  {tag}
+                </span>
+              ))
+            }
+          </div>
+
+          <h1
+            class="typography-heading mt-5 text-balance text-[clamp(2rem,4.2vw,2.9rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary"
+          >
+            {post.data.title}
+          </h1>
+
+          <p
+            class="mt-5 text-[1.08rem] leading-relaxed text-cube27-text-secondary"
+          >
+            {post.data.description}
+          </p>
+
+          <div
+            class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-cube27-border-primary pt-5 text-[0.85rem] text-cube27-text-secondary"
+          >
+            <span>{post.data.author}</span>
+            <span aria-hidden="true">·</span>
+            <time datetime={post.data.publishDate.toISOString()}>
+              {dateFormat.format(post.data.publishDate)}
+            </time>
+            {
+              post.data.updatedDate && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span>
+                    Updated {dateFormat.format(post.data.updatedDate)}
+                  </span>
+                </>
+              )
+            }
+          </div>
+
+          <div class="prose prose-lg mt-12 max-w-none">
+            <Content />
+          </div>
+        </div>
+      </article>
+
+      <Contact
+        client:visible
+        eyebrow="Ready to Partner?"
+        headlineLines={["Let's talk about", "your engagement."]}
+        body="Schedule a consultation with a Solutions Architect to work through your GCC, AI, or platform roadmap."
+      />
+    </main>
+    <Footer />
+  </div>
+</Layout>

@@ -25,7 +25,13 @@
 import sharp from "sharp";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { statSync, readdirSync, mkdirSync, existsSync } from "node:fs";
+import {
+  statSync,
+  readdirSync,
+  mkdirSync,
+  existsSync,
+  writeFileSync,
+} from "node:fs";
 
 const publicDir = join(dirname(fileURLToPath(import.meta.url)), "..", "public");
 
@@ -69,6 +75,40 @@ async function buildLogo() {
 }
 
 /**
+ * Record each optimized logo's intrinsic size to
+ * `src/content/site/logo-dimensions.json`. The marquee sets width/height per
+ * image from this so lazy-loaded logos reserve their exact box before
+ * decoding (no layout shift) — these marks range from 0.65 to 5.61 in aspect
+ * ratio, so a single fixed size would distort them. Regenerated here so the
+ * data can never drift from the committed assets.
+ *
+ * @param {string} outDir Directory holding the optimized `{n}.webp` logos.
+ */
+async function writeLogoDimensions(outDir) {
+  const entries = readdirSync(outDir)
+    .filter((f) => /^\d+\.webp$/i.test(f))
+    .sort((a, b) => Number.parseInt(a, 10) - Number.parseInt(b, 10));
+  /** @type {Record<string, [number, number]>} */
+  const dims = {};
+  for (const file of entries) {
+    const { width, height } = await sharp(join(outDir, file)).metadata();
+    if (width && height) dims[file.replace(/\.webp$/i, "")] = [width, height];
+  }
+  // Emit each pair on one line so the file matches what Prettier would
+  // produce — otherwise `format` and `optimize:images` fight over it.
+  const body = Object.entries(dims)
+    .map(([n, [w, h]]) => `  "${n}": [${w}, ${h}]`)
+    .join(",\n");
+  writeFileSync(
+    join(publicDir, "..", "src", "content", "site", "logo-dimensions.json"),
+    `{\n${body}\n}\n`,
+  );
+  console.log(
+    `  logo-dimensions.json      ${Object.keys(dims).length} entries`,
+  );
+}
+
+/**
  * Partner logos: numbered PNGs in images/logos/. Trim the baked-in white
  * margin so each mark fills its frame (the marquee renders them card-less on
  * the page background), then emit a WebP per logo. Output:
@@ -86,6 +126,7 @@ async function buildPartnerLogos() {
     console.log(
       `  (skipped partner logos — no source PNGs; ${have} committed in opt/)`,
     );
+    await writeLogoDimensions(outDir);
     return have;
   }
   for (const file of files) {
@@ -105,6 +146,7 @@ async function buildPartnerLogos() {
       .toFile(join(outDir, `${n}.webp`));
   }
   console.log(`  images/logos/opt/*.webp   ${files.length} logos (trimmed)`);
+  await writeLogoDimensions(outDir);
   return files.length;
 }
 

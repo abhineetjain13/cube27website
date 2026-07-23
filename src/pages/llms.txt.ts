@@ -20,14 +20,20 @@ export const GET: APIRoute = async () => {
   const { organization, url } = SITE_CONFIG;
   const facts = COMPANY_FACTS;
 
-  const [services, roles, leaders, studies] = await Promise.all([
+  const [services, roles, leaders, studies, insights] = await Promise.all([
     getCollection("services"),
     getCollection("roles"),
     getCollection("leadership"),
     getCollection("caseStudies"),
+    getCollection("insights"),
   ]);
-  const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) =>
-    a.data.order - b.data.order;
+  insights.sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+  );
+  const byOrder = (
+    a: { data: { order: number } },
+    b: { data: { order: number } },
+  ) => a.data.order - b.data.order;
   services.sort(byOrder);
   roles.sort(byOrder);
   leaders.sort(byOrder);
@@ -48,7 +54,7 @@ export const GET: APIRoute = async () => {
 
   const body = `# Cube27
 
-> Cube27 (${organization.legalName}) is a ${address.addressLocality}, India-based technology and operations partner that engineers the intelligent enterprise for ambitious organizations. Cube27 builds and operates Global Capability Centers (GCCs) and delivers agentic AI, digital product engineering, enterprise commerce, Salesforce, data, and digital-marketing solutions. Trusted by ${facts.brands.value} global brands, including Fortune 500 companies, with ${facts.headcount.value} specialists and ${facts.coverage.value} global coverage across NORAM, EMEA, APAC, and India.
+> Cube27 (${organization.legalName}) is a ${address.addressLocality}, India-based technology and operations partner that engineers the intelligent enterprise for ambitious organizations. Cube27 works across four capabilities: agentic AI and process automation, digital product engineering, Salesforce and enterprise platforms, and GCC-as-a-Service — building and operating dedicated Global Capability Centers through Build-Operate-Transfer (BOT) and Build-Operate (BO) engagements. Trusted by ${facts.brands.value} global brands, including Fortune 500 companies, with ${facts.headcount.value} specialists and ${facts.coverage.value} global coverage across NORAM, EMEA, APAC, and India.
 
 ## About
 
@@ -65,6 +71,11 @@ ${services.map((s) => `- ${s.data.name}: ${s.data.description}`).join("\n")}
 
 - [Success stories & case studies](${url}/success-stories): Real outcomes and measurable impact across client engagements.
 ${studies.map((s) => `- ${s.data.category}: ${s.data.title}.`).join("\n")}
+
+## Insights
+
+- [Insights](${url}/insights): Practical guidance on GCC setup, agentic AI, Salesforce, and enterprise delivery.
+${insights.map((post) => `- [${post.data.title}](${url}/insights/${post.id}): ${post.data.description}`).join("\n")}
 
 ## Careers
 

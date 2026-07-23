@@ -123,10 +123,7 @@ export function Contact({
                 className="size-5 shrink-0 text-cube27-accent-primary"
                 strokeWidth={1.5}
               />
-              <a
-                href={`mailto:${email}`}
-                className="cube27-link"
-              >
+              <a href={`mailto:${email}`} className="cube27-link">
                 {email}
               </a>
             </div>

@@ -1,8 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import { Navbar } from "@/components/sections/navbar";
+import { Footer } from "@/components/sections/footer";
+import { PageIntro } from "@/components/sections/page-intro";
+import { Contact } from "@/components/sections/contact";
 import {
-  CaseStudiesPage,
+  CaseStudiesExplorer,
+  ClientsAndBrandsSection,
   type CaseStudy,
 } from "@/components/pages/case-studies/page";
 
@@ -17,5 +22,31 @@ const studies: CaseStudy[] = (await getCollection("caseStudies"))
   title="Client Success Stories & Case Studies"
   description="Real outcomes and measurable impact — how Cube27 has helped enterprises build Global Capability Centers and transform digital operations."
 >
-  <CaseStudiesPage client:load studies={studies} />
+  <div
+    class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
+  >
+    <Navbar client:load pathname={Astro.url.pathname} />
+    <main id="main" tabindex="-1">
+      <PageIntro
+        headlineLines={["Success Stories &", "proven enterprise", "outcomes."]}
+        body="Real outcomes, measurable impact — explore how Cube27 has helped enterprises build Global Capability Centers and transform digital operations."
+        ctaLabel="Schedule a consultation"
+        ctaHref="#contact"
+        overlayEyebrow="OUTCOMES DELIVERED"
+        overlayTitle="Impact. Value. Trust."
+        overlayDescription="Rigorous delivery for over 100+ global brands."
+        overlayBadge="100+"
+      />
+      {/* client:load — owns deep-link handling for /success-stories#<id>. */}
+      <CaseStudiesExplorer client:load studies={studies} />
+      <ClientsAndBrandsSection />
+      <Contact
+        client:visible
+        eyebrow="Your Success Story Starts Here"
+        headlineLines={["Ready to achieve", "similar results?"]}
+        body="Let's discuss how Cube27 can help you build capability, not just deliver projects."
+      />
+    </main>
+    <Footer />
+  </div>
 </Layout>

@@ -148,9 +148,21 @@ function DashboardMockup() {
           </div>
           {/* Stat rail */}
           <div className="col-span-2 space-y-4 bg-cube27-neutral-light p-4">
-            <Stat label="Understand — discovery & brief" value="01" delta="week 1" />
-            <Stat label="Build — plan & team assembled" value="02" delta="weeks 2–4" />
-            <Stat label="Operate & measure — delivery" value="03" delta="ongoing" />
+            <Stat
+              label="Understand — discovery & brief"
+              value="01"
+              delta="week 1"
+            />
+            <Stat
+              label="Build — plan & team assembled"
+              value="02"
+              delta="weeks 2–4"
+            />
+            <Stat
+              label="Operate & measure — delivery"
+              value="03"
+              delta="ongoing"
+            />
             <svg
               viewBox="0 0 120 32"
               fill="none"

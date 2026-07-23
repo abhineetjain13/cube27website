@@ -14,9 +14,11 @@ export const prerender = true;
   <div
     class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
   >
-    <Navbar client:load />
-    <h1 class="sr-only">Contact Cube27 — Start a Conversation</h1>
-    <Contact client:load />
+    <Navbar client:load pathname={Astro.url.pathname} />
+    <main id="main" tabindex="-1">
+      <h1 class="sr-only">Contact Cube27 — Start a Conversation</h1>
+      <Contact client:load />
+    </main>
     <Footer />
   </div>
 </Layout>

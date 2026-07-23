@@ -1,0 +1,131 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Navbar } from "@/components/sections/navbar";
+import { Footer } from "@/components/sections/footer";
+import { PageIntro } from "@/components/sections/page-intro";
+import { Contact } from "@/components/sections/contact";
+import { SITE_CONFIG } from "@/site-config";
+import type { CollectionPage, WithContext } from "schema-dts";
+
+export const prerender = true;
+
+// Featured first, then newest. `featured` pins an evergreen piece to the top
+// without having to backdate it.
+const posts = (await getCollection("insights")).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+
+const dateFormat = new Intl.DateTimeFormat("en", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
+
+const jsonLd: WithContext<CollectionPage> = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Insights",
+  description:
+    "Practical guidance on GCC setup, agentic AI, Salesforce, and enterprise delivery from the Cube27 team.",
+  url: `${SITE_CONFIG.url}/insights`,
+  hasPart: posts.map((post) => ({
+    "@type": "Article",
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.publishDate.toISOString(),
+    url: `${SITE_CONFIG.url}/insights/${post.id}`,
+  })),
+};
+---
+
+<Layout
+  title="Insights — GCC, Agentic AI & Salesforce"
+  description="Practical guidance on GCC setup, agentic AI, Salesforce, and enterprise delivery from the Cube27 team."
+  jsonLd={jsonLd}
+>
+  <div
+    class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
+  >
+    <Navbar client:load pathname={Astro.url.pathname} />
+    <main id="main" tabindex="-1">
+      <PageIntro
+        headlineLines={["Field notes from", "enterprise delivery."]}
+        body="Practical guidance on standing up Global Capability Centers, deploying agentic AI in production, and migrating enterprise platforms without freezing your roadmap."
+        ctaLabel="Schedule a consultation"
+        ctaHref="/contact"
+        overlayEyebrow="INSIGHTS"
+        overlayTitle="Written from the work."
+        overlayDescription="Grounded in real engagements, not vendor talking points."
+        overlayBadge="New"
+        overlayLinkHref="#articles"
+      />
+
+      <section
+        id="articles"
+        class="border-t border-cube27-border-primary py-20 lg:py-28"
+      >
+        <div class="mx-auto max-w-7xl px-5 sm:px-8">
+          <p
+            class="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary"
+          >
+            Featured &amp; latest
+          </p>
+          <h2
+            class="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary"
+          >
+            Articles & guides
+          </h2>
+
+          <ul class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {
+              posts.map((post) => (
+                <li>
+                  <a
+                    href={`/insights/${post.id}`}
+                    class="group flex h-full flex-col rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md sm:p-8"
+                  >
+                    <div class="flex flex-wrap items-center gap-2">
+                      {post.data.tags.slice(0, 2).map((tag) => (
+                        <span class="inline-block rounded-full bg-cube27-accent-primary/10 px-3 py-1 text-[0.72rem] font-semibold text-cube27-accent-primary">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <h3 class="typography-heading mt-4 text-balance text-[1.35rem] font-medium leading-snug text-cube27-text-primary">
+                      {post.data.title}
+                    </h3>
+                    <p class="mt-3 flex-1 text-[0.95rem] leading-relaxed text-cube27-text-secondary">
+                      {post.data.description}
+                    </p>
+                    <div class="mt-6 flex items-center justify-between border-t border-cube27-border-primary pt-4">
+                      <time
+                        datetime={post.data.publishDate.toISOString()}
+                        class="text-[0.82rem] text-cube27-text-secondary"
+                      >
+                        {dateFormat.format(post.data.publishDate)}
+                      </time>
+                      <span class="text-[0.85rem] font-medium text-cube27-accent-primary">
+                        Read →
+                      </span>
+                    </div>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+
+      <Contact
+        client:visible
+        eyebrow="Have a harder version of this problem?"
+        headlineLines={["Let's talk about", "your engagement."]}
+        body="Schedule a consultation with a Solutions Architect to work through GCC setup, agentic AI, or a platform migration."
+      />
+    </main>
+    <Footer />
+  </div>
+</Layout>

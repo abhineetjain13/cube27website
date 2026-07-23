@@ -17,6 +17,7 @@ const DEFAULT_COLUMNS: FooterColumn[] = [
   {
     title: "Services",
     links: [
+      { label: "All Services", href: "/services" },
       { label: "GCC & BOT Model", href: "/services#gcc" },
       { label: "Salesforce & Platforms", href: "/services#commerce" },
       { label: "Digital Product Engineering", href: "/services#engineering" },
@@ -28,8 +29,9 @@ const DEFAULT_COLUMNS: FooterColumn[] = [
     links: [
       { label: "About Us", href: "/about" },
       { label: "Success Stories", href: "/success-stories" },
-      { label: "Contact Us", href: "/contact" },
+      { label: "Insights", href: "/insights" },
       { label: "Careers", href: "/careers" },
+      { label: "Contact Us", href: "/contact" },
     ],
   },
   {

@@ -20,6 +20,13 @@ interface NavLink {
 
 interface NavGroup {
   label: string;
+  /**
+   * Destination of the group label itself. Every group heads a real page, so
+   * the label renders as a link and only the adjacent chevron toggles the
+   * menu — without this, `/services` and `/about` are unreachable from the
+   * nav and the dropdown is the only way in.
+   */
+  href: string;
   items: NavLink[];
 }
 
@@ -29,23 +36,23 @@ function isGroup(item: NavItem): item is NavGroup {
   return "items" in item;
 }
 
+/**
+ * Five top-level destinations. Success Stories and Insights sit at the top
+ * level rather than nested under a "Company" catch-all: both are primary
+ * evaluation content for enterprise buyers, and burying them cost a click
+ * from every page. Each dropdown leads with an "Overview" row pointing at the
+ * parent page, so there are always two routes to it.
+ */
 const DEFAULT_ITEMS: NavItem[] = [
   {
-    label: "Company",
-    items: [
-      { label: "About", href: "/about", desc: "Who we are & how we work" },
-      { label: "Careers", href: "/careers", desc: "Open roles at Cube27" },
-      {
-        label: "Success Stories",
-        href: "/success-stories",
-        desc: "Proven enterprise outcomes",
-      },
-      { label: "CSR", href: "/csr", desc: "Our corporate responsibility" },
-    ],
-  },
-  {
     label: "Services",
+    href: "/services",
     items: [
+      {
+        label: "Overview",
+        href: "/services",
+        desc: "All four capabilities",
+      },
       {
         label: "AI & Automation",
         href: "/services#ai",
@@ -68,19 +75,40 @@ const DEFAULT_ITEMS: NavItem[] = [
       },
     ],
   },
+  { label: "Success Stories", href: "/success-stories" },
+  { label: "Insights", href: "/insights" },
+  {
+    label: "About",
+    href: "/about",
+    items: [
+      { label: "Overview", href: "/about", desc: "Who we are & how we work" },
+      { label: "Careers", href: "/careers", desc: "Open roles at Cube27" },
+      { label: "CSR", href: "/csr", desc: "Our corporate responsibility" },
+    ],
+  },
   { label: "Contact", href: "/contact" },
 ];
+
+/** True when `href` is the current page (or, for /services, its hash views). */
+function isActive(href: string, pathname: string): boolean {
+  const path = href.split("#")[0];
+  if (path === "/") return pathname === "/";
+  return pathname === path || pathname.startsWith(`${path}/`);
+}
 
 interface NavbarProps {
   items?: NavItem[];
   ctaLabel?: string;
   ctaHref?: string;
+  /** Current path, passed from the Astro shell, for active-item marking. */
+  pathname?: string;
 }
 
 export function Navbar({
   items = DEFAULT_ITEMS,
   ctaLabel = "Schedule a consultation",
   ctaHref = "/contact",
+  pathname = "",
 }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
@@ -136,6 +164,17 @@ export function Navbar({
     };
   }, []);
 
+  // Lock body scroll while the mobile sheet is open so the page behind it
+  // doesn't scroll under the menu.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [mobileOpen]);
+
   function scheduleClose() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     closeTimer.current = setTimeout(() => setOpenGroup(null), 120);
@@ -166,12 +205,14 @@ export function Navbar({
           <Cube27Logo />
         </a>
 
-        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
-          {items.map((item) =>
-            isGroup(item) ? (
+        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 md:flex">
+          {items.map((item) => {
+            const active = isActive(item.href, pathname);
+            return isGroup(item) ? (
               <DesktopDropdown
                 key={item.label}
                 group={item}
+                active={active}
                 open={openGroup === item.label}
                 onOpen={() => {
                   cancelClose();
@@ -185,13 +226,19 @@ export function Navbar({
               <li key={item.label}>
                 <a
                   href={item.href}
-                  className="text-[0.9rem] text-cube27-text-primary/80 transition-colors hover:text-cube27-text-primary"
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "relative py-1 text-[0.9rem] transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-cube27-accent-primary after:transition-opacity",
+                    active
+                      ? "text-cube27-text-primary after:opacity-100"
+                      : "text-cube27-text-primary/80 hover:text-cube27-text-primary after:opacity-0",
+                  )}
                 >
                   {item.label}
                 </a>
               </li>
-            ),
-          )}
+            );
+          })}
         </ul>
 
         <div className="hidden md:block">
@@ -222,6 +269,7 @@ export function Navbar({
                 <li key={item.label}>
                   <MobileGroup
                     group={item}
+                    active={isActive(item.href, pathname)}
                     onNavigate={() => setMobileOpen(false)}
                   />
                 </li>
@@ -233,7 +281,15 @@ export function Navbar({
                   <a
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className="flex min-h-[3rem] items-center text-base font-medium text-cube27-text-primary"
+                    aria-current={
+                      isActive(item.href, pathname) ? "page" : undefined
+                    }
+                    className={cn(
+                      "flex min-h-[2.75rem] items-center py-1 text-base font-medium",
+                      isActive(item.href, pathname)
+                        ? "text-cube27-accent-primary"
+                        : "text-cube27-text-primary",
+                    )}
                   >
                     {item.label}
                   </a>
@@ -253,8 +309,16 @@ export function Navbar({
   );
 }
 
+/**
+ * Group entry: the label is a real link to the parent page, and a separate
+ * adjacent chevron button toggles the menu. Splitting them is what makes
+ * `/services` and `/about` reachable — a single <button> trigger left those
+ * pages with no direct path at all. Hover still opens the menu on pointer
+ * devices, so the discovery affordance is unchanged.
+ */
 function DesktopDropdown({
   group,
+  active,
   open,
   onOpen,
   onScheduleClose,
@@ -262,6 +326,7 @@ function DesktopDropdown({
   onClose,
 }: {
   group: NavGroup;
+  active: boolean;
   open: boolean;
   onOpen: () => void;
   onScheduleClose: () => void;
@@ -269,6 +334,7 @@ function DesktopDropdown({
   onClose: () => void;
 }) {
   const menuId = useId();
+  const wide = group.items.length > 4;
 
   return (
     <li
@@ -285,22 +351,36 @@ function DesktopDropdown({
         }
       }}
     >
-      <button
-        type="button"
-        className="flex items-center gap-1 text-[0.9rem] text-cube27-text-primary/80 transition-colors hover:text-cube27-text-primary aria-expanded:text-cube27-text-primary"
-        aria-expanded={open}
-        aria-controls={menuId}
-        onClick={() => (open ? onClose() : onOpen())}
-      >
-        {group.label}
-        <ChevronDown
+      <span className="flex items-center gap-0.5">
+        <a
+          href={group.href}
+          aria-current={active ? "page" : undefined}
           className={cn(
-            "size-4 transition-transform duration-200",
-            open && "rotate-180",
+            "relative py-1 text-[0.9rem] transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-cube27-accent-primary after:transition-opacity",
+            active
+              ? "text-cube27-text-primary after:opacity-100"
+              : "text-cube27-text-primary/80 hover:text-cube27-text-primary after:opacity-0",
           )}
-          aria-hidden="true"
-        />
-      </button>
+        >
+          {group.label}
+        </a>
+        <button
+          type="button"
+          className="grid size-6 place-items-center rounded text-cube27-text-primary/70 transition-colors hover:text-cube27-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cube27-accent-primary"
+          aria-expanded={open}
+          aria-controls={menuId}
+          aria-label={`${group.label} menu`}
+          onClick={() => (open ? onClose() : onOpen())}
+        >
+          <ChevronDown
+            className={cn(
+              "size-4 transition-transform duration-200",
+              open && "rotate-180",
+            )}
+            aria-hidden="true"
+          />
+        </button>
+      </span>
 
       {open && (
         <div
@@ -312,7 +392,12 @@ function DesktopDropdown({
           onPointerLeave={(e) => {
             if (e.pointerType !== "touch") onScheduleClose();
           }}
-          className="absolute left-1/2 top-full z-50 mt-2 w-72 -translate-x-1/2 overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-1.5 shadow-lg shadow-black/5 motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-top-1 motion-safe:duration-150 motion-safe:ease-out"
+          className={cn(
+            "absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-1.5 shadow-lg shadow-black/5 motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-top-1 motion-safe:duration-150 motion-safe:ease-out",
+            // Services carries five entries; two columns keeps the panel from
+            // running past the viewport and reads as a preview of the page.
+            wide ? "grid w-[34rem] grid-cols-2 gap-0.5" : "w-72",
+          )}
         >
           {group.items.map((link) => (
             <a
@@ -337,32 +422,70 @@ function DesktopDropdown({
   );
 }
 
+/**
+ * Mobile group row: the label navigates to the parent page and only the
+ * chevron expands the sublist. Previously the whole row was a <summary>, so
+ * tapping "Services" could never reach /services. Uses controlled state
+ * rather than <details> so the link can sit outside the toggle target.
+ */
 function MobileGroup({
   group,
+  active,
   onNavigate,
 }: {
   group: NavGroup;
+  active: boolean;
   onNavigate: () => void;
 }) {
+  const [open, setOpen] = useState(false);
+  const listId = useId();
+
   return (
-    <details className="group border-b border-cube27-border-primary">
-      <summary className="flex min-h-[3rem] cursor-pointer list-none items-center justify-between text-base font-medium text-cube27-text-primary">
-        {group.label}
-        <ChevronDown className="size-5 text-cube27-text-secondary transition-transform duration-200 group-open:rotate-180" />
-      </summary>
-      <ul className="pb-2">
-        {group.items.map((link) => (
-          <li key={link.label}>
-            <a
-              href={link.href}
-              onClick={onNavigate}
-              className="flex min-h-[2.75rem] items-center pl-3 text-[0.95rem] text-cube27-text-secondary transition-colors hover:text-cube27-text-primary"
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </details>
+    <div className="border-b border-cube27-border-primary">
+      <div className="flex items-center justify-between gap-2">
+        <a
+          href={group.href}
+          onClick={onNavigate}
+          aria-current={active ? "page" : undefined}
+          className={cn(
+            "flex min-h-[2.75rem] flex-1 items-center py-1 text-base font-medium",
+            active ? "text-cube27-accent-primary" : "text-cube27-text-primary",
+          )}
+        >
+          {group.label}
+        </a>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-controls={listId}
+          aria-label={`${group.label} menu`}
+          className="grid size-11 shrink-0 place-items-center text-cube27-text-secondary"
+        >
+          <ChevronDown
+            className={cn(
+              "size-5 transition-transform duration-200",
+              open && "rotate-180",
+            )}
+            aria-hidden="true"
+          />
+        </button>
+      </div>
+      {open && (
+        <ul id={listId} className="pb-2">
+          {group.items.map((link) => (
+            <li key={link.label}>
+              <a
+                href={link.href}
+                onClick={onNavigate}
+                className="flex min-h-[2.75rem] items-center pl-3 text-[0.95rem] text-cube27-text-secondary transition-colors hover:text-cube27-text-primary"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }

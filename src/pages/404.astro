@@ -10,5 +10,6 @@ export const prerender = true;
   description="The page you requested could not be found."
   noindex={true}
 >
-  <NotFoundPage client:load />
+  {/* Static markup — no interactivity, so no hydration. */}
+  <NotFoundPage />
 </Layout>

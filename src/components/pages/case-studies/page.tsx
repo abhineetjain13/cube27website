@@ -1,8 +1,4 @@
 import { Check, ArrowRight, Building, Award, Shield } from "lucide-react";
-import { Navbar } from "@/components/sections/navbar";
-import { Footer } from "@/components/sections/footer";
-import { PageIntro } from "@/components/sections/page-intro";
-import { Contact } from "@/components/sections/contact";
 import { Reveal } from "@/components/ui/reveal";
 import { SplitExplorer, type SplitItem } from "@/components/ui/split-explorer";
 import { StatGrid, StatCell } from "@/components/ui/stat-grid";
@@ -24,7 +20,14 @@ export interface CaseStudy {
   tags: string[];
 }
 
-export function CaseStudiesPage({ studies }: { studies: CaseStudy[] }) {
+/**
+ * Interactive case-study explorer. Hydrated on its own by
+ * `src/pages/success-stories.astro` — the page hero, the trusted-partnership
+ * band, and the contact form are separate islands, so this ships only the
+ * explorer's JS. `render` returns JSX, so the items array must be built here
+ * (inside React) rather than passed across the Astro boundary.
+ */
+export function CaseStudiesExplorer({ studies }: { studies: CaseStudy[] }) {
   const items: SplitItem[] = studies.map((cs) => ({
     id: cs.id,
     eyebrow: cs.category,
@@ -33,52 +36,23 @@ export function CaseStudiesPage({ studies }: { studies: CaseStudy[] }) {
   }));
 
   return (
-    <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
-      <Navbar />
-      <main>
-        <PageIntro
-          headlineLines={[
-            "Success Stories &",
-            "proven enterprise",
-            "outcomes.",
-          ]}
-          body="Real outcomes, measurable impact — explore how Cube27 has helped enterprises build Global Capability Centers and transform digital operations."
-          ctaLabel="Schedule a consultation"
-          ctaHref="#contact"
-          overlayEyebrow="OUTCOMES DELIVERED"
-          overlayTitle="Impact. Value. Trust."
-          overlayDescription="Rigorous delivery for over 100+ global brands."
-          overlayBadge="10x"
-        />
-
-        <section className="border-t border-cube27-border-primary py-20 lg:py-28">
-          <div className="mx-auto mb-12 max-w-7xl px-5 sm:px-8">
-            <Reveal>
-              <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
-                Success stories
-              </p>
-              <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
-                Select an engagement to explore the outcome.
-              </h2>
-            </Reveal>
-          </div>
-          <SplitExplorer items={items} ariaLabel="Case studies" />
-        </section>
-
-        <ClientsAndBrandsSection />
-
-        <Contact
-          eyebrow="Your Success Story Starts Here"
-          headlineLines={["Ready to achieve", "similar results?"]}
-          body="Let's discuss how Cube27 can help you build capability, not just deliver projects."
-        />
-      </main>
-      <Footer />
-    </div>
+    <section className="border-t border-cube27-border-primary py-20 lg:py-28">
+      <div className="mx-auto mb-12 max-w-7xl px-5 sm:px-8">
+        <Reveal>
+          <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">
+            Success stories
+          </p>
+          <h2 className="typography-heading mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.2vw,2.35rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-cube27-text-primary">
+            Select an engagement to explore the outcome.
+          </h2>
+        </Reveal>
+      </div>
+      <SplitExplorer items={items} ariaLabel="Case studies" />
+    </section>
   );
 }
 
-function ClientsAndBrandsSection() {
+export function ClientsAndBrandsSection() {
   return (
     <section className="border-t border-cube27-border-primary bg-cube27-neutral-secondary/30 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -159,12 +133,7 @@ function CaseStudyDetail({ study }: { study: CaseStudy }) {
       {/* Results grid */}
       <StatGrid className="mt-10 sm:grid-cols-4">
         {study.results.map((r) => (
-          <StatCell
-            key={r.label}
-            value={r.value}
-            label={r.label}
-            size="lg"
-          />
+          <StatCell key={r.label} value={r.value} label={r.label} size="lg" />
         ))}
       </StatGrid>
 

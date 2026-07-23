@@ -1,8 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import { ServicesPage } from "@/components/pages/services/page";
-import { SITE_CONFIG } from "@/site-config";
+import { Navbar } from "@/components/sections/navbar";
+import { Footer } from "@/components/sections/footer";
+import { PageIntro } from "@/components/sections/page-intro";
+import { Contact } from "@/components/sections/contact";
+import { Faq } from "@/components/sections/faq";
+import { ServicesExplorer } from "@/components/pages/services/page";
+import { SITE_CONFIG, COMPANY_FACTS } from "@/site-config";
 import type { SeoJsonSchema } from "@/components/seo-json";
 
 export const prerender = true;
@@ -46,5 +51,44 @@ const jsonLd: SeoJsonSchema[] = services.map((service) => ({
   description="Cube27's services across Agentic AI & Automation, Digital Product Engineering, Salesforce & Enterprise Platforms, and GCC-as-a-Service."
   jsonLd={jsonLd}
 >
-  <ServicesPage client:load faqItems={faqItems} />
+  <div
+    class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
+  >
+    <Navbar client:load pathname={Astro.url.pathname} />
+    <main id="main" tabindex="-1">
+      <PageIntro
+        headlineLines={["Engineering the", "intelligent enterprise."]}
+        body="Rapid innovation through technology, and sustained operational and process capacity via GCC-as-a-Service."
+        ctaLabel="Schedule a consultation"
+        ctaHref="#contact"
+        overlayEyebrow="CAPABILITY ENGINE"
+        overlayTitle="Architect. Build. Scale."
+        overlayDescription="High-fidelity engineering & GCC operations for global enterprises."
+        overlayBadge={COMPANY_FACTS.headcount.value}
+        overlayLinkHref="#capabilities"
+      />
+      {
+        /*
+        client:load, not client:visible: this island owns deep-link handling
+        for /services#ai|#engineering|#commerce|#gcc. Deferring hydration until
+        it scrolls into view means a deep link never selects or scrolls to the
+        right capability, so the nav dropdown appears to do nothing.
+      */
+      }
+      <ServicesExplorer client:load />
+      <Faq
+        eyebrow="Questions"
+        heading="Services & engagement FAQs"
+        items={faqItems}
+        schemaUrl={`${SITE_CONFIG.url}/services`}
+      />
+      <Contact
+        client:visible
+        eyebrow="Ready to Partner?"
+        headlineLines={["Let's find the right", "engagement model."]}
+        body="Whether you need a GCC, a Salesforce transformation, or an AI-powered product build — schedule a consultation with our Solutions Architect."
+      />
+    </main>
+    <Footer />
+  </div>
 </Layout>

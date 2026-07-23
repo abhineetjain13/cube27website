@@ -87,6 +87,13 @@ const imageUrl = resolveUrl(image);
     <slot name="head" />
   </head>
   <body>
+    {/* Keyboard users can jump the navbar; visually hidden until focused. */}
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-cube27-background-primary focus:px-4 focus:py-2 focus:text-cube27-text-primary focus:shadow-lg focus:outline focus:outline-2 focus:outline-cube27-accent-primary"
+    >
+      Skip to content
+    </a>
     <slot />
   </body>
 </html>

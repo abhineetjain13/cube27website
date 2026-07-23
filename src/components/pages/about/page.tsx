@@ -1,10 +1,6 @@
 import { ArrowRight, UserCheck } from "lucide-react";
-import { Navbar } from "@/components/sections/navbar";
-import { Footer } from "@/components/sections/footer";
 import { PageIntro } from "@/components/sections/page-intro";
 import { HomeProof } from "@/components/pages/home/sections/proof";
-import { Contact } from "@/components/sections/contact";
-import { LifeAtCube27 } from "@/components/sections/life-at-cube27";
 import { Reveal } from "@/components/ui/reveal";
 import { StatGrid, StatCell } from "@/components/ui/stat-grid";
 import { COMPANY_FACTS } from "@/site-config";
@@ -17,59 +13,50 @@ export interface Leader {
   bio: string;
 }
 
+/**
+ * Static body of the about page. The navbar, culture gallery, and contact
+ * form are hydrated separately by `src/pages/about.astro` — everything here
+ * is markup whose entrance motion is pure CSS, so it needs no JS.
+ */
 export function AboutPage({ leaders }: { leaders: Leader[] }) {
   return (
-    <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
-      <Navbar />
-      <main>
-        <PageIntro
-          headlineLines={[
-            "Built to engineer",
-            "the intelligent",
-            "enterprise.",
-          ]}
-          body="Cube27 is a Global Capability Center (GCC) partner bridging operational stability and high-end technical innovation."
-          ctaLabel="Schedule a consultation"
-          ctaHref="#contact"
-          overlayEyebrow="GLOBAL DELIVERY"
-          overlayTitle="People. Process. Pride."
-          overlayDescription="Operating as a seamless extension from our Pune hub."
-          overlayBadge="150+"
-          overlayLinkHref="#company"
-        />
-        <CompanyStory />
-        <LeadershipSection leaders={leaders} />
-        <InfrastructureSection />
-        <Principles />
-        <HomeProof
-          eyebrow="Our track record"
-          statement="With over two decades of combined leadership experience in eCommerce, digital marketing, and enterprise technology, we deliver on our promises while innovating."
-          stats={[
-            {
-              value: COMPANY_FACTS.headcount.value,
-              label: COMPANY_FACTS.headcount.label,
-            },
-            { value: COMPANY_FACTS.sla.value, label: COMPANY_FACTS.sla.label },
-            {
-              value: COMPANY_FACTS.adSpend.value,
-              label: COMPANY_FACTS.adSpend.label,
-            },
-            {
-              value: COMPANY_FACTS.experience.value,
-              label: COMPANY_FACTS.experience.label,
-            },
-          ]}
-        />
-        <PeopleBand />
-        <LifeAtCube27 />
-        <Contact
-          eyebrow="Partner with Cube27"
-          headlineLines={["Let's engineer your", "intelligent enterprise."]}
-          body="Whether you're looking to extend your team or join ours, we'd love to hear from you."
-        />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <PageIntro
+        headlineLines={["Built to engineer", "the intelligent", "enterprise."]}
+        body="Cube27 is a Global Capability Center (GCC) partner bridging operational stability and high-end technical innovation."
+        ctaLabel="Schedule a consultation"
+        ctaHref="#contact"
+        overlayEyebrow="GLOBAL DELIVERY"
+        overlayTitle="People. Process. Pride."
+        overlayDescription="Operating as a seamless extension from our Pune hub."
+        overlayBadge={COMPANY_FACTS.headcount.value}
+        overlayLinkHref="#company"
+      />
+      <CompanyStory />
+      <LeadershipSection leaders={leaders} />
+      <InfrastructureSection />
+      <Principles />
+      <HomeProof
+        eyebrow="Our track record"
+        statement="With over two decades of combined leadership experience in eCommerce, digital marketing, and enterprise technology, we deliver on our promises while innovating."
+        stats={[
+          {
+            value: COMPANY_FACTS.headcount.value,
+            label: COMPANY_FACTS.headcount.label,
+          },
+          { value: COMPANY_FACTS.sla.value, label: COMPANY_FACTS.sla.label },
+          {
+            value: COMPANY_FACTS.adSpend.value,
+            label: COMPANY_FACTS.adSpend.label,
+          },
+          {
+            value: COMPANY_FACTS.experience.value,
+            label: COMPANY_FACTS.experience.label,
+          },
+        ]}
+      />
+      <PeopleBand />
+    </>
   );
 }
 

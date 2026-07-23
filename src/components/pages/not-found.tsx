@@ -4,7 +4,11 @@
  */
 export function NotFoundPage() {
   return (
-    <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary flex items-center justify-center">
+    <main
+      id="main"
+      tabIndex={-1}
+      className="min-h-screen bg-cube27-background-primary text-cube27-text-primary flex items-center justify-center"
+    >
       <div className="text-center space-y-6 px-6">
         <h1 className="font-heading typography-heading text-4xl md:text-6xl lg:text-7xl">
           404
@@ -14,11 +18,11 @@ export function NotFoundPage() {
         </p>
         <a
           href="/"
-          className="mt-4 inline-flex items-center justify-center rounded-md border border-cube27-border-primary px-4 py-2 text-sm md:text-base lg:text-lg transition-colors hover:bg-cube27-neutral-primary-s2"
+          className="mt-4 inline-flex items-center justify-center rounded-md border border-cube27-border-primary px-4 py-2 text-sm md:text-base lg:text-lg transition-colors hover:bg-cube27-neutral-secondary"
         >
           Go home
         </a>
       </div>
-    </div>
+    </main>
   );
 }

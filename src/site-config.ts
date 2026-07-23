@@ -34,7 +34,7 @@ export const SITE_CONFIG: SiteConfig = {
   brand: "Cube27",
   url: "https://www.cube27.com",
   description:
-    "Cube27 builds digital marketing, ecommerce, machine learning, and business intelligence solutions for ambitious organizations. Trusted by more than 100 brands, including Fortune 500 companies.",
+    "Cube27 is a GCC partner engineering agentic AI, digital products, and Salesforce platforms for global enterprises. Trusted by 100+ brands and the Fortune 500.",
   organization: {
     legalName: "Cube27 IT Pvt. Ltd.",
     email: "contact@cube27.com",

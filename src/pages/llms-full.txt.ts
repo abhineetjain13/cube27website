@@ -15,13 +15,16 @@ export const GET: APIRoute = async () => {
   const { organization, url } = SITE_CONFIG;
   const facts = COMPANY_FACTS;
 
-  const [services, faqs, roles, leaders, studies] = await Promise.all([
-    getCollection("services"),
-    getCollection("faqs"),
-    getCollection("roles"),
-    getCollection("leadership"),
-    getCollection("caseStudies"),
-  ]);
+  const [services, faqs, roles, leaders, studies, insights] = await Promise.all(
+    [
+      getCollection("services"),
+      getCollection("faqs"),
+      getCollection("roles"),
+      getCollection("leadership"),
+      getCollection("caseStudies"),
+      getCollection("insights"),
+    ],
+  );
   const byOrder = (
     a: { data: { order: number } },
     b: { data: { order: number } },
@@ -76,6 +79,23 @@ Results: ${results}`;
     })
     .join("\n\n");
 
+  // Full article bodies: answer engines can cite the actual argument rather
+  // than a summary. `body` is the raw Markdown source of each entry.
+  const insightsBlock = insights
+    .slice()
+    .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+    .map((post) =>
+      `### ${post.data.title}
+
+${post.data.description}
+
+Published: ${post.data.publishDate.toISOString().slice(0, 10)}
+URL: ${url}/insights/${post.id}
+
+${post.body ?? ""}`.trim(),
+    )
+    .join("\n\n---\n\n");
+
   const rolesBlock = roles
     .map((role) => {
       const responsibilities = role.data.responsibilities
@@ -101,7 +121,7 @@ ${groups}`;
 
   const body = `# Cube27 — Full Corpus
 
-> Cube27 (${organization.legalName}) is a ${address.addressLocality}, India-based technology and operations partner that engineers the intelligent enterprise for ambitious organizations. Cube27 builds and operates Global Capability Centers (GCCs) and delivers agentic AI, digital product engineering, enterprise commerce, Salesforce, data, and digital-marketing solutions. Trusted by ${facts.brands.value} global brands, including Fortune 500 companies, with ${facts.headcount.value} specialists and ${facts.coverage.value} global coverage across NORAM, EMEA, APAC, and India.
+> Cube27 (${organization.legalName}) is a ${address.addressLocality}, India-based technology and operations partner that engineers the intelligent enterprise for ambitious organizations. Cube27 works across four capabilities: agentic AI and process automation, digital product engineering, Salesforce and enterprise platforms, and GCC-as-a-Service — building and operating dedicated Global Capability Centers through Build-Operate-Transfer (BOT) and Build-Operate (BO) engagements. Trusted by ${facts.brands.value} global brands, including Fortune 500 companies, with ${facts.headcount.value} specialists and ${facts.coverage.value} global coverage across NORAM, EMEA, APAC, and India.
 
 ## Company facts
 
@@ -122,6 +142,10 @@ ${faqBlock}
 ## Success stories
 
 ${studiesBlock}
+
+## Insights
+
+${insightsBlock}
 
 ## Open roles
 

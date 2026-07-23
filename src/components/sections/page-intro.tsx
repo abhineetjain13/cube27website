@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { COMPANY_FACTS } from "@/site-config";
 
 /**
  * @cube27Component
@@ -32,7 +33,7 @@ interface PageIntroProps {
 
 const DEFAULT_HEADLINE = ["The technology", "behind better", "business."];
 const DEFAULT_BODY =
-  "CUBE27 builds digital marketing, ecommerce, machine learning, and business intelligence solutions that help ambitious organizations make better decisions and move faster.";
+  "CUBE27 is a GCC partner engineering agentic AI, digital products, and Salesforce platforms for global enterprises — extending your team with stability, intelligence, and scale.";
 
 export function PageIntro({
   headlineLines = DEFAULT_HEADLINE,
@@ -42,7 +43,10 @@ export function PageIntro({
   overlayEyebrow = "INTELLIGENT OPERATIONS",
   overlayTitle = "Signal. Context. Action.",
   overlayDescription = "Continuous intelligence across data, marketing, and operations.",
-  overlayBadge = "+24%",
+  // Sourced from facts.json. The previous "+24%" mapped to no real metric —
+  // an invented number in the hero is the wrong first impression for an
+  // enterprise buyer evaluating a delivery partner.
+  overlayBadge = COMPANY_FACTS.headcount.value,
   overlayLinkLabel = "See how it works",
   overlayLinkHref,
   as: Headline = "h1",
@@ -95,7 +99,7 @@ export function PageIntro({
           <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:max-w-md rounded-xl border border-white/20 bg-white/90 backdrop-blur-md p-4 sm:p-5 shadow-[0_16px_48px_rgba(15,17,23,0.12)] transition-all duration-300 hover:shadow-[0_20px_56px_rgba(15,17,23,0.18)]">
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cube27-accent-primary opacity-75"></span>
+                <span className="absolute inline-flex h-full w-full rounded-full bg-cube27-accent-primary opacity-75 motion-safe:animate-ping"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cube27-accent-primary"></span>
               </span>
               <span className="text-[0.65rem] uppercase tracking-[0.16em] font-semibold text-cube27-text-secondary">
@@ -142,7 +146,7 @@ export function PageIntro({
                 </svg>
                 {/* Stat Badge */}
                 {overlayBadge && (
-                  <span className="inline-flex items-center justify-center rounded bg-cube27-accent-primary px-1.5 py-0.5 text-[0.7rem] font-semibold text-white tracking-wide animate-pulse">
+                  <span className="inline-flex items-center justify-center rounded bg-cube27-accent-primary px-1.5 py-0.5 text-[0.7rem] font-semibold tracking-wide text-cube27-text-on-accent-primary">
                     {overlayBadge}
                   </span>
                 )}

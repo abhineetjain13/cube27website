@@ -1,7 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import { Navbar } from "@/components/sections/navbar";
+import { Footer } from "@/components/sections/footer";
 import { AboutPage, type Leader } from "@/components/pages/about/page";
+import { LifeAtCube27 } from "@/components/sections/life-at-cube27";
+import { Contact } from "@/components/sections/contact";
 
 export const prerender = true;
 
@@ -14,5 +18,20 @@ const leaders: Leader[] = (await getCollection("leadership"))
   title="About Cube27 — GCC & Enterprise AI Partner"
   description="Cube27 is a Pune-based technology and operations partner helping 100+ global brands — including Fortune 500 enterprises — engineer their intelligent enterprise across GCC-as-a-Service, agentic AI, data, and marketing."
 >
-  <AboutPage client:load leaders={leaders} />
+  <div
+    class="min-h-screen bg-cube27-background-primary text-cube27-text-primary"
+  >
+    <Navbar client:load pathname={Astro.url.pathname} />
+    <main id="main" tabindex="-1">
+      <AboutPage leaders={leaders} />
+      <LifeAtCube27 client:visible />
+      <Contact
+        client:visible
+        eyebrow="Partner with Cube27"
+        headlineLines={["Let's engineer your", "intelligent enterprise."]}
+        body="Whether you're looking to extend your team or join ours, we'd love to hear from you."
+      />
+    </main>
+    <Footer />
+  </div>
 </Layout>

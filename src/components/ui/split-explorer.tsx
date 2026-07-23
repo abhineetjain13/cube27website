@@ -31,6 +31,26 @@ interface SplitExplorerProps {
   className?: string;
 }
 
+/**
+ * Scroll a deep-linked item into view via its enclosing <section> rather than
+ * the explorer itself, so the section's framing heading stays on screen. Falls
+ * back to the explorer root when there is no wrapping section.
+ */
+function scrollToFrame(
+  el: HTMLElement | null,
+  behavior: ScrollBehavior = "auto",
+) {
+  const target = el?.closest("section") ?? el;
+  // Honor prefers-reduced-motion: a smooth scroll is exactly the kind of
+  // large-viewport motion that setting exists to suppress, so downgrade to an
+  // instant jump. Every other caller already passes "auto".
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  target?.scrollIntoView({
+    block: "start",
+    behavior: reduced ? "auto" : behavior,
+  });
+}
+
 export function SplitExplorer({
   items,
   ariaLabel,
@@ -40,32 +60,67 @@ export function SplitExplorer({
   const [activeId, setActiveId] = useState(items[0]?.id ?? "");
   const rootRef = useRef<HTMLDivElement>(null);
 
-  // On mount, honor a deep-link hash (/services#gcc) by selecting that item.
+  // On mount, honor a deep-link hash (/services#gcc) by SELECTING that item —
+  // and scroll to the SECTION that frames it — not to the detail panel.
+  // Scrolling to the panel dropped the visitor past the page's own heading
+  // ("Four capabilities, one integrated partner"); not scrolling at all left
+  // a dropdown click looking like it had done nothing but load the parent
+  // page. Targeting the enclosing section shows the framing heading and the
+  // selected item together, which is what a deep link should do.
   // Deferred to a frame so server and first client render both show items[0]
-  // (no hydration mismatch), then we correct to the hash target and scroll it
-  // into view without jumping past the sticky navbar.
+  // (no hydration mismatch), then we correct to the hash target.
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
     if (hash && items.some((i) => i.id === hash)) {
       requestAnimationFrame(() => {
         setActiveId(hash);
-        rootRef.current?.scrollIntoView({ block: "start" });
+        scrollToFrame(rootRef.current);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Respond to in-page hash changes (e.g. clicking a navbar dropdown link
-  // while already on the page).
+  // Respond to in-page hash changes (e.g. clicking a navbar or footer link
+  // while already on the page) and to view-transition navigations. With
+  // <ClientRouter/>, moving from / to /services#gcc swaps the DOM instead of
+  // reloading, and Astro restores scroll on `astro:after-swap` — which would
+  // otherwise undo the scroll above. Re-applying on that event wins the race.
   useEffect(() => {
-    function onHashChange() {
+    function applyHash(behavior: ScrollBehavior) {
       const hash = window.location.hash.replace("#", "");
-      if (hash && items.some((i) => i.id === hash)) setActiveId(hash);
+      if (hash && items.some((i) => i.id === hash)) {
+        setActiveId(hash);
+        scrollToFrame(rootRef.current, behavior);
+      }
     }
+    const onHashChange = () => applyHash("smooth");
+    const onNavigate = () => applyHash("auto");
+
+    // Four separate paths can change the hash, and no single one covers them:
+    //  - hashchange:        same-page #a → #b via a normal anchor click
+    //  - popstate:          back/forward between hashes
+    //  - astro:page-load:   ClientRouter navigations, including hash-only ones
+    //                       where astro:after-swap never fires
+    //  - astro:after-swap:  cross-page swap, where Astro restores scroll and
+    //                       would otherwise undo ours
+    // Missing astro:page-load is what left a dropdown click on an already-open
+    // /services page selecting nothing.
     window.addEventListener("hashchange", onHashChange);
-    return () => window.removeEventListener("hashchange", onHashChange);
+    window.addEventListener("popstate", onHashChange);
+    document.addEventListener("astro:page-load", onNavigate);
+    document.addEventListener("astro:after-swap", onNavigate);
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+      window.removeEventListener("popstate", onHashChange);
+      document.removeEventListener("astro:page-load", onNavigate);
+      document.removeEventListener("astro:after-swap", onNavigate);
+    };
   }, [items]);
 
+  // Rail/accordion clicks update the URL so the selection is shareable and
+  // survives a refresh. `replaceState` deliberately does NOT fire
+  // `hashchange` — that's why the listener above cannot be relied on to
+  // observe our own writes, and why state is set directly here.
   function select(id: string) {
     setActiveId(id);
     if (window.location.hash.replace("#", "") !== id) {

@@ -750,3 +750,12 @@
 .prose :where(ul) {
   padding-left: 1.25em;
 }
+
+/* `<main id="main" tabindex="-1">` is the skip-link destination. The negative
+   tabindex makes it programmatically focusable so activating the skip link
+   moves focus (not just scroll position) into the content. It is never a
+   keyboard tab stop, so the focus ring would only ever appear on that jump —
+   suppress it there while leaving :focus-visible rings everywhere else. */
+main[tabindex="-1"]:focus {
+  outline: none;
+}
