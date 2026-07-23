@@ -72,6 +72,14 @@ export const onRequestPost = async ({
   }
 
   if (!env.RESEND_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) {
+    const missing = [
+      !env.RESEND_API_KEY && "RESEND_API_KEY",
+      !env.CONTACT_TO_EMAIL && "CONTACT_TO_EMAIL",
+      !env.CONTACT_FROM_EMAIL && "CONTACT_FROM_EMAIL",
+    ].filter(Boolean);
+    console.error(
+      `Contact function missing environment variables: ${missing.join(", ")}`,
+    );
     return json(
       { ok: false, error: "The contact service is not configured." },
       503,
@@ -102,6 +110,9 @@ export const onRequestPost = async ({
   });
 
   if (!response.ok) {
+    console.error(
+      `Resend request failed with ${response.status}: ${await response.text()}`,
+    );
     return json(
       { ok: false, error: "We could not send your message. Please try again." },
       502,
