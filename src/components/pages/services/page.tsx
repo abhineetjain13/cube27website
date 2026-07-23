@@ -18,7 +18,9 @@ import { Contact } from "@/components/sections/contact";
 import { Faq } from "@/components/sections/faq";
 import { Reveal } from "@/components/ui/reveal";
 import { SplitExplorer, type SplitItem } from "@/components/ui/split-explorer";
-import { SITE_CONFIG } from "@/site-config";
+import { StatGrid, StatCell } from "@/components/ui/stat-grid";
+import { FeatureCard } from "@/components/ui/feature-card";
+import { COMPANY_FACTS, SITE_CONFIG } from "@/site-config";
 import type { FaqItem } from "@/components/seo-json";
 
 const SERVICES_FAQ: readonly FaqItem[] = [
@@ -166,28 +168,6 @@ function ServiceHeader({
   );
 }
 
-function FeatureCard({
-  icon,
-  title,
-  children,
-}: {
-  icon?: ReactNode;
-  title: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6">
-      {icon}
-      <h4 className="typography-heading mt-4 text-[1.1rem] font-medium text-cube27-text-primary">
-        {title}
-      </h4>
-      <p className="mt-2 text-[0.92rem] leading-relaxed text-cube27-text-secondary">
-        {children}
-      </p>
-    </div>
-  );
-}
-
 function AiServiceDetail() {
   return (
     <div>
@@ -228,12 +208,12 @@ function AiServiceDetail() {
         </div>
       </div>
 
-      <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-4">
+      <StatGrid className="mt-6 sm:grid-cols-4">
         <StatCell value="40%" label="Ops Reduction" />
         <StatCell value="24/7" label="Autonomous Op" />
         <StatCell value="22%" label="Conversion Lift" />
         <StatCell value="60D" label="MVP Deployment" />
-      </dl>
+      </StatGrid>
 
       <div className="mt-6 rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 sm:p-8">
         <h4 className="typography-heading text-lg font-medium text-cube27-text-primary">
@@ -453,12 +433,20 @@ function GccServiceDetail() {
         body="Scale your engineering and operational capabilities without losing control. We establish and operate dedicated teams aligned to your culture, processes, and architecture — delivered through BOT (Build-Operate-Transfer) and BO (Build-Operate) engagement models."
       />
 
-      <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary lg:grid-cols-4">
-        <StatCell value="90+ Day" label="Operational Startup" large />
-        <StatCell value="150+" label="Team Specialists" large />
-        <StatCell value="<10%" label="Annual Attrition" large />
-        <StatCell value="10%" label="YoY Efficiency Gain" large />
-      </dl>
+      <StatGrid className="mt-10">
+        <StatCell value="90+ Day" label="Operational Startup" size="lg" />
+        <StatCell
+          value={COMPANY_FACTS.headcount.value}
+          label={COMPANY_FACTS.headcount.label}
+          size="lg"
+        />
+        <StatCell
+          value={COMPANY_FACTS.attrition.value}
+          label={COMPANY_FACTS.attrition.label}
+          size="lg"
+        />
+        <StatCell value="10%" label="YoY Efficiency Gain" size="lg" />
+      </StatGrid>
 
       <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-3">
         <FeatureCard
@@ -509,35 +497,8 @@ function GccServiceDetail() {
 }
 
 /* ----------------------------------------------------------------------------
- * Small shared cells
+ * Small local cells
  * ------------------------------------------------------------------------- */
-
-function StatCell({
-  value,
-  label,
-  large,
-}: {
-  value: string;
-  label: string;
-  large?: boolean;
-}) {
-  return (
-    <div className="bg-cube27-background-primary p-5 sm:p-6">
-      <dt
-        className={
-          large
-            ? "font-mono text-2xl font-medium text-cube27-text-primary sm:text-3xl"
-            : "font-mono text-2xl font-medium text-cube27-text-primary"
-        }
-      >
-        {value}
-      </dt>
-      <dd className="mt-1 text-[0.78rem] text-cube27-text-secondary">
-        {label}
-      </dd>
-    </div>
-  );
-}
 
 function OfferingItem({
   title,

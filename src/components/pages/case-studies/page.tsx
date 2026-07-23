@@ -5,7 +5,9 @@ import { PageIntro } from "@/components/sections/page-intro";
 import { Contact } from "@/components/sections/contact";
 import { Reveal } from "@/components/ui/reveal";
 import { SplitExplorer, type SplitItem } from "@/components/ui/split-explorer";
-import { cn } from "@/lib/utils";
+import { StatGrid, StatCell } from "@/components/ui/stat-grid";
+import { isNumericStat } from "@/lib/utils";
+import { COMPANY_FACTS } from "@/site-config";
 
 interface CaseStudy {
   id: string;
@@ -165,7 +167,7 @@ function ClientsAndBrandsSection() {
             <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
               <Building className="size-8 text-cube27-accent-primary mb-2" />
               <span className="typography-heading text-lg font-medium text-cube27-text-primary">
-                100+
+                {COMPANY_FACTS.brands.value}
               </span>
               <span className="text-[0.82rem] text-cube27-text-secondary">
                 Global Brands
@@ -183,7 +185,7 @@ function ClientsAndBrandsSection() {
             <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
               <Shield className="size-8 text-cube27-accent-primary mb-2" />
               <span className="typography-heading text-lg font-medium text-cube27-text-primary">
-                95%
+                {COMPANY_FACTS.sla.value}
               </span>
               <span className="text-[0.82rem] text-cube27-text-secondary">
                 SLA Adherence
@@ -192,7 +194,7 @@ function ClientsAndBrandsSection() {
             <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
               <ArrowRight className="size-8 text-cube27-accent-primary mb-2" />
               <span className="typography-heading text-lg font-medium text-cube27-text-primary">
-                24/7
+                {COMPANY_FACTS.coverage.value}
               </span>
               <span className="text-[0.82rem] text-cube27-text-secondary">
                 Global Delivery Hub
@@ -204,10 +206,6 @@ function ClientsAndBrandsSection() {
     </section>
   );
 }
-
-/* Numeric result values render in IBM Plex Mono; word values ("Real-time",
-   "Full") keep the heading face. */
-const NUMERIC_STAT = /^[\d<$]/;
 
 function CaseStudyDetail({ study }: { study: CaseStudy }) {
   return (
@@ -225,28 +223,17 @@ function CaseStudyDetail({ study }: { study: CaseStudy }) {
       )}
 
       {/* Results grid */}
-      <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-4">
+      <StatGrid className="mt-10 sm:grid-cols-4">
         {study.results.map((r) => (
-          <div
+          <StatCell
             key={r.label}
-            className="bg-cube27-background-primary p-5 sm:p-6"
-          >
-            <dt
-              className={cn(
-                "text-[clamp(1.5rem,3vw,2rem)] font-medium text-cube27-text-primary",
-                NUMERIC_STAT.test(r.value)
-                  ? "font-mono"
-                  : "typography-heading tracking-[-0.02em]",
-              )}
-            >
-              {r.value}
-            </dt>
-            <dd className="mt-1 text-[0.82rem] text-cube27-text-secondary">
-              {r.label}
-            </dd>
-          </div>
+            value={r.value}
+            label={r.label}
+            size="lg"
+            mono={isNumericStat(r.value)}
+          />
         ))}
-      </dl>
+      </StatGrid>
 
       {/* Narrative columns */}
       <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2">

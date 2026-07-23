@@ -6,6 +6,8 @@ import { HomeProof } from "@/components/pages/home/sections/proof";
 import { Contact } from "@/components/sections/contact";
 import { LifeAtCube27 } from "@/components/sections/life-at-cube27";
 import { Reveal } from "@/components/ui/reveal";
+import { StatGrid, StatCell } from "@/components/ui/stat-grid";
+import { COMPANY_FACTS } from "@/site-config";
 
 export function AboutPage() {
   return (
@@ -35,10 +37,19 @@ export function AboutPage() {
           eyebrow="Our track record"
           statement="With over two decades of combined leadership experience in eCommerce, digital marketing, and enterprise technology, we deliver on our promises while innovating."
           stats={[
-            { value: "150+", label: "Team Members" },
-            { value: "95%", label: "Enterprise SLA" },
-            { value: "$1B+", label: "Ad Spend Optimized" },
-            { value: "20+", label: "Years Experience" },
+            {
+              value: COMPANY_FACTS.headcount.value,
+              label: COMPANY_FACTS.headcount.label,
+            },
+            { value: COMPANY_FACTS.sla.value, label: COMPANY_FACTS.sla.label },
+            {
+              value: COMPANY_FACTS.adSpend.value,
+              label: COMPANY_FACTS.adSpend.label,
+            },
+            {
+              value: COMPANY_FACTS.experience.value,
+              label: COMPANY_FACTS.experience.label,
+            },
           ]}
         />
         <PeopleBand />
@@ -188,41 +199,32 @@ function InfrastructureSection() {
         </Reveal>
 
         <Reveal delay={0.1} className="mt-12">
-          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-2 lg:grid-cols-4">
-            <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="font-mono text-xl font-medium text-cube27-text-primary">
-                150+ Specialists
-              </dt>
-              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
-                Engineers, architects, and consultants across multiple
-                technology domains.
-              </dd>
-            </div>
-            <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="font-mono text-xl font-medium text-cube27-text-primary">
-                95% SLA Achievement
-              </dt>
-              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
-                Consistent delivery on enterprise support commitments.
-              </dd>
-            </div>
-            <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="font-mono text-xl font-medium text-cube27-text-primary">
-                $1B+ Ad Spend Managed
-              </dt>
-              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
-                Optimizations via our proprietary MarTech tools.
-              </dd>
-            </div>
-            <div className="bg-cube27-neutral-secondary/30 p-6">
-              <dt className="font-mono text-xl font-medium text-cube27-text-primary">
-                24/7 Global Coverage
-              </dt>
-              <dd className="mt-2 text-[0.88rem] leading-relaxed text-cube27-text-secondary">
-                Support across NORAM, EMEA, APAC, and India.
-              </dd>
-            </div>
-          </dl>
+          <StatGrid className="grid-cols-1 sm:grid-cols-2">
+            <StatCell
+              value={COMPANY_FACTS.headcount.value}
+              label={COMPANY_FACTS.headcount.label}
+              description="Engineers, architects, and consultants across multiple technology domains."
+              className="bg-cube27-neutral-secondary/30"
+            />
+            <StatCell
+              value={COMPANY_FACTS.sla.value}
+              label={COMPANY_FACTS.sla.label}
+              description="Consistent delivery on enterprise support commitments."
+              className="bg-cube27-neutral-secondary/30"
+            />
+            <StatCell
+              value={COMPANY_FACTS.adSpend.value}
+              label={COMPANY_FACTS.adSpend.label}
+              description="Optimizations via our proprietary MarTech tools."
+              className="bg-cube27-neutral-secondary/30"
+            />
+            <StatCell
+              value={COMPANY_FACTS.coverage.value}
+              label={COMPANY_FACTS.coverage.label}
+              description="Support across NORAM, EMEA, APAC, and India."
+              className="bg-cube27-neutral-secondary/30"
+            />
+          </StatGrid>
         </Reveal>
       </div>
     </section>
@@ -331,40 +333,28 @@ function PeopleBand() {
         </Reveal>
 
         <Reveal delay={0.1} className="lg:col-span-7 lg:pl-6">
-          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-border-primary sm:grid-cols-2">
-            <div className="bg-cube27-background-primary p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                Pune
-              </dt>
-              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
-                Global delivery hub, serving enterprises worldwide
-              </dd>
-            </div>
-            <div className="bg-cube27-background-primary p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                Cross-functional
-              </dt>
-              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
-                Marketing, data, AI, and engineering under one roof
-              </dd>
-            </div>
-            <div className="bg-cube27-background-primary p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                Embedded teams
-              </dt>
-              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
-                Operating as an extension of client organizations
-              </dd>
-            </div>
-            <div className="bg-cube27-background-primary p-6">
-              <dt className="typography-heading text-xl font-medium text-cube27-text-primary">
-                Outcome-owned
-              </dt>
-              <dd className="mt-1.5 text-[0.85rem] text-cube27-text-secondary">
-                Accountable from strategy through operations
-              </dd>
-            </div>
-          </dl>
+          <StatGrid columns={2}>
+            <StatCell
+              value="Pune"
+              label="Global delivery hub, serving enterprises worldwide"
+              mono={false}
+            />
+            <StatCell
+              value="Cross-functional"
+              label="Marketing, data, AI, and engineering under one roof"
+              mono={false}
+            />
+            <StatCell
+              value="Embedded teams"
+              label="Operating as an extension of client organizations"
+              mono={false}
+            />
+            <StatCell
+              value="Outcome-owned"
+              label="Accountable from strategy through operations"
+              mono={false}
+            />
+          </StatGrid>
         </Reveal>
       </div>
     </section>
