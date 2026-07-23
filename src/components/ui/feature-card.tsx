@@ -18,7 +18,7 @@ interface FeatureCardProps {
 
 export function FeatureCard({ icon, title, children }: FeatureCardProps) {
   return (
-    <div className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6">
+    <div className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md">
       {icon}
       <h4 className="typography-heading mt-4 text-[1.1rem] font-medium text-cube27-text-primary">
         {title}

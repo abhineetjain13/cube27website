@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { CountUp } from "@/components/ui/count-up";
+import { cn, isNumericStat } from "@/lib/utils";
 
 /**
  * @cube27Component
@@ -47,6 +48,12 @@ interface StatCellProps {
   size?: "md" | "lg";
   /** Mono numerals by default; set false for word values. */
   mono?: boolean;
+  /**
+   * Animate the value 0 → final once on scroll into view (Home/About proof
+   * grids only). Only applies to numeric-leading values — word tiles and
+   * reduced-motion users always see the static final string.
+   */
+  countUp?: boolean;
   className?: string;
 }
 
@@ -56,6 +63,7 @@ export function StatCell({
   description,
   size = "md",
   mono = true,
+  countUp = false,
   className,
 }: StatCellProps) {
   return (
@@ -67,7 +75,7 @@ export function StatCell({
           size === "lg" ? "text-2xl sm:text-3xl" : "text-2xl",
         )}
       >
-        {value}
+        {countUp && isNumericStat(value) ? <CountUp value={value} /> : value}
       </dt>
       <dd className="mt-1 text-[0.85rem] text-cube27-text-secondary">
         {label}

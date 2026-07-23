@@ -129,8 +129,8 @@ function LeadershipSection() {
 
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
           <Reveal
-            delay={0.05}
-            className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8"
+            delay={0.06}
+            className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8 motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md"
           >
             <div className="flex items-center gap-3 text-cube27-accent-primary">
               <UserCheck className="size-6" />
@@ -154,7 +154,7 @@ function LeadershipSection() {
 
           <Reveal
             delay={0.1}
-            className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8"
+            className="rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-8 motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md"
           >
             <div className="flex items-center gap-3 text-cube27-accent-primary">
               <UserCheck className="size-6" />

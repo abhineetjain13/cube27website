@@ -55,6 +55,7 @@ export function HomeProof({
                 label={s.label}
                 size="lg"
                 mono={isNumericStat(s.value)}
+                countUp
               />
             ))}
           </StatGrid>

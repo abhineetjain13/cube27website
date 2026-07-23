@@ -47,8 +47,8 @@ export function CareersPage() {
             {/* Role 1: AI Engineer */}
             <div className="mt-12 space-y-16">
               <Reveal
-                delay={0.05}
-                className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 sm:p-10"
+                delay={0.06}
+                className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md sm:p-10"
               >
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
@@ -214,7 +214,7 @@ export function CareersPage() {
               {/* Role 2: AI Research Intern */}
               <Reveal
                 delay={0.1}
-                className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 sm:p-10"
+                className="rounded-xl border border-cube27-border-primary bg-cube27-neutral-secondary/30 p-6 motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md sm:p-10"
               >
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>

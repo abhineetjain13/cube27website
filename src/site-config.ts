@@ -1,4 +1,4 @@
-import facts from "./content/site/facts.json";
+import facts from "@/content/site/facts.json";
 
 interface OrgAddress {
   streetAddress: string;
@@ -54,7 +54,7 @@ export const SITE_CONFIG: SiteConfig = {
 /**
  * Canonical company facts — the single source of truth for stat tiles,
  * proof grids, and generated documents (llms.txt). Sourced from
- * `./content/site/facts.json` via a plain static import so this module
+ * `@/content/site/facts.json` via a plain static import so this module
  * stays safe to import from client bundles (React islands) as well as
  * server code; the same JSON backs the `site` content collection.
  * Do NOT source this from `astro:content` (server-only).

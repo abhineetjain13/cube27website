@@ -591,6 +591,14 @@
   }
 }
 
+@layer components {
+  /* Inline text link with an accent underline — the canonical treatment for
+     in-copy links (contact details, document links). */
+  .cube27-link {
+    @apply text-cube27-text-primary underline decoration-cube27-accent-primary/40 underline-offset-4 transition-colors hover:text-cube27-accent-primary hover:decoration-cube27-accent-primary;
+  }
+}
+
 /* ============================================
    Marquee. Infinite logo strip (Trusted Partners)
    ============================================ */

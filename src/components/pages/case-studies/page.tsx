@@ -164,7 +164,7 @@ function ClientsAndBrandsSection() {
 
         <Reveal delay={0.1} className="mt-10">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md">
               <Building className="size-8 text-cube27-accent-primary mb-2" />
               <span className="typography-heading text-lg font-medium text-cube27-text-primary">
                 {COMPANY_FACTS.brands.value}
@@ -173,7 +173,7 @@ function ClientsAndBrandsSection() {
                 Global Brands
               </span>
             </div>
-            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md">
               <Award className="size-8 text-cube27-accent-primary mb-2" />
               <span className="typography-heading text-lg font-medium text-cube27-text-primary">
                 Fortune 500
@@ -182,7 +182,7 @@ function ClientsAndBrandsSection() {
                 Enterprise Clients
               </span>
             </div>
-            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md">
               <Shield className="size-8 text-cube27-accent-primary mb-2" />
               <span className="typography-heading text-lg font-medium text-cube27-text-primary">
                 {COMPANY_FACTS.sla.value}
@@ -191,7 +191,7 @@ function ClientsAndBrandsSection() {
                 SLA Adherence
               </span>
             </div>
-            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center">
+            <div className="flex flex-col items-center justify-center rounded-xl border border-cube27-border-primary bg-cube27-background-primary p-6 text-center motion-safe:transition-all motion-safe:duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-md">
               <ArrowRight className="size-8 text-cube27-accent-primary mb-2" />
               <span className="typography-heading text-lg font-medium text-cube27-text-primary">
                 {COMPANY_FACTS.coverage.value}

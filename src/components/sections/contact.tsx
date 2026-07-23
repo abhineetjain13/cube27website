@@ -112,7 +112,7 @@ export function Contact({
                 href="https://www.linkedin.com/company/cube27ltd"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-cube27-text-primary hover:text-cube27-accent-primary"
+                className="cube27-link"
               >
                 Connect on LinkedIn
               </a>
@@ -125,7 +125,7 @@ export function Contact({
               />
               <a
                 href={`mailto:${email}`}
-                className="text-cube27-text-primary hover:text-cube27-accent-primary"
+                className="cube27-link"
               >
                 {email}
               </a>
