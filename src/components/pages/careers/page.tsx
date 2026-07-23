@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
-import { HomeHero } from "@/components/pages/home/sections/hero";
+import { PageIntro } from "@/components/sections/page-intro";
 import { Contact } from "@/components/sections/contact";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -17,7 +17,7 @@ export function CareersPage() {
     <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
       <Navbar />
       <main>
-        <HomeHero
+        <PageIntro
           headlineLines={["Build the future", "of enterprise", "AI with us."]}
           body="Explore open roles at Cube27. We are building next-generation AI-powered commerce infrastructure and intelligent platforms that help businesses become AI-agent ready."
           ctaLabel="View Openings"
@@ -26,6 +26,7 @@ export function CareersPage() {
           overlayTitle="Impact. Ownership. Scale."
           overlayDescription="Join a multidisciplinary team solving real-world enterprise AI problems."
           overlayBadge="Pune"
+          overlayLinkHref="#openings"
         />
 
         {/* Current Openings */}

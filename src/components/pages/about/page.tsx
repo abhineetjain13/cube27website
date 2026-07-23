@@ -1,7 +1,7 @@
 import { ArrowRight, UserCheck } from "lucide-react";
 import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
-import { HomeHero } from "@/components/pages/home/sections/hero";
+import { PageIntro } from "@/components/sections/page-intro";
 import { HomeProof } from "@/components/pages/home/sections/proof";
 import { Contact } from "@/components/sections/contact";
 import { LifeAtCube27 } from "@/components/sections/life-at-cube27";
@@ -12,7 +12,7 @@ export function AboutPage() {
     <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
       <Navbar />
       <main>
-        <HomeHero
+        <PageIntro
           headlineLines={[
             "Built to engineer",
             "the intelligent",
@@ -25,6 +25,7 @@ export function AboutPage() {
           overlayTitle="People. Process. Pride."
           overlayDescription="Operating as a seamless extension from our Pune hub."
           overlayBadge="150+"
+          overlayLinkHref="#company"
         />
         <CompanyStory />
         <LeadershipSection />

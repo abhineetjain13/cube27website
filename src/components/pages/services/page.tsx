@@ -13,7 +13,7 @@ import {
 import type { ReactNode } from "react";
 import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
-import { HomeHero } from "@/components/pages/home/sections/hero";
+import { PageIntro } from "@/components/sections/page-intro";
 import { Contact } from "@/components/sections/contact";
 import { Faq } from "@/components/sections/faq";
 import { Reveal } from "@/components/ui/reveal";
@@ -86,7 +86,7 @@ export function ServicesPage() {
     <div className="min-h-screen bg-cube27-background-primary text-cube27-text-primary">
       <Navbar />
       <main>
-        <HomeHero
+        <PageIntro
           headlineLines={["Engineering the", "intelligent enterprise."]}
           body="Rapid innovation through technology, and sustained operational and process capacity via GCC-as-a-Service."
           ctaLabel="Schedule a consultation"
@@ -95,9 +95,13 @@ export function ServicesPage() {
           overlayTitle="Architect. Build. Scale."
           overlayDescription="High-fidelity engineering & GCC operations for global enterprises."
           overlayBadge="150+"
+          overlayLinkHref="#capabilities"
         />
 
-        <section className="border-t border-cube27-border-primary py-20 lg:py-28">
+        <section
+          id="capabilities"
+          className="border-t border-cube27-border-primary py-20 lg:py-28"
+        >
           <div className="mx-auto mb-12 max-w-7xl px-5 sm:px-8">
             <Reveal>
               <p className="typography-eyebrow text-[0.7rem] uppercase text-cube27-accent-primary">

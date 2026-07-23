@@ -2,7 +2,9 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 
 /**
- * Decision-support continuation band for the homepage.
+ * Approach band for the homepage ("How we work"): the engagement journey as
+ * three concrete steps — Understand, Build, Operate & Measure — beside an
+ * engagement-overview mockup. Links forward to the services page.
  */
 interface PlatformProps {
   eyebrow?: string;
@@ -13,11 +15,11 @@ interface PlatformProps {
 }
 
 export function HomePlatform({
-  eyebrow = "The CUBE27 approach",
-  headlineLines = ["From insight", "to action."],
-  body = "We combine technical expertise with practical business context, helping teams connect data, marketing, and technology to the decisions that matter.",
-  linkLabel = "Explore our solutions",
-  linkHref = "#solutions",
+  eyebrow = "How we work",
+  headlineLines = ["A clear path from", "brief to outcome."],
+  body = "Every engagement runs on the same disciplined loop: we dig into the brief, assemble a focused plan and team, then deliver and measure against the outcomes we agreed on.",
+  linkLabel = "See our services",
+  linkHref = "/services",
 }: PlatformProps) {
   return (
     <section
@@ -65,7 +67,7 @@ function DashboardMockup() {
       <div className="overflow-hidden rounded-xl border border-cube27-border-primary bg-cube27-neutral-light shadow-sm">
         <div className="flex items-center justify-between border-b border-cube27-border-primary px-4 py-2.5">
           <span className="text-[0.78rem] font-medium text-cube27-text-primary">
-            Delivery overview
+            Engagement overview
           </span>
           <div className="flex gap-1.5">
             <span className="size-2 rounded-full bg-cube27-neutral-secondary" />
@@ -97,9 +99,9 @@ function DashboardMockup() {
           </div>
           {/* Stat rail */}
           <div className="col-span-2 space-y-4 bg-cube27-neutral-light p-4">
-            <Stat label="Brief understood" value="01" delta="clear" />
-            <Stat label="Plan assembled" value="02" delta="focused" />
-            <Stat label="Outcome measured" value="03" delta="visible" />
+            <Stat label="Understand — discovery & brief" value="01" delta="week 1" />
+            <Stat label="Build — plan & team assembled" value="02" delta="weeks 2–4" />
+            <Stat label="Operate & measure — delivery" value="03" delta="ongoing" />
             <svg
               viewBox="0 0 120 32"
               fill="none"

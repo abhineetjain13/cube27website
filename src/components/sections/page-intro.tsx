@@ -1,7 +1,22 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-interface HeroProps {
+/**
+ * @cube27Component
+ * @cube27ComponentId PageIntro
+ * @cube27ComponentType section
+ * @cube27ComponentPattern hero
+ * @cube27ComponentStatus stable
+ * @cube27ComponentDescription Shared top-of-page intro for the five pages that
+ * reuse it (home, about, services, careers, success-stories — the contact page
+ * does not use it). Split layout: eyebrow + display headline + lead body + a
+ * single primary CTA on the left; media panel with a floating glass overlay
+ * card on the right. Pages differentiate through copy props, not structure.
+ * The overlay "See how it works" row renders as a real anchor only when
+ * `overlayLinkHref` is provided; otherwise it is plain text with no link
+ * affordance. `as` controls the headline element level (default h1).
+ */
+interface PageIntroProps {
   headlineLines?: string[];
   body?: string;
   ctaLabel?: string;
@@ -10,13 +25,16 @@ interface HeroProps {
   overlayTitle?: string;
   overlayDescription?: string;
   overlayBadge?: string;
+  overlayLinkLabel?: string;
+  overlayLinkHref?: string;
+  as?: "h1" | "h2";
 }
 
 const DEFAULT_HEADLINE = ["The technology", "behind better", "business."];
 const DEFAULT_BODY =
   "CUBE27 builds digital marketing, ecommerce, machine learning, and business intelligence solutions that help ambitious organizations make better decisions and move faster.";
 
-export function HomeHero({
+export function PageIntro({
   headlineLines = DEFAULT_HEADLINE,
   body = DEFAULT_BODY,
   ctaLabel = "Start a conversation",
@@ -25,7 +43,10 @@ export function HomeHero({
   overlayTitle = "Signal. Context. Action.",
   overlayDescription = "Continuous intelligence across data, marketing, and operations.",
   overlayBadge = "+24%",
-}: HeroProps) {
+  overlayLinkLabel = "See how it works",
+  overlayLinkHref,
+  as: Headline = "h1",
+}: PageIntroProps) {
   return (
     <section className="overflow-hidden bg-cube27-background-primary">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 py-12 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:py-20">
@@ -33,13 +54,13 @@ export function HomeHero({
           <p className="typography-eyebrow text-xs uppercase tracking-[0.2em] text-cube27-accent-primary font-semibold">
             Technology and solutions partner
           </p>
-          <h1 className="typography-heading mt-4 text-balance text-[clamp(2.35rem,5vw,3.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-cube27-text-primary">
+          <Headline className="typography-heading mt-4 text-balance text-[clamp(2.35rem,5vw,3.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-cube27-text-primary">
             {headlineLines.map((line, idx) => (
               <span key={idx} className="block">
                 {line}
               </span>
             ))}
-          </h1>
+          </Headline>
           <p className="mt-5 max-w-md text-[1.02rem] leading-relaxed text-cube27-text-secondary">
             {body}
           </p>
@@ -89,10 +110,19 @@ export function HomeHero({
             </p>
 
             <div className="mt-4 flex items-center justify-between border-t border-cube27-border-primary/50 pt-3">
-              <span className="inline-flex items-center gap-1 text-[0.82rem] font-medium text-cube27-accent-primary hover:text-cube27-accent-secondary group/link transition-colors">
-                See how it works
-                <ArrowRight className="size-3.5 transition-transform duration-150 group-hover/link:translate-x-0.5" />
-              </span>
+              {overlayLinkHref ? (
+                <a
+                  href={overlayLinkHref}
+                  className="inline-flex items-center gap-1 text-[0.82rem] font-medium text-cube27-accent-primary hover:text-cube27-accent-secondary group/link transition-colors"
+                >
+                  {overlayLinkLabel}
+                  <ArrowRight className="size-3.5 transition-transform duration-150 group-hover/link:translate-x-0.5" />
+                </a>
+              ) : (
+                <span className="inline-flex items-center gap-1 text-[0.82rem] font-medium text-cube27-text-secondary">
+                  {overlayLinkLabel}
+                </span>
+              )}
 
               <div className="flex items-center gap-3">
                 {/* Custom Sparkline drawing inside a mini-SVG */}
